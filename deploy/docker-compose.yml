@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  jenkins:
+    image: ${JENKINS_IMAGE_NAME}
+    container_name: ${JENKINS_CONTAINER_NAME}
+    restart: always
+    ports:
+      - "${JENKINS_URL_PORT}:8080"
+      - "${JENKINS_AGENT}:${JENKINS_AGENT}"
+    environment:
+      JENKINS_OPTS: --prefix=/jenkins
+      JENKINS_INITIAL_PASSWORD: 19a4456531424247aafd265cbc62aa70  # Initial password
+    volumes:
+      - ./data/jenkins:/var/jenkins_home
+    networks:
+      - app-network
+
+  stocky-service-db:
+    image: ${STOCKY_SERVICE_DB_IMAGE_NAME}
+    container_name: ${STOCKY_SERVICE_DB_CONTAINER_NAME}
+    volumes:
+      - app-stocky:/var/lib/mysql
+    ports:
+      - "${STOCKY_SERVICE_DB_PORT}:${STOCKY_SERVICE_DB_PORT}"
+    environment:
+      - MYSQL_DATABASE=${STOCKY_SERVICE_DB_NAME}
+      - MYSQL_USER=${STOCKY_SERVICE_DB_USER}
+      - MYSQL_PASSWORD=${STOCKY_SERVICE_DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${STOCKY_SERVICE_DB_PASSWORD_ROOT}
+    networks:
+      - app-network
+
+  stocky-service-back:
+    build: ${STOCKY_SERVICE_PROJECT_PATH}
+    container_name: ${STOCKY_SERVICE_CONTAINER_NAME}
+    image: ${STOCKY_SERVICE_IMAGE_NAME}
+    ports:
+      - "${STOCKY_SERVICE_BACK_PORT}:${STOCKY_SERVICE_BACK_PORT}"
+    environment:
+      - STOCKY_SERVICE_DB_URL=jdbc:mysql://stocky-service-db:${STOCKY_SERVICE_DB_PORT}/${STOCKY_SERVICE_DB_NAME}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      - STOCKY_SERVICE_DB_USER=${STOCKY_SERVICE_DB_USER}
+      - STOCKY_SERVICE_DB_PASSWORD=${STOCKY_SERVICE_DB_PASSWORD}
+    depends_on:
+      - stocky-service-db
+    networks:
+      - app-network
+
+
+  minio-instance:
+    image: ${MINIO_IMAGE_NAME}
+    container_name: ${MINIO_CONTAINER_NAME}
+    restart: always
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ./data/minio_data:/data
+    ports:
+      - "${MINIO_HOME_PORT}:${MINIO_HOME_PORT}"
+      - "${MINIO_URL_PORT}:${MINIO_URL_PORT}" # tap localhost:9001 to access to minio
+    networks:
+      - app-network
+
+volumes:
+  app-stocky:
+
+networks:
+  app-network:
