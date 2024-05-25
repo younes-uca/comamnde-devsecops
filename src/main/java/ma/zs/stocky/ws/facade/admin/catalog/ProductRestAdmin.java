@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api/admin/product/")
 public class ProductRestAdmin {
 
-
+    // no opration
     
     @PostMapping("import-data")
     public ResponseEntity<List<ProductDto>> importData(@RequestBody List<ProductDto> dtos) {
