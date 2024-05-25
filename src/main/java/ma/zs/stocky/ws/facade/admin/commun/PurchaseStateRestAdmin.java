@@ -1,6 +1,6 @@
 package ma.zs.stocky.ws.facade.admin.commun;
 
-import io.swagger.v3.oas.annotations.Operation;
+
 import ma.zs.stocky.bean.core.commun.PurchaseState;
 import ma.zs.stocky.dao.criteria.core.commun.PurchaseStateCriteria;
 import ma.zs.stocky.service.facade.admin.commun.PurchaseStateAdminService;
@@ -20,7 +20,7 @@ import java.util.List;
 public class PurchaseStateRestAdmin {
 
 
-    @Operation(summary = "Import Data")
+    
     @PostMapping("import-data")
     public ResponseEntity<List<PurchaseStateDto>> importData(@RequestBody List<PurchaseStateDto> dtos) {
         List<PurchaseState> items = converter.toItem(dtos);
@@ -30,7 +30,6 @@ public class PurchaseStateRestAdmin {
     }
 
 
-    @Operation(summary = "Finds a list of all purchaseStates")
     @GetMapping("")
     public ResponseEntity<List<PurchaseStateDto>> findAll() throws Exception {
         ResponseEntity<List<PurchaseStateDto>> res = null;
@@ -43,7 +42,6 @@ public class PurchaseStateRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds an optimized list of all purchaseStates")
     @GetMapping("optimized")
     public ResponseEntity<List<PurchaseStateDto>> findAllOptimized() throws Exception {
         ResponseEntity<List<PurchaseStateDto>> res = null;
@@ -56,7 +54,6 @@ public class PurchaseStateRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds a purchaseState by id")
     @GetMapping("id/{id}")
     public ResponseEntity<PurchaseStateDto> findById(@PathVariable Long id) {
         PurchaseState t = service.findById(id);
@@ -67,7 +64,6 @@ public class PurchaseStateRestAdmin {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @Operation(summary = "Finds a purchaseState by libelle")
     @GetMapping("libelle/{libelle}")
     public ResponseEntity<PurchaseStateDto> findByLibelle(@PathVariable String libelle) {
         PurchaseState t = service.findByReferenceEntity(new PurchaseState(libelle));
@@ -78,7 +74,6 @@ public class PurchaseStateRestAdmin {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @Operation(summary = "Saves the specified  purchaseState")
     @PostMapping("")
     public ResponseEntity<PurchaseStateDto> save(@RequestBody PurchaseStateDto dto) throws Exception {
         if (dto != null) {
@@ -95,7 +90,6 @@ public class PurchaseStateRestAdmin {
         }
     }
 
-    @Operation(summary = "Updates the specified  purchaseState")
     @PutMapping("")
     public ResponseEntity<PurchaseStateDto> update(@RequestBody PurchaseStateDto dto) throws Exception {
         ResponseEntity<PurchaseStateDto> res;
@@ -111,7 +105,6 @@ public class PurchaseStateRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete list of purchaseState")
     @PostMapping("multiple")
     public ResponseEntity<List<PurchaseStateDto>> delete(@RequestBody List<PurchaseStateDto> dtos) throws Exception {
         ResponseEntity<List<PurchaseStateDto>> res;
@@ -125,7 +118,6 @@ public class PurchaseStateRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete the specified purchaseState")
     @DeleteMapping("")
     public ResponseEntity<PurchaseStateDto> delete(@RequestBody PurchaseStateDto dto) throws Exception {
         ResponseEntity<PurchaseStateDto> res;
@@ -139,7 +131,6 @@ public class PurchaseStateRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete the specified purchaseState")
     @DeleteMapping("id/{id}")
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         ResponseEntity<Long> res;
@@ -154,7 +145,6 @@ public class PurchaseStateRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete multiple purchaseStates by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
         ResponseEntity<List<Long>> res;
@@ -168,7 +158,6 @@ public class PurchaseStateRestAdmin {
     }
 
 
-    @Operation(summary = "Finds a purchaseState and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<PurchaseStateDto> findWithAssociatedLists(@PathVariable Long id) {
         PurchaseState loaded = service.findWithAssociatedLists(id);
@@ -176,7 +165,6 @@ public class PurchaseStateRestAdmin {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @Operation(summary = "Finds purchaseStates by criteria")
     @PostMapping("find-by-criteria")
     public ResponseEntity<List<PurchaseStateDto>> findByCriteria(@RequestBody PurchaseStateCriteria criteria) throws Exception {
         ResponseEntity<List<PurchaseStateDto>> res = null;
@@ -190,7 +178,6 @@ public class PurchaseStateRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds paginated purchaseStates by criteria")
     @PostMapping("find-paginated-by-criteria")
     public ResponseEntity<PaginatedList> findPaginatedByCriteria(@RequestBody PurchaseStateCriteria criteria) throws Exception {
         List<PurchaseState> list = service.findPaginatedByCriteria(criteria, criteria.getPage(), criteria.getMaxResults(), criteria.getSortOrder(), criteria.getSortField());
@@ -204,7 +191,6 @@ public class PurchaseStateRestAdmin {
         return new ResponseEntity<>(paginatedList, HttpStatus.OK);
     }
 
-    @Operation(summary = "Gets purchaseState data size by criteria")
     @PostMapping("data-size-by-criteria")
     public ResponseEntity<Integer> getDataSize(@RequestBody PurchaseStateCriteria criteria) throws Exception {
         int count = service.getDataSize(criteria);

@@ -1,6 +1,6 @@
 package ma.zs.stocky.ws.facade.admin.money;
 
-import io.swagger.v3.oas.annotations.Operation;
+
 import ma.zs.stocky.bean.core.money.PurchaseItem;
 import ma.zs.stocky.dao.criteria.core.money.PurchaseItemCriteria;
 import ma.zs.stocky.service.facade.admin.money.PurchaseItemAdminService;
@@ -20,7 +20,7 @@ import java.util.List;
 public class PurchaseItemRestAdmin {
 
 
-    @Operation(summary = "Import Data")
+    
     @PostMapping("import-data")
     public ResponseEntity<List<PurchaseItemDto>> importData(@RequestBody List<PurchaseItemDto> dtos) {
         List<PurchaseItem> items = converter.toItem(dtos);
@@ -30,7 +30,6 @@ public class PurchaseItemRestAdmin {
     }
 
 
-    @Operation(summary = "Finds a list of all purchaseItems")
     @GetMapping("")
     public ResponseEntity<List<PurchaseItemDto>> findAll() throws Exception {
         ResponseEntity<List<PurchaseItemDto>> res = null;
@@ -45,7 +44,6 @@ public class PurchaseItemRestAdmin {
     }
 
 
-    @Operation(summary = "Finds a purchaseItem by id")
     @GetMapping("id/{id}")
     public ResponseEntity<PurchaseItemDto> findById(@PathVariable Long id) {
         PurchaseItem t = service.findById(id);
@@ -58,7 +56,6 @@ public class PurchaseItemRestAdmin {
     }
 
 
-    @Operation(summary = "Saves the specified  purchaseItem")
     @PostMapping("")
     public ResponseEntity<PurchaseItemDto> save(@RequestBody PurchaseItemDto dto) throws Exception {
         if (dto != null) {
@@ -76,7 +73,6 @@ public class PurchaseItemRestAdmin {
         }
     }
 
-    @Operation(summary = "Updates the specified  purchaseItem")
     @PutMapping("")
     public ResponseEntity<PurchaseItemDto> update(@RequestBody PurchaseItemDto dto) throws Exception {
         ResponseEntity<PurchaseItemDto> res;
@@ -92,7 +88,6 @@ public class PurchaseItemRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete list of purchaseItem")
     @PostMapping("multiple")
     public ResponseEntity<List<PurchaseItemDto>> delete(@RequestBody List<PurchaseItemDto> dtos) throws Exception {
         ResponseEntity<List<PurchaseItemDto>> res;
@@ -107,7 +102,6 @@ public class PurchaseItemRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete the specified purchaseItem")
     @DeleteMapping("")
     public ResponseEntity<PurchaseItemDto> delete(@RequestBody PurchaseItemDto dto) throws Exception {
         ResponseEntity<PurchaseItemDto> res;
@@ -122,7 +116,6 @@ public class PurchaseItemRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete the specified purchaseItem")
     @DeleteMapping("id/{id}")
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         ResponseEntity<Long> res;
@@ -137,7 +130,6 @@ public class PurchaseItemRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete multiple purchaseItems by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
         ResponseEntity<List<Long>> res;
@@ -151,7 +143,6 @@ public class PurchaseItemRestAdmin {
     }
 
 
-    @Operation(summary = "Finds a purchaseItem and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<PurchaseItemDto> findWithAssociatedLists(@PathVariable Long id) {
         PurchaseItem loaded = service.findWithAssociatedLists(id);
@@ -160,7 +151,6 @@ public class PurchaseItemRestAdmin {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @Operation(summary = "Finds purchaseItems by criteria")
     @PostMapping("find-by-criteria")
     public ResponseEntity<List<PurchaseItemDto>> findByCriteria(@RequestBody PurchaseItemCriteria criteria) throws Exception {
         ResponseEntity<List<PurchaseItemDto>> res = null;
@@ -175,7 +165,6 @@ public class PurchaseItemRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds paginated purchaseItems by criteria")
     @PostMapping("find-paginated-by-criteria")
     public ResponseEntity<PaginatedList> findPaginatedByCriteria(@RequestBody PurchaseItemCriteria criteria) throws Exception {
         List<PurchaseItem> list = service.findPaginatedByCriteria(criteria, criteria.getPage(), criteria.getMaxResults(), criteria.getSortOrder(), criteria.getSortField());
@@ -190,7 +179,6 @@ public class PurchaseItemRestAdmin {
         return new ResponseEntity<>(paginatedList, HttpStatus.OK);
     }
 
-    @Operation(summary = "Gets purchaseItem data size by criteria")
     @PostMapping("data-size-by-criteria")
     public ResponseEntity<Integer> getDataSize(@RequestBody PurchaseItemCriteria criteria) throws Exception {
         int count = service.getDataSize(criteria);

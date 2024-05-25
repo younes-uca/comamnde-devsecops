@@ -1,6 +1,6 @@
 package ma.zs.stocky.ws.facade.admin.crm;
 
-import io.swagger.v3.oas.annotations.Operation;
+
 import ma.zs.stocky.bean.core.crm.Client;
 import ma.zs.stocky.dao.criteria.core.crm.ClientCriteria;
 import ma.zs.stocky.service.facade.admin.crm.ClientAdminService;
@@ -20,7 +20,7 @@ import java.util.List;
 public class ClientRestAdmin {
 
 
-    @Operation(summary = "Import Data")
+    
     @PostMapping("import-data")
     public ResponseEntity<List<ClientDto>> importData(@RequestBody List<ClientDto> dtos) {
         List<Client> items = converter.toItem(dtos);
@@ -30,7 +30,6 @@ public class ClientRestAdmin {
     }
 
 
-    @Operation(summary = "Finds a list of all clients")
     @GetMapping("")
     public ResponseEntity<List<ClientDto>> findAll() throws Exception {
         ResponseEntity<List<ClientDto>> res = null;
@@ -43,7 +42,6 @@ public class ClientRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds an optimized list of all clients")
     @GetMapping("optimized")
     public ResponseEntity<List<ClientDto>> findAllOptimized() throws Exception {
         ResponseEntity<List<ClientDto>> res = null;
@@ -56,7 +54,6 @@ public class ClientRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds a client by id")
     @GetMapping("id/{id}")
     public ResponseEntity<ClientDto> findById(@PathVariable Long id) {
         Client t = service.findById(id);
@@ -67,7 +64,6 @@ public class ClientRestAdmin {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @Operation(summary = "Finds a client by fullName")
     @GetMapping("fullName/{fullName}")
     public ResponseEntity<ClientDto> findByFullName(@PathVariable String fullName) {
         Client t = service.findByReferenceEntity(new Client(fullName));
@@ -78,7 +74,6 @@ public class ClientRestAdmin {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @Operation(summary = "Saves the specified  client")
     @PostMapping("")
     public ResponseEntity<ClientDto> save(@RequestBody ClientDto dto) throws Exception {
         if (dto != null) {
@@ -95,7 +90,6 @@ public class ClientRestAdmin {
         }
     }
 
-    @Operation(summary = "Updates the specified  client")
     @PutMapping("")
     public ResponseEntity<ClientDto> update(@RequestBody ClientDto dto) throws Exception {
         ResponseEntity<ClientDto> res;
@@ -111,7 +105,6 @@ public class ClientRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete list of client")
     @PostMapping("multiple")
     public ResponseEntity<List<ClientDto>> delete(@RequestBody List<ClientDto> dtos) throws Exception {
         ResponseEntity<List<ClientDto>> res;
@@ -125,7 +118,6 @@ public class ClientRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete the specified client")
     @DeleteMapping("")
     public ResponseEntity<ClientDto> delete(@RequestBody ClientDto dto) throws Exception {
         ResponseEntity<ClientDto> res;
@@ -139,7 +131,6 @@ public class ClientRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete the specified client")
     @DeleteMapping("id/{id}")
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         ResponseEntity<Long> res;
@@ -154,7 +145,6 @@ public class ClientRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete multiple clients by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
         ResponseEntity<List<Long>> res;
@@ -168,7 +158,6 @@ public class ClientRestAdmin {
     }
 
 
-    @Operation(summary = "Finds a client and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<ClientDto> findWithAssociatedLists(@PathVariable Long id) {
         Client loaded = service.findWithAssociatedLists(id);
@@ -176,7 +165,6 @@ public class ClientRestAdmin {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @Operation(summary = "Finds clients by criteria")
     @PostMapping("find-by-criteria")
     public ResponseEntity<List<ClientDto>> findByCriteria(@RequestBody ClientCriteria criteria) throws Exception {
         ResponseEntity<List<ClientDto>> res = null;
@@ -190,7 +178,6 @@ public class ClientRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds paginated clients by criteria")
     @PostMapping("find-paginated-by-criteria")
     public ResponseEntity<PaginatedList> findPaginatedByCriteria(@RequestBody ClientCriteria criteria) throws Exception {
         List<Client> list = service.findPaginatedByCriteria(criteria, criteria.getPage(), criteria.getMaxResults(), criteria.getSortOrder(), criteria.getSortField());
@@ -204,7 +191,6 @@ public class ClientRestAdmin {
         return new ResponseEntity<>(paginatedList, HttpStatus.OK);
     }
 
-    @Operation(summary = "Gets client data size by criteria")
     @PostMapping("data-size-by-criteria")
     public ResponseEntity<Integer> getDataSize(@RequestBody ClientCriteria criteria) throws Exception {
         int count = service.getDataSize(criteria);

@@ -1,6 +1,6 @@
 package ma.zs.stocky.ws.facade.admin.money;
 //Operation checked
-import io.swagger.v3.oas.annotations.Operation;
+
 import ma.zs.stocky.bean.core.money.Purchase;
 import ma.zs.stocky.dao.criteria.core.money.PurchaseCriteria;
 import ma.zs.stocky.service.facade.admin.money.PurchaseAdminService;
@@ -20,7 +20,7 @@ import java.util.List;
 public class PurchaseRestAdmin {
 
 
-    @Operation(summary = "Import Data")
+    
     @PostMapping("import-data")
     public ResponseEntity<List<PurchaseDto>> importData(@RequestBody List<PurchaseDto> dtos) {
         List<Purchase> items = converter.toItem(dtos);

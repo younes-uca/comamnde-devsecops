@@ -1,6 +1,6 @@
 package ma.zs.stocky.ws.facade.admin.catalog;
 
-import io.swagger.v3.oas.annotations.Operation;
+
 import ma.zs.stocky.bean.core.catalog.Product;
 import ma.zs.stocky.dao.criteria.core.catalog.ProductCriteria;
 import ma.zs.stocky.service.facade.admin.catalog.ProductAdminService;
@@ -20,7 +20,7 @@ import java.util.List;
 public class ProductRestAdmin {
 
 
-    @Operation(summary = "Import Data")
+    
     @PostMapping("import-data")
     public ResponseEntity<List<ProductDto>> importData(@RequestBody List<ProductDto> dtos) {
         List<Product> items = converter.toItem(dtos);
@@ -30,7 +30,7 @@ public class ProductRestAdmin {
     }
 
 
-    @Operation(summary = "Finds a list of all products")
+    
     @GetMapping("")
     public ResponseEntity<List<ProductDto>> findAll() throws Exception {
         ResponseEntity<List<ProductDto>> res = null;
@@ -43,7 +43,7 @@ public class ProductRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds an optimized list of all products")
+    
     @GetMapping("optimized")
     public ResponseEntity<List<ProductDto>> findAllOptimized() throws Exception {
         ResponseEntity<List<ProductDto>> res = null;
@@ -56,7 +56,6 @@ public class ProductRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds a product by id")
     @GetMapping("id/{id}")
     public ResponseEntity<ProductDto> findById(@PathVariable Long id) {
         Product t = service.findById(id);
@@ -67,7 +66,6 @@ public class ProductRestAdmin {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @Operation(summary = "Finds a product by reference")
     @GetMapping("reference/{reference}")
     public ResponseEntity<ProductDto> findByReference(@PathVariable String reference) {
         Product t = service.findByReferenceEntity(new Product(reference));
@@ -78,7 +76,6 @@ public class ProductRestAdmin {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @Operation(summary = "Saves the specified  product")
     @PostMapping("")
     public ResponseEntity<ProductDto> save(@RequestBody ProductDto dto) throws Exception {
         if (dto != null) {
@@ -95,7 +92,6 @@ public class ProductRestAdmin {
         }
     }
 
-    @Operation(summary = "Updates the specified  product")
     @PutMapping("")
     public ResponseEntity<ProductDto> update(@RequestBody ProductDto dto) throws Exception {
         ResponseEntity<ProductDto> res;
@@ -111,7 +107,6 @@ public class ProductRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete list of product")
     @PostMapping("multiple")
     public ResponseEntity<List<ProductDto>> delete(@RequestBody List<ProductDto> dtos) throws Exception {
         ResponseEntity<List<ProductDto>> res;
@@ -125,7 +120,6 @@ public class ProductRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete the specified product")
     @DeleteMapping("")
     public ResponseEntity<ProductDto> delete(@RequestBody ProductDto dto) throws Exception {
         ResponseEntity<ProductDto> res;
@@ -139,7 +133,6 @@ public class ProductRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete the specified product")
     @DeleteMapping("id/{id}")
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         ResponseEntity<Long> res;
@@ -154,7 +147,6 @@ public class ProductRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Delete multiple products by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
         ResponseEntity<List<Long>> res;
@@ -168,7 +160,6 @@ public class ProductRestAdmin {
     }
 
 
-    @Operation(summary = "Finds a product and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<ProductDto> findWithAssociatedLists(@PathVariable Long id) {
         Product loaded = service.findWithAssociatedLists(id);
@@ -176,7 +167,6 @@ public class ProductRestAdmin {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @Operation(summary = "Finds products by criteria")
     @PostMapping("find-by-criteria")
     public ResponseEntity<List<ProductDto>> findByCriteria(@RequestBody ProductCriteria criteria) throws Exception {
         ResponseEntity<List<ProductDto>> res = null;
@@ -190,7 +180,6 @@ public class ProductRestAdmin {
         return res;
     }
 
-    @Operation(summary = "Finds paginated products by criteria")
     @PostMapping("find-paginated-by-criteria")
     public ResponseEntity<PaginatedList> findPaginatedByCriteria(@RequestBody ProductCriteria criteria) throws Exception {
         List<Product> list = service.findPaginatedByCriteria(criteria, criteria.getPage(), criteria.getMaxResults(), criteria.getSortOrder(), criteria.getSortField());
@@ -204,7 +193,6 @@ public class ProductRestAdmin {
         return new ResponseEntity<>(paginatedList, HttpStatus.OK);
     }
 
-    @Operation(summary = "Gets product data size by criteria")
     @PostMapping("data-size-by-criteria")
     public ResponseEntity<Integer> getDataSize(@RequestBody ProductCriteria criteria) throws Exception {
         int count = service.getDataSize(criteria);
