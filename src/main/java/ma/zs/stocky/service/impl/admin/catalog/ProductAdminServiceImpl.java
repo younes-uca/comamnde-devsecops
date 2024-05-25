@@ -1,31 +1,25 @@
 package ma.zs.stocky.service.impl.admin.catalog;
 
 
-import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.bean.core.catalog.Product;
 import ma.zs.stocky.dao.criteria.core.catalog.ProductCriteria;
 import ma.zs.stocky.dao.facade.core.catalog.ProductDao;
 import ma.zs.stocky.dao.specification.core.catalog.ProductSpecification;
 import ma.zs.stocky.service.facade.admin.catalog.ProductAdminService;
-import ma.zs.stocky.zynerator.service.AbstractServiceImpl;
+import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.zynerator.util.ListUtil;
-import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.ArrayList;
+import ma.zs.stocky.zynerator.util.RefelexivityUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.multipart.MultipartFile;
-
-import ma.zs.stocky.zynerator.util.RefelexivityUtil;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-
+import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class ProductAdminServiceImpl implements ProductAdminService {
 
@@ -81,7 +75,7 @@ public class ProductAdminServiceImpl implements ProductAdminService {
 
 
     private ProductSpecification constructSpecification(ProductCriteria criteria) {
-        ProductSpecification mySpecification =  (ProductSpecification) RefelexivityUtil.constructObjectUsingOneParam(ProductSpecification.class, criteria);
+        ProductSpecification mySpecification = (ProductSpecification) RefelexivityUtil.constructObjectUsingOneParam(ProductSpecification.class, criteria);
         return mySpecification;
     }
 
@@ -100,7 +94,7 @@ public class ProductAdminServiceImpl implements ProductAdminService {
     }
 
 
-	public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) {
         boolean condition = deleteByIdCheckCondition(id);
         if (condition) {
             dao.deleteById(id);
@@ -115,8 +109,8 @@ public class ProductAdminServiceImpl implements ProductAdminService {
     public void deleteByIdIn(List<Long> ids) {
         //dao.deleteByIdIn(ids);
     }
-	
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public int delete(Product t) {
         int result = 0;
         if (t != null) {
@@ -127,19 +121,18 @@ public class ProductAdminServiceImpl implements ProductAdminService {
     }
 
 
-
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<Product> delete(List<Product> list) {
-		List<Product> result = new ArrayList();
+        List<Product> result = new ArrayList();
         if (list != null) {
             for (Product t : list) {
                 int count = delete(t);
-				if(count == 0){
-					result.add(t);
-				}
+                if (count == 0) {
+                    result.add(t);
+                }
             }
         }
-		return result;
+        return result;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -148,18 +141,18 @@ public class ProductAdminServiceImpl implements ProductAdminService {
         Product saved;
         if (loaded == null) {
             saved = dao.save(t);
-        }else {
+        } else {
             saved = null;
         }
         return saved;
     }
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<Product> create(List<Product> ts) {
         List<Product> result = new ArrayList<>();
         if (ts != null) {
             for (Product t : ts) {
-				Product created = create(t);
+                Product created = create(t);
                 if (created == null)
                     result.add(t);
             }
@@ -167,12 +160,12 @@ public class ProductAdminServiceImpl implements ProductAdminService {
         return result;
     }
 
-    public Product findWithAssociatedLists(Long id){
+    public Product findWithAssociatedLists(Long id) {
         Product result = dao.findById(id).orElse(null);
         return result;
     }
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<Product> update(List<Product> ts, boolean createIfNotExist) {
         List<Product> result = new ArrayList<>();
         if (ts != null) {
@@ -195,13 +188,9 @@ public class ProductAdminServiceImpl implements ProductAdminService {
     }
 
 
-
-
-
-    public Product findByReferenceEntity(Product t){
-        return t==null? null : dao.findByCode(t.getCode());
+    public Product findByReferenceEntity(Product t) {
+        return t == null ? null : dao.findByCode(t.getCode());
     }
-
 
 
     public List<Product> findAllOptimized() {
@@ -265,14 +254,11 @@ public class ProductAdminServiceImpl implements ProductAdminService {
     }
 
 
+    public ProductAdminServiceImpl(ProductDao dao) {
+        this.dao = dao;
+    }
 
-
-
-
-
-
-
-    private @Autowired ProductDao dao;
+    private ProductDao dao;
 
 
 }

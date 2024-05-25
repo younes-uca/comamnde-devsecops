@@ -35,6 +35,10 @@ public class Product  extends BaseEntity     {
         super();
     }
 
+    public Product(Long id){
+        this.id = id;
+    }
+
     public Product(Long id,String reference){
         this.id = id;
         this.reference = reference ;

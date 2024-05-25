@@ -295,18 +295,16 @@ public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
     }
 
 
-
-
-
-
-
+    public PurchaseItemAdminServiceImpl(PurchaseItemDao dao) {
+        this.dao = dao;
+    }
 
     @Autowired
     private PurchaseAdminService purchaseService ;
     @Autowired
     private ProductAdminService productService ;
 
-    private @Autowired PurchaseItemDao dao;
+    private PurchaseItemDao dao;
 
 
 }

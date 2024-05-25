@@ -265,14 +265,11 @@ public class PurchaseStateAdminServiceImpl implements PurchaseStateAdminService 
     }
 
 
+    public PurchaseStateAdminServiceImpl(PurchaseStateDao dao) {
+        this.dao = dao;
+    }
 
-
-
-
-
-
-
-    private @Autowired PurchaseStateDao dao;
+    private PurchaseStateDao dao;
 
 
 }
