@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 public class RoleUserConverter extends AbstractConverter<RoleUser, RoleUserDto> {
 
     @Autowired
-    private RoleConverter roleConverter;
+    private RoleConverter roleConverter ;
     @Autowired
-    private UserConverter utilisateurConverter;
+    private UserConverter utilisateurConverter ;
     private boolean role;
     private boolean user;
 
-    public RoleUserConverter() {//Role roleUser user,){
+    public  RoleUserConverter(){//Role roleUser user,){
         super(RoleUser.class, RoleUserDto.class);
         //this.role =  role ;
         //this.user =  user ;
@@ -29,20 +29,22 @@ public class RoleUserConverter extends AbstractConverter<RoleUser, RoleUserDto> 
         if (dto == null) {
             return null;
         } else {
-            RoleUser item = new RoleUser();
-            if (StringUtil.isNotEmpty(dto.getId()))
+        RoleUser item = new RoleUser();
+            if(StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if (this.role && dto.getRole() != null && dto.getRole().getId() != null)
-                item.setRole(roleConverter.toItem(dto.getRole()));
+            if(this.role && dto.getRole()!=null &&  dto.getRole().getId() != null)
+                item.setRole(roleConverter.toItem(dto.getRole())) ;
 
-            if (dto.getUser() != null && dto.getUser().getId() != null) {
+            if(dto.getUser() != null && dto.getUser().getId() != null){
                 item.setUser(new User());
                 item.getUser().setId(dto.getUser().getId());
                 item.getUser().setEmail(dto.getUser().getEmail());
             }
 
 
-            return item;
+
+
+        return item;
         }
     }
 
@@ -52,17 +54,17 @@ public class RoleUserConverter extends AbstractConverter<RoleUser, RoleUserDto> 
             return null;
         } else {
             RoleUserDto dto = new RoleUserDto();
-            if (StringUtil.isNotEmpty(item.getId()))
+            if(StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-            if (this.role && item.getRole() != null) {
-                dto.setRole(roleConverter.toDto(item.getRole()));
-            }
-            if (this.user && item.getUser() != null) {
-                dto.setUser(utilisateurConverter.toDto(item.getUser()));
-            }
+        if(this.role && item.getRole()!=null) {
+            dto.setRole(roleConverter.toDto(item.getRole())) ;
+        }
+        if(this.user && item.getUser()!=null) {
+            dto.setUser(utilisateurConverter.toDto(item.getUser())) ;
+        }
 
 
-            return dto;
+        return dto;
         }
     }
 
@@ -73,35 +75,28 @@ public class RoleUserConverter extends AbstractConverter<RoleUser, RoleUserDto> 
     }
 
 
-    public RoleConverter getRoleConverter() {
+    public RoleConverter getRoleConverter(){
         return this.roleConverter;
     }
-
-    public void setRoleConverter(RoleConverter roleConverter) {
+    public void setRoleConverter(RoleConverter roleConverter ){
         this.roleConverter = roleConverter;
     }
-
-    public UserConverter getUserConverter() {
+    public UserConverter getUserConverter(){
         return this.utilisateurConverter;
     }
-
-    public void setUserConverter(UserConverter utilisateurConverter) {
+    public void setUserConverter(UserConverter utilisateurConverter ){
         this.utilisateurConverter = utilisateurConverter;
     }
-
-    public boolean isRole() {
+    public boolean  isRole(){
         return this.role;
     }
-
-    public void setRole(boolean role) {
+    public void  setRole(boolean role){
         this.role = role;
     }
-
-    public boolean isUser() {
+    public boolean  isUser(){
         return this.user;
     }
-
-    public void setUser(boolean user) {
+    public void  setUser(boolean user){
         this.user = user;
     }
 }

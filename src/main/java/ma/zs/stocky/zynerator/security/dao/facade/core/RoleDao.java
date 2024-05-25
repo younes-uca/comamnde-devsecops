@@ -9,9 +9,8 @@ import java.util.List;
 
 
 @Repository
-public interface RoleDao extends AbstractRepository<Role, Long> {
+public interface RoleDao extends AbstractRepository<Role,Long>  {
     Role findByAuthority(String authority);
-
     int deleteByAuthority(String authority);
 
     @Query("SELECT NEW Role(item.id,item.authority) FROM Role item")

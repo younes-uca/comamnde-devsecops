@@ -1,19 +1,26 @@
 package ma.zs.stocky.service.facade.admin.catalog;
 
+import java.util.List;
 import ma.zs.stocky.bean.core.catalog.Product;
 import ma.zs.stocky.dao.criteria.core.catalog.ProductCriteria;
-import org.springframework.web.multipart.MultipartFile;
+import ma.zs.stocky.zynerator.service.IService;
 
-import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ProductAdminService {
 
 
-    Product create(Product t);
+
+
+
+
+
+	Product create(Product t);
 
     Product update(Product t);
 
-    List<Product> update(List<Product> ts, boolean createIfNotExist);
+    List<Product> update(List<Product> ts,boolean createIfNotExist);
 
     Product findById(Long id);
 
@@ -41,7 +48,7 @@ public interface ProductAdminService {
 
     List<List<Product>> getToBeSavedAndToBeDeleted(List<Product> oldList, List<Product> newList);
 
-    public String uploadFile(String checksumOld, String tempUpladedFile, String destinationFilePath) throws Exception;
+    public String uploadFile(String checksumOld, String tempUpladedFile,String destinationFilePath) throws Exception ;
 
     List<Product> importExcel(MultipartFile file);
 

@@ -47,9 +47,8 @@ public class VelocityPdf {
             field.setAccessible(true);
             try {
                 Object value = field.get(objet);
-                if (value != null) {
-                    context.put(field.getName(), value);
-                }
+                if(value!=null){
+                context.put(field.getName(), value);}
             } catch (IllegalAccessException e) {
                 // Handle any exceptions thrown by reflection
                 e.printStackTrace();

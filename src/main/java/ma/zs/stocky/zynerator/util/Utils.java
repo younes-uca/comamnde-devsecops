@@ -5,6 +5,7 @@ import ma.zs.stocky.zynerator.audit.Log;
 import ma.zs.stocky.zynerator.bean.BusinessObject;
 import ma.zs.stocky.zynerator.bean.EnumBean;
 import ma.zs.stocky.zynerator.dto.BaseDto;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -210,15 +211,15 @@ public abstract class Utils {
         BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
     }
 
-    private static String[] getNullPropertyNames(Object source) {
+    private static String[] getNullPropertyNames (Object source) {
         final BeanWrapper src = new BeanWrapperImpl(source);
         java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
 
         Set<String> emptyNames = new HashSet<>();
-        for (java.beans.PropertyDescriptor pd : pds) {
-            Object srcValue = src.getPropertyValue(pd.getName());
-            if (srcValue == null) emptyNames.add(pd.getName());
-        }
+            for(java.beans.PropertyDescriptor pd : pds) {
+                Object srcValue = src.getPropertyValue(pd.getName());
+                if (srcValue == null) emptyNames.add(pd.getName());
+            }
 
         String[] result = new String[emptyNames.size()];
         return emptyNames.toArray(result);

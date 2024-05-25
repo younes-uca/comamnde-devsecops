@@ -5,13 +5,13 @@ import ma.zs.stocky.zynerator.security.dao.criteria.core.ActionPermissionCriteri
 import ma.zs.stocky.zynerator.specification.AbstractSpecification;
 
 
-public class ActionPermissionSpecification extends AbstractSpecification<ActionPermissionCriteria, ActionPermission> {
+public class ActionPermissionSpecification extends  AbstractSpecification<ActionPermissionCriteria, ActionPermission>  {
 
     @Override
     public void constructPredicates() {
         addPredicateId("id", criteria);
-        addPredicate("reference", criteria.getReference(), criteria.getReferenceLike());
-        addPredicate("libelle", criteria.getLibelle(), criteria.getLibelleLike());
+        addPredicate("reference", criteria.getReference(),criteria.getReferenceLike());
+        addPredicate("libelle", criteria.getLibelle(),criteria.getLibelleLike());
     }
 
     public ActionPermissionSpecification(ActionPermissionCriteria criteria) {

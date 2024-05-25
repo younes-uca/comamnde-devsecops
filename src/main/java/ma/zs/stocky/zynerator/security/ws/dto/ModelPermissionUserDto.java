@@ -1,66 +1,73 @@
 package ma.zs.stocky.zynerator.security.ws.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ma.zs.stocky.zynerator.audit.Log;
 import ma.zs.stocky.zynerator.dto.AuditBaseDto;
 
 
+
+
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ModelPermissionUserDto extends AuditBaseDto {
+public class ModelPermissionUserDto  extends AuditBaseDto {
 
-    private Boolean value;
-    private String subAttribute;
+    private Boolean value  ;
+    private String subAttribute  ;
 
-    private ActionPermissionDto actionPermission;
-    private ModelPermissionDto modelPermission;
-    private UserDto user;
+    private ActionPermissionDto actionPermission ;
+    private ModelPermissionDto modelPermission ;
+    private UserDto user ;
 
 
-    public ModelPermissionUserDto() {
+
+    public ModelPermissionUserDto(){
         super();
     }
 
 
-    public Boolean getValue() {
+
+
+    public Boolean getValue(){
         return this.value;
     }
-
-    public void setValue(Boolean value) {
+    public void setValue(Boolean value){
         this.value = value;
     }
 
 
-    public String getSubAttribute() {
+    public String getSubAttribute(){
         return this.subAttribute;
     }
-
-    public void setSubAttribute(String subAttribute) {
+    public void setSubAttribute(String subAttribute){
         this.subAttribute = subAttribute;
     }
 
 
-    public ActionPermissionDto getActionPermission() {
+    public ActionPermissionDto getActionPermission(){
         return this.actionPermission;
     }
 
-    public void setActionPermission(ActionPermissionDto actionPermission) {
+    public void setActionPermission(ActionPermissionDto actionPermission){
         this.actionPermission = actionPermission;
     }
-
-    public ModelPermissionDto getModelPermission() {
+    public ModelPermissionDto getModelPermission(){
         return this.modelPermission;
     }
 
-    public void setModelPermission(ModelPermissionDto modelPermission) {
+    public void setModelPermission(ModelPermissionDto modelPermission){
         this.modelPermission = modelPermission;
     }
-
-    public UserDto getUser() {
+    public UserDto getUser(){
         return this.user;
     }
 
-    public void setUser(UserDto user) {
+    public void setUser(UserDto user){
         this.user = user;
     }
+
+
+
+
 
 
 }

@@ -1,11 +1,12 @@
 package ma.zs.stocky.zynerator.history;
 
-import jakarta.persistence.MappedSuperclass;
 import ma.zs.stocky.zynerator.bean.BusinessObject;
 
+import jakarta.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 /**
+ *
  * @author Zouani
  * @version 1.2
  */

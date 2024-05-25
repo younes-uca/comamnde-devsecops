@@ -5,17 +5,17 @@ import ma.zs.stocky.zynerator.security.dao.criteria.core.RoleUserCriteria;
 import ma.zs.stocky.zynerator.specification.AbstractSpecification;
 
 
-public class RoleUserSpecification extends AbstractSpecification<RoleUserCriteria, RoleUser> {
+public class RoleUserSpecification extends  AbstractSpecification<RoleUserCriteria, RoleUser>  {
 
     @Override
     public void constructPredicates() {
         addPredicateId("id", criteria);
-        addPredicateFk("role", "id", criteria.getRole() == null ? null : criteria.getRole().getId());
-        addPredicateFk("role", "id", criteria.getRoles());
-        addPredicateFk("role", "authority", criteria.getRole() == null ? null : criteria.getRole().getAuthority());
-        addPredicateFk("user", "id", criteria.getUser() == null ? null : criteria.getUser().getId());
-        addPredicateFk("user", "id", criteria.getUsers());
-        addPredicateFk("user", "email", criteria.getUser() == null ? null : criteria.getUser().getEmail());
+        addPredicateFk("role","id", criteria.getRole()==null?null:criteria.getRole().getId());
+        addPredicateFk("role","id", criteria.getRoles());
+        addPredicateFk("role","authority", criteria.getRole()==null?null:criteria.getRole().getAuthority());
+        addPredicateFk("user","id", criteria.getUser()==null?null:criteria.getUser().getId());
+        addPredicateFk("user","id", criteria.getUsers());
+        addPredicateFk("user","email", criteria.getUser()==null?null:criteria.getUser().getEmail());
     }
 
     public RoleUserSpecification(RoleUserCriteria criteria) {

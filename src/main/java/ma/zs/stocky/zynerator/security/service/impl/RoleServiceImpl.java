@@ -26,8 +26,9 @@ public class RoleServiceImpl extends AbstractServiceImpl<Role, RoleCriteria, Rol
     }
 
 
-    public Role findByReferenceEntity(Role t) {
-        return dao.findByAuthority(t.getAuthority());
+
+    public Role findByReferenceEntity(Role t){
+        return  dao.findByAuthority(t.getAuthority());
     }
 
 
@@ -36,9 +37,13 @@ public class RoleServiceImpl extends AbstractServiceImpl<Role, RoleCriteria, Rol
     }
 
 
+
+
+
     public void configure() {
         super.configure(Role.class, RoleSpecification.class);
     }
+
 
 
     public RoleServiceImpl(RoleDao dao) {

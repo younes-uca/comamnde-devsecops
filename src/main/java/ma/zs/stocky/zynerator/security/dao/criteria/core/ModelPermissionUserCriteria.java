@@ -5,93 +5,82 @@ import ma.zs.stocky.zynerator.criteria.BaseCriteria;
 
 import java.util.List;
 
-public class ModelPermissionUserCriteria extends BaseCriteria {
+public class ModelPermissionUserCriteria extends  BaseCriteria  {
 
     private Boolean value;
     private String subAttribute;
     private String subAttributeLike;
 
-    private ActionPermissionCriteria actionPermission;
-    private List<ActionPermissionCriteria> actionPermissions;
-    private ModelPermissionCriteria modelPermission;
-    private List<ModelPermissionCriteria> modelPermissions;
-    private UserCriteria user;
-    private List<UserCriteria> utilisateurs;
+    private ActionPermissionCriteria actionPermission ;
+    private List<ActionPermissionCriteria> actionPermissions ;
+    private ModelPermissionCriteria modelPermission ;
+    private List<ModelPermissionCriteria> modelPermissions ;
+    private UserCriteria user ;
+    private List<UserCriteria> utilisateurs ;
 
 
-    public ModelPermissionUserCriteria() {
-    }
+    public ModelPermissionUserCriteria(){}
 
-    public Boolean getValue() {
+    public Boolean getValue(){
         return this.value;
     }
-
-    public void setValue(Boolean value) {
+    public void setValue(Boolean value){
         this.value = value;
     }
-
-    public String getSubAttribute() {
+    public String getSubAttribute(){
         return this.subAttribute;
     }
-
-    public void setSubAttribute(String subAttribute) {
+    public void setSubAttribute(String subAttribute){
         this.subAttribute = subAttribute;
     }
-
-    public String getSubAttributeLike() {
+    public String getSubAttributeLike(){
         return this.subAttributeLike;
     }
-
-    public void setSubAttributeLike(String subAttributeLike) {
+    public void setSubAttributeLike(String subAttributeLike){
         this.subAttributeLike = subAttributeLike;
     }
 
 
-    public ActionPermissionCriteria getActionPermission() {
+    public ActionPermissionCriteria getActionPermission(){
         return this.actionPermission;
     }
 
-    public void setActionPermission(ActionPermissionCriteria actionPermission) {
+    public void setActionPermission(ActionPermissionCriteria actionPermission){
         this.actionPermission = actionPermission;
     }
-
-    public List<ActionPermissionCriteria> getActionPermissions() {
+    public List<ActionPermissionCriteria> getActionPermissions(){
         return this.actionPermissions;
     }
 
-    public void setActionPermissions(List<ActionPermissionCriteria> actionPermissions) {
+    public void setActionPermissions(List<ActionPermissionCriteria> actionPermissions){
         this.actionPermissions = actionPermissions;
     }
-
-    public ModelPermissionCriteria getModelPermission() {
+    public ModelPermissionCriteria getModelPermission(){
         return this.modelPermission;
     }
 
-    public void setModelPermission(ModelPermissionCriteria modelPermission) {
+    public void setModelPermission(ModelPermissionCriteria modelPermission){
         this.modelPermission = modelPermission;
     }
-
-    public List<ModelPermissionCriteria> getModelPermissions() {
+    public List<ModelPermissionCriteria> getModelPermissions(){
         return this.modelPermissions;
     }
 
-    public void setModelPermissions(List<ModelPermissionCriteria> modelPermissions) {
+    public void setModelPermissions(List<ModelPermissionCriteria> modelPermissions){
         this.modelPermissions = modelPermissions;
     }
-
-    public UserCriteria getUser() {
+    public UserCriteria getUser(){
         return this.user;
     }
 
-    public void setUser(UserCriteria user) {
+    public void setUser(UserCriteria user){
         this.user = user;
     }
-
-    public List<UserCriteria> getUsers() {
+    public List<UserCriteria> getUsers(){
         return this.utilisateurs;
     }
 
-    public void setUsers(List<UserCriteria> utilisateurs) {
+    public void setUsers(List<UserCriteria> utilisateurs){
         this.utilisateurs = utilisateurs;
     }
 }

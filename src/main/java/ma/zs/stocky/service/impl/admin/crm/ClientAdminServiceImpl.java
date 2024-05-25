@@ -1,25 +1,31 @@
 package ma.zs.stocky.service.impl.admin.crm;
 
 
+import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.bean.core.crm.Client;
 import ma.zs.stocky.dao.criteria.core.crm.ClientCriteria;
 import ma.zs.stocky.dao.facade.core.crm.ClientDao;
 import ma.zs.stocky.dao.specification.core.crm.ClientSpecification;
 import ma.zs.stocky.service.facade.admin.crm.ClientAdminService;
-import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
+import ma.zs.stocky.zynerator.service.AbstractServiceImpl;
 import ma.zs.stocky.zynerator.util.ListUtil;
-import ma.zs.stocky.zynerator.util.RefelexivityUtil;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.ArrayList;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
+import ma.zs.stocky.zynerator.util.RefelexivityUtil;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+
+import java.util.List;
 @Service
 public class ClientAdminServiceImpl implements ClientAdminService {
 
@@ -75,7 +81,7 @@ public class ClientAdminServiceImpl implements ClientAdminService {
 
 
     private ClientSpecification constructSpecification(ClientCriteria criteria) {
-        ClientSpecification mySpecification = (ClientSpecification) RefelexivityUtil.constructObjectUsingOneParam(ClientSpecification.class, criteria);
+        ClientSpecification mySpecification =  (ClientSpecification) RefelexivityUtil.constructObjectUsingOneParam(ClientSpecification.class, criteria);
         return mySpecification;
     }
 
@@ -94,7 +100,7 @@ public class ClientAdminServiceImpl implements ClientAdminService {
     }
 
 
-    public boolean deleteById(Long id) {
+	public boolean deleteById(Long id) {
         boolean condition = deleteByIdCheckCondition(id);
         if (condition) {
             dao.deleteById(id);
@@ -109,8 +115,8 @@ public class ClientAdminServiceImpl implements ClientAdminService {
     public void deleteByIdIn(List<Long> ids) {
         //dao.deleteByIdIn(ids);
     }
-
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public int delete(Client t) {
         int result = 0;
         if (t != null) {
@@ -121,18 +127,19 @@ public class ClientAdminServiceImpl implements ClientAdminService {
     }
 
 
+
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<Client> delete(List<Client> list) {
-        List<Client> result = new ArrayList();
+		List<Client> result = new ArrayList();
         if (list != null) {
             for (Client t : list) {
                 int count = delete(t);
-                if (count == 0) {
-                    result.add(t);
-                }
+				if(count == 0){
+					result.add(t);
+				}
             }
         }
-        return result;
+		return result;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -141,18 +148,18 @@ public class ClientAdminServiceImpl implements ClientAdminService {
         Client saved;
         if (loaded == null) {
             saved = dao.save(t);
-        } else {
+        }else {
             saved = null;
         }
         return saved;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<Client> create(List<Client> ts) {
         List<Client> result = new ArrayList<>();
         if (ts != null) {
             for (Client t : ts) {
-                Client created = create(t);
+				Client created = create(t);
                 if (created == null)
                     result.add(t);
             }
@@ -160,12 +167,12 @@ public class ClientAdminServiceImpl implements ClientAdminService {
         return result;
     }
 
-    public Client findWithAssociatedLists(Long id) {
+    public Client findWithAssociatedLists(Long id){
         Client result = dao.findById(id).orElse(null);
         return result;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<Client> update(List<Client> ts, boolean createIfNotExist) {
         List<Client> result = new ArrayList<>();
         if (ts != null) {
@@ -188,9 +195,13 @@ public class ClientAdminServiceImpl implements ClientAdminService {
     }
 
 
+
+
+
     public Client findByReferenceEntity(Client t) {
-        return t == null ? null : dao.findByEmail(t.getEmail());
+        return t == null || t.getId() == null ? null : findById(t.getId());
     }
+
 
 
     public List<Client> findAllOptimized() {
@@ -254,11 +265,16 @@ public class ClientAdminServiceImpl implements ClientAdminService {
     }
 
 
+
+
+
+
+
+
+
     public ClientAdminServiceImpl(ClientDao dao) {
         this.dao = dao;
     }
 
     private ClientDao dao;
-
-
 }

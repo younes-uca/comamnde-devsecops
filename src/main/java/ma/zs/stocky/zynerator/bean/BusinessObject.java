@@ -1,7 +1,6 @@
 package ma.zs.stocky.zynerator.bean;
 
 import jakarta.persistence.Transient;
-
 import java.io.Serializable;
 
 

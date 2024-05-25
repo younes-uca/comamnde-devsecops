@@ -2,11 +2,11 @@ package ma.zs.stocky.zynerator.audit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import ma.zs.stocky.zynerator.bean.BusinessObject;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import ma.zs.stocky.zynerator.bean.BusinessObject;
-
 import java.time.LocalDateTime;
 
 
@@ -19,7 +19,6 @@ public class AuditBusinessObject extends BusinessObject {
     protected LocalDateTime updatedOn;
     protected String createdBy;
     protected String updatedBy;
-
     public AuditBusinessObject() {
         super();
     }

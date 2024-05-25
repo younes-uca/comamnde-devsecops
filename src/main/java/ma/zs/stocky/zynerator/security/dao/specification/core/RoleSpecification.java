@@ -5,12 +5,12 @@ import ma.zs.stocky.zynerator.security.dao.criteria.core.RoleCriteria;
 import ma.zs.stocky.zynerator.specification.AbstractSpecification;
 
 
-public class RoleSpecification extends AbstractSpecification<RoleCriteria, Role> {
+public class RoleSpecification extends  AbstractSpecification<RoleCriteria, Role>  {
 
     @Override
     public void constructPredicates() {
         addPredicateId("id", criteria);
-        addPredicate("authority", criteria.getAuthority(), criteria.getAuthorityLike());
+        addPredicate("authority", criteria.getAuthority(),criteria.getAuthorityLike());
     }
 
     public RoleSpecification(RoleCriteria criteria) {

@@ -18,29 +18,32 @@ import java.util.List;
 public class RoleUserServiceImpl extends AbstractServiceImpl<RoleUser, RoleUserCriteria, RoleUserDao> implements RoleUserService {
 
 
-    public List<RoleUser> findByRoleId(Long id) {
+
+
+
+
+    public List<RoleUser> findByRoleId(Long id){
         return dao.findByRoleId(id);
     }
-
-    public int deleteByRoleId(Long id) {
+    public int deleteByRoleId(Long id){
         return dao.deleteByRoleId(id);
     }
-
-    public long countByRoleAuthority(String authority) {
+    public long countByRoleAuthority(String authority){
         return dao.countByRoleAuthority(authority);
     }
-
-    public List<RoleUser> findByUserId(Long id) {
+    public List<RoleUser> findByUserId(Long id){
         return dao.findByUserId(id);
     }
-
-    public int deleteByUserId(Long id) {
+    public int deleteByUserId(Long id){
         return dao.deleteByUserId(id);
     }
-
-    public long countByUserEmail(String email) {
+    public long countByUserEmail(String email){
         return dao.countByUserEmail(email);
     }
+
+
+
+
 
 
     public void configure() {
@@ -49,9 +52,9 @@ public class RoleUserServiceImpl extends AbstractServiceImpl<RoleUser, RoleUserC
 
 
     @Autowired
-    private RoleService roleService;
+    private RoleService roleService ;
     @Autowired
-    private UserService utilisateurService;
+    private UserService utilisateurService ;
 
     public RoleUserServiceImpl(RoleUserDao dao) {
         super(dao);

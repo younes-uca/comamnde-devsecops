@@ -9,13 +9,10 @@ import java.util.List;
 
 
 @Repository
-public interface UserDao extends AbstractRepository<User, Long> {
+public interface UserDao extends AbstractRepository<User,Long>  {
     User findByEmail(String email);
-
     int deleteByEmail(String email);
-
     User findByUsername(String username);
-
     int deleteByUsername(String username);
 
 

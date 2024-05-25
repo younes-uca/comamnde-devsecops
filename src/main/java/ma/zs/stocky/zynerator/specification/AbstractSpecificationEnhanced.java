@@ -1,17 +1,18 @@
 package ma.zs.stocky.zynerator.specification;
 
 
+import ma.zs.stocky.zynerator.bean.BaseEntity;
+import ma.zs.stocky.zynerator.criteria.BaseCriteriaEnhanced;
+import org.springframework.data.jpa.domain.Specification;
+
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import ma.zs.stocky.zynerator.bean.BaseEntity;
-import ma.zs.stocky.zynerator.criteria.BaseCriteriaEnhanced;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractSpecificationEnhanced<Criteria extends BaseCriteriaEnhanced, T extends BaseEntity> extends AbstractSpecification<Criteria, T> {
+public abstract class AbstractSpecificationEnhanced<Criteria extends BaseCriteriaEnhanced, T extends BaseEntity> extends AbstractSpecification<Criteria, T>  {
 
 
     public AbstractSpecificationEnhanced(Criteria criteria) {
@@ -19,7 +20,7 @@ public abstract class AbstractSpecificationEnhanced<Criteria extends BaseCriteri
     }
 
     public AbstractSpecificationEnhanced(Criteria criteria, boolean distinct) {
-        super(criteria, distinct);
+        super(criteria,distinct);
     }
 
 
@@ -32,13 +33,14 @@ public abstract class AbstractSpecificationEnhanced<Criteria extends BaseCriteri
             constructPredicates();
             addOrderAndFilter();
         }
-        return getResult();
+    return getResult();
     }
 
     private void addEnhacedPredicate() {
-        addPredicateBool("actif", criteria.isActifLike());
-        addPredicate("ordre", criteria.getOrdre(), criteria.getOrdreLike());
+        addPredicateBool("actif",criteria.isActifLike());
+        addPredicate("ordre",criteria.getOrdre(), criteria.getOrdreLike());
     }
+
 
 
 }

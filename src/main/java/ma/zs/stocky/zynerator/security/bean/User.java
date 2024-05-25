@@ -1,8 +1,8 @@
 package ma.zs.stocky.zynerator.security.bean;
 
+import ma.zs.stocky.zynerator.bean.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-import ma.zs.stocky.zynerator.bean.BaseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,7 +16,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Inheritance(strategy = InheritanceType.JOINED)
 @SequenceGenerator(name = "user_app_seq", sequenceName = "user_app_seq", allocationSize = 1, initialValue = 1)
-public class User extends BaseEntity implements UserDetails {
+public class User  extends BaseEntity  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_app_seq")
     protected Long id;
@@ -44,7 +44,7 @@ public class User extends BaseEntity implements UserDetails {
 
 
     public User() {
-        super();
+         super();
     }
 
     public User(String username) {
@@ -55,88 +55,88 @@ public class User extends BaseEntity implements UserDetails {
 
 
     public boolean getCredentialsNonExpired() {
-        return credentialsNonExpired;
+    return credentialsNonExpired;
     }
 
     public boolean getEnabled() {
-        return enabled;
+    return enabled;
     }
 
     public boolean getAccountNonExpired() {
-        return accountNonExpired;
+    return accountNonExpired;
     }
 
     public boolean getAccountNonLocked() {
-        return accountNonLocked;
+    return accountNonLocked;
     }
 
     public boolean getPasswordChanged() {
-        return passwordChanged;
+    return passwordChanged;
     }
 
 
     public Long getId() {
-        return id;
+    return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+    this.id = id;
     }
 
     public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
+    return credentialsNonExpired;
     }
 
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
+    this.credentialsNonExpired = credentialsNonExpired;
     }
 
     public boolean isEnabled() {
-        return enabled;
+    return enabled;
     }
 
     public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    this.enabled = enabled;
     }
 
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+    return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    this.createdAt = createdAt;
     }
 
     public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    return updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    this.updatedAt = updatedAt;
     }
 
     public String getEmail() {
-        return email;
+    return email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+    this.email = email;
     }
 
     public boolean isAccountNonExpired() {
-        return accountNonExpired;
+    return accountNonExpired;
     }
 
     public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
+    this.accountNonExpired = accountNonExpired;
     }
 
     public boolean isAccountNonLocked() {
-        return accountNonLocked;
+    return accountNonLocked;
     }
 
     public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
+    this.accountNonLocked = accountNonLocked;
     }
 
     public String getUsername() {
@@ -173,65 +173,68 @@ public class User extends BaseEntity implements UserDetails {
 
 
     public Collection<GrantedAuthority> getAuthorities() {
-        return this.authorities;
+    return this.authorities;
     }
 
     public void setAuthorities(Collection<GrantedAuthority> authorities) {
-        this.authorities = authorities;
+    this.authorities = authorities;
     }
 
     public String getPassword() {
-        return password;
+    return password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+    this.password = password;
     }
 
     public boolean isPasswordChanged() {
-        return passwordChanged;
+    return passwordChanged;
     }
 
     public void setPasswordChanged(boolean passwordChanged) {
-        this.passwordChanged = passwordChanged;
+    this.passwordChanged = passwordChanged;
     }
+
+
 
 
     public List<ModelPermissionUser> getModelPermissionUsers() {
-        return this.modelPermissionUsers;
+    return this.modelPermissionUsers;
     }
 
     public void setModelPermissionUsers(List<ModelPermissionUser> modelPermissionUsers) {
-        this.modelPermissionUsers = modelPermissionUsers;
+    this.modelPermissionUsers = modelPermissionUsers;
     }
+
 
 
     public List<RoleUser> getRoleUsers() {
-        return this.roleUsers;
+    return this.roleUsers;
     }
 
     public void setRoleUsers(List<RoleUser> roleUsers) {
-        this.roleUsers = roleUsers;
+    this.roleUsers = roleUsers;
     }
 
 
     @Transient
     public String getLabel() {
-        label = email;
-        return label;
+    label = email;
+    return label;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id != null && id.equals(user.id);
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    User user = (User) o;
+    return id != null && id.equals(user.id);
     }
 
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+    return Objects.hash(id);
     }
 }

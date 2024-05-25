@@ -49,11 +49,12 @@ function fn() {
     config.actuatorUri = config.rootUrl + 'actuator/';
     config.adminUri = config.rootUrl + 'api/admin/';
 
-    config.purchaseStateUrl = config.adminUri + 'purchaseState/';
-    config.clientUrl = config.adminUri + 'client/';
-    config.purchaseItemUrl = config.adminUri + 'purchaseItem/';
     config.productUrl = config.adminUri + 'product/';
     config.purchaseUrl = config.adminUri + 'purchase/';
+    config.paymentTypeUrl = config.adminUri + 'paymentType/';
+    config.purchaseItemUrl = config.adminUri + 'purchaseItem/';
+    config.paymentUrl = config.adminUri + 'payment/';
+    config.clientUrl = config.adminUri + 'client/';
 
     common = karate.callSingle('classpath:common.feature', config);
     config.uniqueId = common.uniqueId

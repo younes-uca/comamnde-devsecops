@@ -29,43 +29,43 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/")
 public class AuthController {
-    @Autowired
-    AuthenticationManager authenticationManager;
+  @Autowired
+  AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserDao userRepository;
+  @Autowired
+  UserDao userRepository;
 
-    @Autowired
-    RoleDao roleRepository;
+  @Autowired
+  RoleDao roleRepository;
 
-    @Autowired
-    PasswordEncoder encoder;
+  @Autowired
+  PasswordEncoder encoder;
 
-    @Autowired
-    JwtUtils jwtUtils;
+  @Autowired
+  JwtUtils jwtUtils;
 
-    @PostMapping("login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+  @PostMapping("login")
+  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+    Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-        User userDetails = (User) authentication.getPrincipal();
-        List<String> roles = userDetails.getRoleUsers().stream()
-                .map(item -> item.getRole().getAuthority())
-                .collect(Collectors.toList());
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    String jwt = jwtUtils.generateJwtToken(authentication);
+    User userDetails = (User) authentication.getPrincipal();
+    List<String> roles = userDetails.getRoleUsers().stream()
+            .map(item -> item.getRole().getAuthority())
+            .collect(Collectors.toList());
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(SecurityParams.JWT_HEADER_NAME, SecurityParams.HEADER_PREFIX + jwt);
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(new JwtResponse(jwt,
-                        userDetails.getId(),
-                        userDetails.getUsername(),
-                        userDetails.getEmail(),
-                        roles));
-    }
+    HttpHeaders headers = new HttpHeaders();
+    headers.add(SecurityParams.JWT_HEADER_NAME,SecurityParams.HEADER_PREFIX+jwt);
+    return ResponseEntity.ok()
+            .headers(headers)
+            .body(new JwtResponse(jwt,
+                    userDetails.getId(),
+                    userDetails.getUsername(),
+                    userDetails.getEmail(),
+                    roles));
+  }
 
 }

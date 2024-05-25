@@ -1,10 +1,11 @@
 package ma.zs.stocky.zynerator.audit;
 
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import ma.zs.stocky.zynerator.security.bean.User;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 

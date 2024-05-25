@@ -2,9 +2,9 @@ package ma.zs.stocky.zynerator.criteria;
 
 public class BaseCriteriaEnhanced extends BaseCriteria {
 
-    /**
-     * Fields.
-     */
+     /**
+    * Fields.
+    */
 
     protected Boolean actif;
     protected Boolean actifLike;
@@ -13,9 +13,10 @@ public class BaseCriteriaEnhanced extends BaseCriteria {
     protected String ordre;
 
 
+
     /**
-     * Methods.
-     */
+    * Methods.
+    */
 
     public Boolean isActif() {
         return actif;

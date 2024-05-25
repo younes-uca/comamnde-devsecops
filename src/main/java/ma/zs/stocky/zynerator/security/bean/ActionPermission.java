@@ -1,17 +1,16 @@
 package ma.zs.stocky.zynerator.security.bean;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.*;
-import ma.zs.stocky.zynerator.bean.BaseEntity;
-
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import ma.zs.stocky.zynerator.bean.BaseEntity;
+import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "action_permission")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name = "action_permission_seq", sequenceName = "action_permission_seq", allocationSize = 1, initialValue = 1)
-public class ActionPermission extends BaseEntity {
+@SequenceGenerator(name="action_permission_seq",sequenceName="action_permission_seq",allocationSize=1, initialValue = 1)
+public class ActionPermission   extends BaseEntity     {
 
     private Long id;
 
@@ -21,63 +20,60 @@ public class ActionPermission extends BaseEntity {
     private String libelle;
 
 
-    public ActionPermission() {
-        super();
+
+    public ActionPermission(){
+    super();
     }
 
-    public ActionPermission(Long id, String reference) {
-        this.id = id;
-        this.reference = reference;
+    public ActionPermission(Long id,String reference){
+    this.id = id;
+    this.reference = reference ;
+    }
+    public ActionPermission(String reference){
+    this.reference = reference ;
     }
 
-    public ActionPermission(String reference) {
-        this.reference = reference;
-    }
+
 
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "action_permission_seq")
-    public Long getId() {
-        return this.id;
+    @GeneratedValue(strategy =  GenerationType.SEQUENCE,generator="action_permission_seq")
+    public Long getId(){
+    return this.id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long id){
+    this.id = id;
     }
-
-    public String getReference() {
-        return this.reference;
+    public String getReference(){
+    return this.reference;
     }
-
-    public void setReference(String reference) {
-        this.reference = reference;
+    public void setReference(String reference){
+    this.reference = reference;
     }
-
-    public String getLibelle() {
-        return this.libelle;
+    public String getLibelle(){
+    return this.libelle;
     }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
+    public void setLibelle(String libelle){
+    this.libelle = libelle;
     }
 
     @Transient
     public String getLabel() {
-        label = reference;
-        return label;
+    label = reference;
+    return label;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ActionPermission actionPermission = (ActionPermission) o;
-        return id != null && id.equals(actionPermission.id);
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ActionPermission actionPermission = (ActionPermission) o;
+    return id != null && id.equals(actionPermission.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+    return Objects.hash(id);
     }
 }

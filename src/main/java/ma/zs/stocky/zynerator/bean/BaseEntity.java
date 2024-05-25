@@ -2,13 +2,15 @@ package ma.zs.stocky.zynerator.bean;
 
 
 import jakarta.persistence.Transient;
-
+import jakarta.persistence.MappedSuperclass;
 import java.io.Serializable;
+
 
 
 public class BaseEntity {
 
 
+    
     protected Long id;
     protected String label;
 

@@ -10,6 +10,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ma.zs.stocky.zynerator.security.common.SecurityParams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,37 +32,37 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        response.addHeader("Access-Control-Allow-Origin", "*");// Angular :: "http://localhost:4200" or React :: "http://localhost:3000"
-        response.addHeader("Access-Control-Allow-Headers",
-                "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization");
-        response.addHeader("Access-Control-Allow-Methods", "DELETE, POST, GET, PUT, PATCH, OPTIONS");
-        response.addHeader("Access-Control-Expose-Headers",
-                "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Authorization");
+            response.addHeader("Access-Control-Allow-Origin", "*");// Angular :: "http://localhost:4200" or React :: "http://localhost:3000"
+            response.addHeader("Access-Control-Allow-Headers",
+                    "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization");
+            response.addHeader("Access-Control-Allow-Methods", "DELETE, POST, GET, PUT, PATCH, OPTIONS");
+            response.addHeader("Access-Control-Expose-Headers",
+                    "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Authorization");
 
-        if (request.getMethod().equals("OPTIONS")) {
-            response.setStatus(HttpServletResponse.SC_OK);
-        } else if (request.getRequestURI().equals("/login")) {
-            filterChain.doFilter(request, response);
-            return;
-        } else {
-            String jwtToken = request.getHeader(SecurityParams.JWT_HEADER_NAME);
-            if (jwtToken == null || !jwtToken.startsWith(SecurityParams.HEADER_PREFIX)) {
+            if (request.getMethod().equals("OPTIONS")) {
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else if (request.getRequestURI().equals("/login")) {
                 filterChain.doFilter(request, response);
                 return;
+            } else {
+                String jwtToken = request.getHeader(SecurityParams.JWT_HEADER_NAME);
+                if (jwtToken == null || !jwtToken.startsWith(SecurityParams.HEADER_PREFIX)) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+                JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SecurityParams.SECRET)).build();
+                String jwt = jwtToken.substring(SecurityParams.HEADER_PREFIX.length());
+                DecodedJWT decodedJWT = verifier.verify(jwt);
+                String username = decodedJWT.getSubject();
+                List<String> roles = decodedJWT.getClaims().get("roles").asList(String.class);
+                Collection<GrantedAuthority> authorities = new ArrayList<>();
+                roles.forEach(rn -> {
+                    authorities.add(new SimpleGrantedAuthority(rn));
+                });
+                UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(username, null, authorities);
+                SecurityContextHolder.getContext().setAuthentication(user);
+                filterChain.doFilter(request, response);
             }
-            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SecurityParams.SECRET)).build();
-            String jwt = jwtToken.substring(SecurityParams.HEADER_PREFIX.length());
-            DecodedJWT decodedJWT = verifier.verify(jwt);
-            String username = decodedJWT.getSubject();
-            List<String> roles = decodedJWT.getClaims().get("roles").asList(String.class);
-            Collection<GrantedAuthority> authorities = new ArrayList<>();
-            roles.forEach(rn -> {
-                authorities.add(new SimpleGrantedAuthority(rn));
-            });
-            UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(username, null, authorities);
-            SecurityContextHolder.getContext().setAuthentication(user);
-            filterChain.doFilter(request, response);
-        }
     }
 
 

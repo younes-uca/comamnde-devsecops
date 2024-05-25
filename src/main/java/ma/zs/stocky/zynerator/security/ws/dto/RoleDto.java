@@ -2,32 +2,40 @@ package ma.zs.stocky.zynerator.security.ws.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ma.zs.stocky.zynerator.audit.Log;
 import ma.zs.stocky.zynerator.dto.AuditBaseDto;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RoleDto extends AuditBaseDto {
+public class RoleDto  extends AuditBaseDto {
 
-    private String authority;
+    private String authority  ;
 
     private String updatedAt;
 
     private String label;
 
 
+
     private String createdAt;
 
 
-    public RoleDto() {
+
+
+
+
+
+    public RoleDto(){
         super();
     }
 
 
-    public String getAuthority() {
+
+
+    public String getAuthority(){
         return this.authority;
     }
-
-    public void setAuthority(String authority) {
+    public void setAuthority(String authority){
         this.authority = authority;
     }
 

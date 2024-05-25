@@ -3,9 +3,9 @@ package ma.zs.stocky.zynerator.service;
 import ma.zs.stocky.zynerator.bean.BaseEntity;
 import ma.zs.stocky.zynerator.criteria.BaseCriteria;
 import ma.zs.stocky.zynerator.security.bean.User;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface IService<T extends BaseEntity, Criteria extends BaseCriteria> {
 
@@ -13,7 +13,7 @@ public interface IService<T extends BaseEntity, Criteria extends BaseCriteria> {
 
     T update(T t);
 
-    List<T> update(List<T> ts, boolean createIfNotExist);
+    List<T> update(List<T> ts,boolean createIfNotExist);
 
     T findById(Long id);
 
@@ -47,7 +47,7 @@ public interface IService<T extends BaseEntity, Criteria extends BaseCriteria> {
 
     List<T> importerData(List<T> items);
 
-    public String uploadFile(String checksumOld, String tempUpladedFile, String destinationFilePath) throws Exception;
+    public String uploadFile(String checksumOld, String tempUpladedFile,String destinationFilePath) throws Exception ;
 
     List<T> importExcel(MultipartFile file);
 }

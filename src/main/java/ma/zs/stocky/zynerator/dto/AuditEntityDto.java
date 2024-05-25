@@ -2,7 +2,9 @@ package ma.zs.stocky.zynerator.dto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
+
 import ma.zs.stocky.zynerator.history.HistBusinessObject;
+import ma.zs.stocky.zynerator.util.DateUtil;
 
 public class AuditEntityDto extends BaseDto {
 
@@ -15,7 +17,7 @@ public class AuditEntityDto extends BaseDto {
      * OldValue
      */
     @Lob
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition="TEXT")
     protected String data;
 
     /**

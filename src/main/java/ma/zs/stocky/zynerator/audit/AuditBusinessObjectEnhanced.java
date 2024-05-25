@@ -1,5 +1,10 @@
 package ma.zs.stocky.zynerator.audit;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import ma.zs.stocky.zynerator.bean.BusinessObject;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 
@@ -18,7 +23,7 @@ public class AuditBusinessObjectEnhanced extends AuditBusinessObject {
     protected Long etablissementId;
     protected Boolean actif = false;
     protected String hl7;
-    protected Long ordre;
+    protected Long ordre ;
 
     public Boolean getActif() {
         return actif;

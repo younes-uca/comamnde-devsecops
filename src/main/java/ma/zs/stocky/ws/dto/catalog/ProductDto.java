@@ -1,39 +1,49 @@
-package ma.zs.stocky.ws.dto.catalog;
+package  ma.zs.stocky.ws.dto.catalog;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.zs.stocky.zynerator.audit.Log;
 import ma.zs.stocky.zynerator.dto.AuditBaseDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+
+
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductDto extends AuditBaseDto {
+public class ProductDto  extends AuditBaseDto {
 
-    private String code;
-    private String reference;
+    private String code  ;
+    private String reference  ;
 
 
-    public ProductDto() {
+
+
+    public ProductDto(){
         super();
     }
 
 
+
     @Log
-    public String getCode() {
+    public String getCode(){
         return this.code;
     }
-
-    public void setCode(String code) {
+    public void setCode(String code){
         this.code = code;
     }
 
     @Log
-    public String getReference() {
+    public String getReference(){
         return this.reference;
     }
-
-    public void setReference(String reference) {
+    public void setReference(String reference){
         this.reference = reference;
     }
+
+
+
+
+
+
 
 
 }

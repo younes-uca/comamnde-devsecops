@@ -27,43 +27,35 @@ public class ModelPermissionUserServiceImpl extends AbstractServiceImpl<ModelPer
         return dao.findByUserUsername(username);
     }
 
-    public List<ModelPermissionUser> findByActionPermissionId(Long id) {
+    public List<ModelPermissionUser> findByActionPermissionId(Long id){
         return dao.findByActionPermissionId(id);
     }
-
-    public int deleteByActionPermissionId(Long id) {
+    public int deleteByActionPermissionId(Long id){
         return dao.deleteByActionPermissionId(id);
     }
-
-    public long countByActionPermissionReference(String reference) {
+    public long countByActionPermissionReference(String reference){
         return dao.countByActionPermissionReference(reference);
     }
-
-    public List<ModelPermissionUser> findByModelPermissionId(Long id) {
+    public List<ModelPermissionUser> findByModelPermissionId(Long id){
         return dao.findByModelPermissionId(id);
     }
-
-    public int deleteByModelPermissionId(Long id) {
+    public int deleteByModelPermissionId(Long id){
         return dao.deleteByModelPermissionId(id);
     }
-
-    public long countByModelPermissionReference(String reference) {
+    public long countByModelPermissionReference(String reference){
         return dao.countByModelPermissionReference(reference);
     }
-
-    public List<ModelPermissionUser> findByUserId(Long id) {
+    public List<ModelPermissionUser> findByUserId(Long id){
         return dao.findByUserId(id);
     }
-
-    public int deleteByUserId(Long id) {
+    public int deleteByUserId(Long id){
         return dao.deleteByUserId(id);
     }
-
-    public long countByUserEmail(String email) {
+    public long countByUserEmail(String email){
         return dao.countByUserEmail(email);
     }
 
-    public List<ModelPermissionUser> findModelPermissionUser() {
+     public List<ModelPermissionUser> findModelPermissionUser() {
         List<ModelPermissionUser> modelPermissionUsers = new ArrayList<>();
 
         List<ModelPermission> models = modelPermissionService.findAllOptimized();
@@ -81,7 +73,7 @@ public class ModelPermissionUserServiceImpl extends AbstractServiceImpl<ModelPer
 
         return modelPermissionUsers;
     }
-
+	
     public List<ModelPermissionUser> initModelPermissionUser() {
         List<ModelPermissionUser> modelPermissionUsers = new ArrayList<>();
 
@@ -94,19 +86,19 @@ public class ModelPermissionUserServiceImpl extends AbstractServiceImpl<ModelPer
 
         return modelPermissionUsers;
     }
-
-    public List<ModelPermissionUser> initSecurityModelPermissionUser() {
-        List<ModelPermissionUser> modelPermissionUsers = new ArrayList<>();
-
-        for (ModelPermissionUser modelPermissionUser : findModelPermissionUser()) {
-            boolean result = checkModelPermissionUser(modelPermissionUser);
-            if (!result) {
-                modelPermissionUsers.add(modelPermissionUser);
-            }
-        }
-
-        return modelPermissionUsers;
-    }
+	
+	public List<ModelPermissionUser> initSecurityModelPermissionUser() {
+		List<ModelPermissionUser> modelPermissionUsers = new ArrayList<>();
+		
+		for (ModelPermissionUser modelPermissionUser : findModelPermissionUser()) {
+			boolean result = checkModelPermissionUser(modelPermissionUser);
+			if (!result) {
+				modelPermissionUsers.add(modelPermissionUser);
+			}
+		}
+    
+		return modelPermissionUsers;
+	}
 
 
     public boolean checkModelPermissionUser(ModelPermissionUser modelPermissionUser) {
@@ -117,11 +109,13 @@ public class ModelPermissionUserServiceImpl extends AbstractServiceImpl<ModelPer
                 modelPermissionUser.getModelPermission().getReference().equals("ModelPermission"));
     }
 
-    public Boolean findByUserUsernameAndModelPermissionReferenceAndActionPermissionReference(String username, String modelReference, String actionReference) {
+    public Boolean findByUserUsernameAndModelPermissionReferenceAndActionPermissionReference( String username ,  String modelReference,  String actionReference){
         ModelPermissionUser modelPermissionUser = dao.findByUserUsernameAndModelPermissionReferenceAndActionPermissionReference(username, modelReference, actionReference);
-        if (modelPermissionUser != null) return modelPermissionUser.getValue();
+        if (modelPermissionUser!=null) return modelPermissionUser.getValue();
         return false;
     }
+
+
 
 
     public void configure() {
@@ -130,11 +124,11 @@ public class ModelPermissionUserServiceImpl extends AbstractServiceImpl<ModelPer
 
 
     @Autowired
-    private ModelPermissionService modelPermissionService;
+    private ModelPermissionService modelPermissionService ;
     @Autowired
-    private UserService utilisateurService;
+    private UserService utilisateurService ;
     @Autowired
-    private ActionPermissionService actionPermissionService;
+    private ActionPermissionService actionPermissionService ;
 
     public ModelPermissionUserServiceImpl(ModelPermissionUserDao dao) {
         super(dao);

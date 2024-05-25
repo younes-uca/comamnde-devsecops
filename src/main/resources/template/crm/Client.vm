@@ -106,10 +106,7 @@
     <table style="width: 100%">
 
                         <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Full name:</span> #displayDataIfNotNull($fullName)</td>
-                </tr>
-                <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Email:</span> #displayDataIfNotNull($email)</td>
+                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Description:</span> #displayDataIfNotNull($description)</td>
                 </tr>
 
     </table>
