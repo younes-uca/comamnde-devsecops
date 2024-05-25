@@ -12,12 +12,12 @@ import java.util.Locale;
 @Configuration
 public class LocaleConfiguration {
 
-  @Value("${app.basename}")
+    @Value("${app.basename}")
     private String baseName;
-  @Value("${app.defaultlocal}")
+    @Value("${app.defaultlocal}")
     private String defaultLocalel;
 
-    @Bean(name="process-messages")
+    @Bean(name = "process-messages")
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource rs = new ResourceBundleMessageSource();
         rs.setBasename(baseName);

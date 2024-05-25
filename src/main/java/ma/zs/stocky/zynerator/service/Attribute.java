@@ -12,6 +12,7 @@ public class Attribute {
         this.name = name;
         this.type = type;
     }
+
     public Attribute(String name, String type, Class complexeType) {
         this.name = name;
         this.type = type;

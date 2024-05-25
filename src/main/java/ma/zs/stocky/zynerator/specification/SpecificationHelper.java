@@ -1,5 +1,6 @@
 package ma.zs.stocky.zynerator.specification;
 
+import jakarta.persistence.criteria.*;
 import ma.zs.stocky.zynerator.bean.BaseEntity;
 import ma.zs.stocky.zynerator.criteria.BaseCriteria;
 import ma.zs.stocky.zynerator.util.ListUtil;
@@ -7,7 +8,6 @@ import ma.zs.stocky.zynerator.util.NumberUtil;
 import ma.zs.stocky.zynerator.util.StringUtil;
 import org.springframework.data.jpa.domain.Specification;
 
-import jakarta.persistence.criteria.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -33,10 +33,11 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
         this.predicates = predicates;
     }
 
-    public void addPredicateInt(String name, String value,String valueMin,String valueMax) {
-        addPredicateInt(name,value);
-        addPredicateInt(name,valueMin,valueMax);
+    public void addPredicateInt(String name, String value, String valueMin, String valueMax) {
+        addPredicateInt(name, value);
+        addPredicateInt(name, valueMin, valueMax);
     }
+
     public void addPredicateBigDecimal(String name, String value, String valueMin, String valueMax) {
         addPredicateBigDecimal(name, value);
         addPredicateBigDecimal(name, valueMin, valueMax);
@@ -61,8 +62,8 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
 
     public void addPredicate(String name, List<? extends BaseCriteria> baseCriterias) {
         if (baseCriterias != null) {
-            List<Long> ids = baseCriterias.stream().map(e->e.getId()).collect(Collectors.toList());
-            addPredicateIn(name,ids);
+            List<Long> ids = baseCriterias.stream().map(e -> e.getId()).collect(Collectors.toList());
+            addPredicateIn(name, ids);
         }
     }
 
@@ -90,11 +91,13 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
             predicates.add(builder.equal(root.<Double>get(name), Double.parseDouble(value)));
         }
     }
+
     public void addPredicateBigDecimal(String name, String value) {
         if (StringUtil.isNotEmpty(value)) {
             predicates.add(builder.equal(root.<BigDecimal>get(name), new BigDecimal(value)));
         }
     }
+
     public void addPredicateId(String name, BaseCriteria baseCriteria) {
         if (baseCriteria != null) {
             addPredicateLong(name, baseCriteria.getId());
@@ -157,7 +160,7 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
     }
 
     public void addPredicateBool(String name, Boolean value) {
-        if (value!=null) {
+        if (value != null) {
             predicates.add(builder.equal(root.<Boolean>get(name), value));
         }
     }
@@ -179,48 +182,55 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
         }
     }
 
-    public void addPredicateBigDecimal(String name, String valueMin,String valueMax) {
+    public void addPredicateBigDecimal(String name, String valueMin, String valueMax) {
         if (StringUtil.isNotEmpty(valueMin)) {
             predicates.add(builder.greaterThanOrEqualTo(root.<BigDecimal>get(name), new BigDecimal(valueMin)));
-        } if (StringUtil.isNotEmpty(valueMax)) {
+        }
+        if (StringUtil.isNotEmpty(valueMax)) {
             predicates.add(builder.lessThanOrEqualTo(root.<BigDecimal>get(name), new BigDecimal(valueMax)));
         }
     }
-    public void addPredicateDouble(String name, String valueMin,String valueMax) {
+
+    public void addPredicateDouble(String name, String valueMin, String valueMax) {
         if (StringUtil.isNotEmpty(valueMin)) {
             predicates.add(builder.greaterThanOrEqualTo(root.<Double>get(name), Double.valueOf(valueMin)));
-        } if (StringUtil.isNotEmpty(valueMax)) {
-            predicates.add(builder.lessThanOrEqualTo(root.<Double>get(name),  Double.valueOf(valueMax)));
+        }
+        if (StringUtil.isNotEmpty(valueMax)) {
+            predicates.add(builder.lessThanOrEqualTo(root.<Double>get(name), Double.valueOf(valueMax)));
         }
     }
-    public void addPredicateLong(String name, String valueMin,String valueMax) {
+
+    public void addPredicateLong(String name, String valueMin, String valueMax) {
         if (StringUtil.isNotEmpty(valueMin)) {
             predicates.add(builder.greaterThanOrEqualTo(root.<Long>get(name), Long.valueOf(valueMin)));
-        } if (StringUtil.isNotEmpty(valueMax)) {
+        }
+        if (StringUtil.isNotEmpty(valueMax)) {
             predicates.add(builder.lessThanOrEqualTo(root.<Long>get(name), Long.valueOf(valueMax)));
         }
     }
-    public void addPredicateInt(String name, String valueMin,String valueMax) {
+
+    public void addPredicateInt(String name, String valueMin, String valueMax) {
         if (StringUtil.isNotEmpty(valueMin)) {
             predicates.add(builder.greaterThanOrEqualTo(root.<Integer>get(name), Integer.valueOf(valueMin)));
-        } if (StringUtil.isNotEmpty(valueMax)) {
+        }
+        if (StringUtil.isNotEmpty(valueMax)) {
             predicates.add(builder.lessThanOrEqualTo(root.<Integer>get(name), Integer.valueOf(valueMax)));
         }
     }
 
 
     public List<Long> getIds(List<? extends BaseCriteria> list) {
-        if(list == null){
+        if (list == null) {
             return new ArrayList<>();
-        }else{
-            return list.stream().map(e->e.getId()).collect(Collectors.toList());
+        } else {
+            return list.stream().map(e -> e.getId()).collect(Collectors.toList());
         }
     }
 
-    public void addPredicateFk(String nameObject,String nameAttribute, List<? extends  BaseCriteria> list) {
+    public void addPredicateFk(String nameObject, String nameAttribute, List<? extends BaseCriteria> list) {
         List<Long> ids = getIds(list);
         if (ListUtil.isNotEmpty(ids) && ids.size() == 1) {
-            addPredicateFk(nameObject, nameAttribute,ids.get(0));
+            addPredicateFk(nameObject, nameAttribute, ids.get(0));
         } else if (ListUtil.isNotEmpty(ids) && ids.size() > 1) {
             predicates.add(root.get(nameObject).get(nameAttribute).in(ids));
         }
@@ -231,6 +241,7 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
             predicates.add(builder.equal(root.get(nameObject).get(nameAttribute), value));
         }
     }
+
     public void addPredicateFk(String nameObject, String nameAttribute, Boolean value) {
         if (value != null) {
             predicates.add(builder.equal(root.get(nameObject).get(nameAttribute), value));
@@ -242,6 +253,7 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
             predicates.add(builder.equal(root.get(nameObject).get(nameAttribute), value));
         }
     }
+
     public void addOrderAndFilter() {
         addFilterConstraint();
         addOrderByAscConstraint();

@@ -10,22 +10,20 @@ import ma.zs.stocky.zynerator.security.ws.converter.ModelPermissionUserConverter
 import ma.zs.stocky.zynerator.security.ws.dto.ModelPermissionUserDto;
 import ma.zs.stocky.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.http.HttpStatus;
-
-import java.util.ArrayList;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/modelPermissionUser/")
-public class ModelPermissionUserRest  extends AbstractController<ModelPermissionUser, ModelPermissionUserDto, ModelPermissionUserCriteria, ModelPermissionUserService, ModelPermissionUserConverter> {
+public class ModelPermissionUserRest extends AbstractController<ModelPermissionUser, ModelPermissionUserDto, ModelPermissionUserCriteria, ModelPermissionUserService, ModelPermissionUserConverter> {
 
 
     @GetMapping("user/{username}")
-    public List<ModelPermissionUserDto> findByUserUserName(@PathVariable String username){
+    public List<ModelPermissionUserDto> findByUserUserName(@PathVariable String username) {
         return findDtos(service.findByUserUsername(username));
     }
 
@@ -34,6 +32,7 @@ public class ModelPermissionUserRest  extends AbstractController<ModelPermission
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @Operation(summary = "upload multiple modelPermissionUsers")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -46,7 +45,7 @@ public class ModelPermissionUserRest  extends AbstractController<ModelPermission
         return super.findAll();
     }
 
-	@Operation(summary = "initialisation des ModelPermissionUsers")
+    @Operation(summary = "initialisation des ModelPermissionUsers")
     @GetMapping("init-model-permission-user")
     public ResponseEntity<List<ModelPermissionUserDto>> initModelPermissionUser() {
         List<ModelPermissionUser> list = service.initModelPermissionUser();
@@ -54,7 +53,7 @@ public class ModelPermissionUserRest  extends AbstractController<ModelPermission
         HttpStatus status = dtos != null && !dtos.isEmpty() ? HttpStatus.OK : HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(dtos, status);
     }
-	
+
     @Operation(summary = "initialisation des ModelPermissionUsers")
     @GetMapping("init-security-model-permission-user")
     public ResponseEntity<List<ModelPermissionUserDto>> initSecurityModelPermissionUser() {
@@ -63,7 +62,6 @@ public class ModelPermissionUserRest  extends AbstractController<ModelPermission
         HttpStatus status = dtos != null && !dtos.isEmpty() ? HttpStatus.OK : HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(dtos, status);
     }
-
 
 
     @Operation(summary = "Finds a modelPermissionUser by id")
@@ -90,10 +88,11 @@ public class ModelPermissionUserRest  extends AbstractController<ModelPermission
     public ResponseEntity<List<ModelPermissionUserDto>> delete(@RequestBody List<ModelPermissionUserDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @Operation(summary = "Delete the specified modelPermissionUser")
     @DeleteMapping("")
     public ResponseEntity<ModelPermissionUserDto> delete(@RequestBody ModelPermissionUserDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @Operation(summary = "Delete the specified modelPermissionUser")
@@ -101,48 +100,56 @@ public class ModelPermissionUserRest  extends AbstractController<ModelPermission
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @Operation(summary = "Delete multiple modelPermissionUsers by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @Operation(summary = "find by actionPermission id")
     @GetMapping("actionPermission/id/{id}")
-    public List<ModelPermissionUserDto> findByActionPermissionId(@PathVariable Long id){
+    public List<ModelPermissionUserDto> findByActionPermissionId(@PathVariable Long id) {
         return findDtos(service.findByActionPermissionId(id));
     }
+
     @Operation(summary = "delete by actionPermission id")
     @DeleteMapping("actionPermission/id/{id}")
-    public int deleteByActionPermissionId(@PathVariable Long id){
+    public int deleteByActionPermissionId(@PathVariable Long id) {
         return service.deleteByActionPermissionId(id);
     }
+
     @Operation(summary = "find by modelPermission id")
     @GetMapping("modelPermission/id/{id}")
-    public List<ModelPermissionUserDto> findByModelPermissionId(@PathVariable Long id){
+    public List<ModelPermissionUserDto> findByModelPermissionId(@PathVariable Long id) {
         return findDtos(service.findByModelPermissionId(id));
     }
+
     @Operation(summary = "delete by modelPermission id")
     @DeleteMapping("modelPermission/id/{id}")
-    public int deleteByModelPermissionId(@PathVariable Long id){
+    public int deleteByModelPermissionId(@PathVariable Long id) {
         return service.deleteByModelPermissionId(id);
     }
+
     @Operation(summary = "find by user id")
     @GetMapping("user/id/{id}")
-    public List<ModelPermissionUserDto> findByUserId(@PathVariable Long id){
+    public List<ModelPermissionUserDto> findByUserId(@PathVariable Long id) {
         return findDtos(service.findByUserId(id));
     }
+
     @Operation(summary = "find by user and model reference and action reference")
     @GetMapping("user/{username}/model/{modelReference}/action/{actionReference}")
-    public Boolean findByUserUsernameAndModelPermissionReferenceAndActionPermissionReference(@PathVariable String username ,@PathVariable String modelReference,@PathVariable String actionReference){
-        return service.findByUserUsernameAndModelPermissionReferenceAndActionPermissionReference(username ,modelReference,actionReference);
+    public Boolean findByUserUsernameAndModelPermissionReferenceAndActionPermissionReference(@PathVariable String username, @PathVariable String modelReference, @PathVariable String actionReference) {
+        return service.findByUserUsernameAndModelPermissionReferenceAndActionPermissionReference(username, modelReference, actionReference);
     }
+
     @Operation(summary = "delete by user id")
     @DeleteMapping("user/id/{id}")
-    public int deleteByUserId(@PathVariable Long id){
+    public int deleteByUserId(@PathVariable Long id) {
         return service.deleteByUserId(id);
     }
+
     @Operation(summary = "Finds modelPermissionUsers by criteria")
     @PostMapping("find-by-criteria")
     public ResponseEntity<List<ModelPermissionUserDto>> findByCriteria(@RequestBody ModelPermissionUserCriteria criteria) throws Exception {
@@ -168,12 +175,9 @@ public class ModelPermissionUserRest  extends AbstractController<ModelPermission
     }
 
 
-
-    public ModelPermissionUserRest (ModelPermissionUserService service, ModelPermissionUserConverter converter) {
+    public ModelPermissionUserRest(ModelPermissionUserService service, ModelPermissionUserConverter converter) {
         super(service, converter);
     }
-
-
 
 
 }

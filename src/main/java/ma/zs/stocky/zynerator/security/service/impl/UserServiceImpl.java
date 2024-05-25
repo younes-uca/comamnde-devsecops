@@ -33,10 +33,9 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
         if (foundedUserByUsername != null || foundedUserByEmail != null) return null;
         else {
             if (t.getPassword() == null || t.getPassword().isEmpty()) {
-            t.setPassword(bCryptPasswordEncoder.encode(t.getUsername()));
-            }
-            else {
-            t.setPassword(bCryptPasswordEncoder.encode(t.getPassword()));
+                t.setPassword(bCryptPasswordEncoder.encode(t.getUsername()));
+            } else {
+                t.setPassword(bCryptPasswordEncoder.encode(t.getPassword()));
             }
             //t.setPassword(bCryptPasswordEncoder.encode("123"));
             t.setAccountNonExpired(true);
@@ -66,7 +65,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
                 });
             }
             if (t.getRoleUsers() != null) {
-                t.getRoleUsers().forEach(element-> {
+                t.getRoleUsers().forEach(element -> {
                     element.setUser(t);
                     roleUserService.create(element);
                 });
@@ -76,14 +75,15 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
 
     }
 
-    public User findWithAssociatedLists(Long id){
+    public User findWithAssociatedLists(Long id) {
         User result = dao.findById(id).orElse(null);
-        if(result!=null && result.getId() != null) {
+        if (result != null && result.getId() != null) {
             result.setModelPermissionUsers(modelPermissionUserService.findByUserId(id));
             result.setRoleUsers(roleUserService.findByUserId(id));
         }
         return result;
     }
+
     @Transactional
     public void deleteAssociatedLists(Long id) {
         modelPermissionUserService.deleteByUserId(id);
@@ -91,24 +91,24 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
     }
 
 
-    public void updateWithAssociatedLists(User user){
-    if(user !=null && user.getId() != null){
-            List<List<ModelPermissionUser>> resultModelPermissionUsers= modelPermissionUserService.getToBeSavedAndToBeDeleted(modelPermissionUserService.findByUserId(user.getId()),user.getModelPermissionUsers());
+    public void updateWithAssociatedLists(User user) {
+        if (user != null && user.getId() != null) {
+            List<List<ModelPermissionUser>> resultModelPermissionUsers = modelPermissionUserService.getToBeSavedAndToBeDeleted(modelPermissionUserService.findByUserId(user.getId()), user.getModelPermissionUsers());
             modelPermissionUserService.delete(resultModelPermissionUsers.get(1));
             ListUtil.emptyIfNull(resultModelPermissionUsers.get(0)).forEach(e -> e.setUser(user));
-            modelPermissionUserService.update(resultModelPermissionUsers.get(0),true);
-            List<List<RoleUser>> resultRoleUsers= roleUserService.getToBeSavedAndToBeDeleted(roleUserService.findByUserId(user.getId()),user.getRoleUsers());
+            modelPermissionUserService.update(resultModelPermissionUsers.get(0), true);
+            List<List<RoleUser>> resultRoleUsers = roleUserService.getToBeSavedAndToBeDeleted(roleUserService.findByUserId(user.getId()), user.getRoleUsers());
             roleUserService.delete(resultRoleUsers.get(1));
             ListUtil.emptyIfNull(resultRoleUsers.get(0)).forEach(e -> e.setUser(user));
-            roleUserService.update(resultRoleUsers.get(0),true);
-    }
+            roleUserService.update(resultRoleUsers.get(0), true);
+        }
     }
 
 
-
-    public User findByReferenceEntity(User t){
-        return  dao.findByEmail(t.getEmail());
+    public User findByReferenceEntity(User t) {
+        return dao.findByEmail(t.getEmail());
     }
+
     @Override
     public User findByUsername(String username) {
         if (username == null)
@@ -137,12 +137,14 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
         }
         return false;
     }
+
     @Override
     public User findByUsernameWithRoles(String username) {
         if (username == null)
             return null;
         return dao.findByUsername(username);
     }
+
     @Override
     @Transactional
     public int deleteByUsername(String username) {
@@ -160,13 +162,13 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
 
 
     @Autowired
-    private RoleUserService roleUserService ;
+    private RoleUserService roleUserService;
     @Autowired
-    private ModelPermissionService modelPermissionService ;
+    private ModelPermissionService modelPermissionService;
     @Autowired
-    private ActionPermissionService actionPermissionService ;
+    private ActionPermissionService actionPermissionService;
     @Autowired
-    private ModelPermissionUserService modelPermissionUserService ;
+    private ModelPermissionUserService modelPermissionUserService;
     @Autowired
     private RoleService roleService;
 

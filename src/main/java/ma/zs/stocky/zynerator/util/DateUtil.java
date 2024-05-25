@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.*;
 
 public class DateUtil {
@@ -45,7 +44,7 @@ public class DateUtil {
     }
 
     public static LocalDateTime stringEnToDate(final String strDate) {
-    List<String> dateFormats = Arrays.asList(DATE_FORMAT_ENG, DATE_FORMAT_ALTERNATIVE);
+        List<String> dateFormats = Arrays.asList(DATE_FORMAT_ENG, DATE_FORMAT_ALTERNATIVE);
 
         for (String format : dateFormats) {
             try {
@@ -55,8 +54,8 @@ public class DateUtil {
                 // Ignore and try the next format
             }
         }
-    // Handle case where none of the formats match
-    throw new DateTimeParseException("Unable to parse date: " + strDate, strDate, 0);
+        // Handle case where none of the formats match
+        throw new DateTimeParseException("Unable to parse date: " + strDate, strDate, 0);
     }
 
     public static String getCurrentDate() {
@@ -141,32 +140,33 @@ public class DateUtil {
         return "";
     }
 
-/*
+    /*
+        public static String dateTimeToString(final LocalDateTime date) {
+            try {
+                if (date != null) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR);
+                    return date.format(formatter);
+                }
+            } catch (Exception e) {
+                return null;
+            }
+            return null;
+        }
+    */
     public static String dateTimeToString(final LocalDateTime date) {
         try {
             if (date != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR);
-                return date.format(formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR, Locale.ENGLISH);
+                OffsetDateTime off = OffsetDateTime.of(date, ZoneOffset.UTC);
+                ZonedDateTime zoned = off.atZoneSameInstant(ZoneId.of("UTC+1"));
+                return zoned.toLocalDateTime().format(formatter);
             }
         } catch (Exception e) {
             return null;
         }
         return null;
     }
-*/
-    public static String dateTimeToString(final LocalDateTime date) {
-        try {
-            if (date != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR,Locale.ENGLISH);
-                OffsetDateTime off = OffsetDateTime.of(date, ZoneOffset.UTC);
-                ZonedDateTime zoned = off.atZoneSameInstant(ZoneId.of("UTC+1"));
-                return zoned.toLocalDateTime().format(formatter);
-            }
-        } catch (Exception e) {
-        return null;
-        }
-    return null;
-    }
+
     public static String dateTimeToString(final LocalDate date) {
         try {
             if (date != null) {

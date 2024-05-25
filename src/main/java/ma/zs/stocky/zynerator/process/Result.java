@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Result<I, K,T> {
+public class Result<I, K, T> {
     private List<Message> messages;
     private List<Message> errors;
     private List<Message> warnings;

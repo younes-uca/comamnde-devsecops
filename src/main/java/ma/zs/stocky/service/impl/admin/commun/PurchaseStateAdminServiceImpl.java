@@ -1,31 +1,25 @@
 package ma.zs.stocky.service.impl.admin.commun;
 
 
-import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.bean.core.commun.PurchaseState;
 import ma.zs.stocky.dao.criteria.core.commun.PurchaseStateCriteria;
 import ma.zs.stocky.dao.facade.core.commun.PurchaseStateDao;
 import ma.zs.stocky.dao.specification.core.commun.PurchaseStateSpecification;
 import ma.zs.stocky.service.facade.admin.commun.PurchaseStateAdminService;
-import ma.zs.stocky.zynerator.service.AbstractServiceImpl;
+import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.zynerator.util.ListUtil;
-import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.ArrayList;
+import ma.zs.stocky.zynerator.util.RefelexivityUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.multipart.MultipartFile;
-
-import ma.zs.stocky.zynerator.util.RefelexivityUtil;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-
+import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class PurchaseStateAdminServiceImpl implements PurchaseStateAdminService {
 
@@ -81,7 +75,7 @@ public class PurchaseStateAdminServiceImpl implements PurchaseStateAdminService 
 
 
     private PurchaseStateSpecification constructSpecification(PurchaseStateCriteria criteria) {
-        PurchaseStateSpecification mySpecification =  (PurchaseStateSpecification) RefelexivityUtil.constructObjectUsingOneParam(PurchaseStateSpecification.class, criteria);
+        PurchaseStateSpecification mySpecification = (PurchaseStateSpecification) RefelexivityUtil.constructObjectUsingOneParam(PurchaseStateSpecification.class, criteria);
         return mySpecification;
     }
 
@@ -100,7 +94,7 @@ public class PurchaseStateAdminServiceImpl implements PurchaseStateAdminService 
     }
 
 
-	public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) {
         boolean condition = deleteByIdCheckCondition(id);
         if (condition) {
             dao.deleteById(id);
@@ -115,8 +109,8 @@ public class PurchaseStateAdminServiceImpl implements PurchaseStateAdminService 
     public void deleteByIdIn(List<Long> ids) {
         //dao.deleteByIdIn(ids);
     }
-	
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public int delete(PurchaseState t) {
         int result = 0;
         if (t != null) {
@@ -127,19 +121,18 @@ public class PurchaseStateAdminServiceImpl implements PurchaseStateAdminService 
     }
 
 
-
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<PurchaseState> delete(List<PurchaseState> list) {
-		List<PurchaseState> result = new ArrayList();
+        List<PurchaseState> result = new ArrayList();
         if (list != null) {
             for (PurchaseState t : list) {
                 int count = delete(t);
-				if(count == 0){
-					result.add(t);
-				}
+                if (count == 0) {
+                    result.add(t);
+                }
             }
         }
-		return result;
+        return result;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -148,18 +141,18 @@ public class PurchaseStateAdminServiceImpl implements PurchaseStateAdminService 
         PurchaseState saved;
         if (loaded == null) {
             saved = dao.save(t);
-        }else {
+        } else {
             saved = null;
         }
         return saved;
     }
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<PurchaseState> create(List<PurchaseState> ts) {
         List<PurchaseState> result = new ArrayList<>();
         if (ts != null) {
             for (PurchaseState t : ts) {
-				PurchaseState created = create(t);
+                PurchaseState created = create(t);
                 if (created == null)
                     result.add(t);
             }
@@ -167,12 +160,12 @@ public class PurchaseStateAdminServiceImpl implements PurchaseStateAdminService 
         return result;
     }
 
-    public PurchaseState findWithAssociatedLists(Long id){
+    public PurchaseState findWithAssociatedLists(Long id) {
         PurchaseState result = dao.findById(id).orElse(null);
         return result;
     }
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<PurchaseState> update(List<PurchaseState> ts, boolean createIfNotExist) {
         List<PurchaseState> result = new ArrayList<>();
         if (ts != null) {
@@ -195,13 +188,9 @@ public class PurchaseStateAdminServiceImpl implements PurchaseStateAdminService 
     }
 
 
-
-
-
-    public PurchaseState findByReferenceEntity(PurchaseState t){
-        return t==null? null : dao.findByCode(t.getCode());
+    public PurchaseState findByReferenceEntity(PurchaseState t) {
+        return t == null ? null : dao.findByCode(t.getCode());
     }
-
 
 
     public List<PurchaseState> findAllOptimized() {

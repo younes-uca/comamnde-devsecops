@@ -1,7 +1,5 @@
 package ma.zs.stocky.zynerator.service;
 
-import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
-
 import ma.zs.stocky.zynerator.bean.BaseEntity;
 import ma.zs.stocky.zynerator.criteria.BaseCriteria;
 import ma.zs.stocky.zynerator.exception.BusinessRuleException;
@@ -45,7 +43,6 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
 
     protected AbstractSpecification<CRITERIA, T> specification;
     protected Class<? extends AbstractSpecification<CRITERIA, T>> specificationClass;
-
 
 
     protected REPO dao;
@@ -122,7 +119,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
                 }
             }
         }
-    return result;
+        return result;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -174,7 +171,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
     }
 
     public T findById(Long id) {
-    Optional<T> item = dao.findById(id);
+        Optional<T> item = dao.findById(id);
         return item.orElse(null);
     }
 
@@ -203,7 +200,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
         List<T> list = new ArrayList<>();
         for (T t : items) {
             T founded = findByReferenceEntity(t);
-                if (founded == null) {
+            if (founded == null) {
                 findOrSaveAssociatedObject(t);
                 dao.save(t);
             } else {
@@ -241,7 +238,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
             for (T t : list) {
                 deleteAssociatedLists(t.getId());
                 dao.deleteById(t.getId()); // il fait find by id apres delete !!!
-            //constructAndSaveHistory(dto, ACTION_TYPE.DELETE); TO DO
+                //constructAndSaveHistory(dto, ACTION_TYPE.DELETE); TO DO
             }
         }
     }
@@ -288,7 +285,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
 
     public List<T> findAll() {
         return dao.findAll();
-        }
+    }
 
     public List<T> findAllOptimized() {
         return dao.findAll();
@@ -331,8 +328,6 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
     */
 
 
-
-
     public void configure(Class<T> itemClass, Class<? extends AbstractSpecification<CRITERIA, T>> specificationClass) {
         this.itemClass = itemClass;
         this.specificationClass = specificationClass;
@@ -341,21 +336,19 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
     public abstract void configure();
 
 
-
-
     public User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null && principal instanceof User) {
-        return (User) principal;
+            return (User) principal;
         } else if (principal != null && principal instanceof String) {
-        return userService.findByUsername(principal.toString());
+            return userService.findByUsername(principal.toString());
         } else {
-        return null;
+            return null;
         }
     }
 
 
-    public String uploadFile(String checksumOld, String tempUpladedFile,String destinationFilePath) throws Exception {
+    public String uploadFile(String checksumOld, String tempUpladedFile, String destinationFilePath) throws Exception {
         String crName = null;
         if (FileUtils.isFileExist(UPLOADED_TEMP_FOLDER, tempUpladedFile)) {
             String filePath = destinationFilePath;
@@ -363,9 +356,9 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
                 return crName;
 
             String checksum = MD5Checksum.getMD5Checksum(UPLOADED_TEMP_FOLDER + tempUpladedFile);
-                if (!checksum.equals(checksumOld)) {
-                    throw new BusinessRuleException("errors.file.checksum", new String[]{tempUpladedFile});
-                }
+            if (!checksum.equals(checksumOld)) {
+                throw new BusinessRuleException("errors.file.checksum", new String[]{tempUpladedFile});
+            }
 
             crName = FileUtils.saveFile(UPLOADED_TEMP_FOLDER, UPLOADED_FOLDER, tempUpladedFile, filePath, "");
 
@@ -456,8 +449,8 @@ public abstract class AbstractServiceImpl<T extends BaseEntity, CRITERIA extends
                         beanWrapper.setPropertyValue(attributes.get(cellIndex).getName(), value);
                     }
                     cellIndex++;
-                    }
-                    items.add(item);
+                }
+                items.add(item);
             }
         } catch (Exception e) {
             e.printStackTrace();

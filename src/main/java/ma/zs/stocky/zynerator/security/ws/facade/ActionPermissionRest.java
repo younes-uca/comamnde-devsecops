@@ -18,8 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/actionPermission/")
-public class ActionPermissionRest  extends AbstractController<ActionPermission, ActionPermissionDto, ActionPermissionCriteria, ActionPermissionService, ActionPermissionConverter> {
-
+public class ActionPermissionRest extends AbstractController<ActionPermission, ActionPermissionDto, ActionPermissionCriteria, ActionPermissionService, ActionPermissionConverter> {
 
 
     @Operation(summary = "upload one actionPermission")
@@ -27,6 +26,7 @@ public class ActionPermissionRest  extends AbstractController<ActionPermission, 
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @Operation(summary = "upload multiple actionPermissions")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -74,10 +74,11 @@ public class ActionPermissionRest  extends AbstractController<ActionPermission, 
     public ResponseEntity<List<ActionPermissionDto>> delete(@RequestBody List<ActionPermissionDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @Operation(summary = "Delete the specified actionPermission")
     @DeleteMapping("")
     public ResponseEntity<ActionPermissionDto> delete(@RequestBody ActionPermissionDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @Operation(summary = "Delete the specified actionPermission")
@@ -85,11 +86,12 @@ public class ActionPermissionRest  extends AbstractController<ActionPermission, 
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @Operation(summary = "Delete multiple actionPermissions by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @Operation(summary = "Finds actionPermissions by criteria")
@@ -117,12 +119,9 @@ public class ActionPermissionRest  extends AbstractController<ActionPermission, 
     }
 
 
-
-    public ActionPermissionRest (ActionPermissionService service, ActionPermissionConverter converter) {
+    public ActionPermissionRest(ActionPermissionService service, ActionPermissionConverter converter) {
         super(service, converter);
     }
-
-
 
 
 }

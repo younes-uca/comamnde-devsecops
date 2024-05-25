@@ -1,26 +1,18 @@
 package ma.zs.stocky.bean.core.commun;
 
-import java.util.Objects;
-
-
-
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ma.zs.stocky.zynerator.bean.BaseEntity;
 import jakarta.persistence.*;
+import ma.zs.stocky.zynerator.bean.BaseEntity;
+
 import java.util.Objects;
 
 @Entity
 @Table(name = "purchase_state")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="purchase_state_seq",sequenceName="purchase_state_seq",allocationSize=1, initialValue = 1)
-public class PurchaseState  extends BaseEntity     {
+@SequenceGenerator(name = "purchase_state_seq", sequenceName = "purchase_state_seq", allocationSize = 1, initialValue = 1)
+public class PurchaseState extends BaseEntity {
 
     private Long id;
-
 
 
     @Column(length = 500)
@@ -30,48 +22,53 @@ public class PurchaseState  extends BaseEntity     {
     private String code;
 
 
-
-    public PurchaseState(){
+    public PurchaseState() {
         super();
     }
 
     public PurchaseState(Long id) {
         this.id = id;
     }
-    public PurchaseState(Long id,String libelle){
+
+    public PurchaseState(Long id, String libelle) {
         this.id = id;
-        this.libelle = libelle ;
-    }
-    public PurchaseState(String libelle){
-        this.libelle = libelle ;
-    }
-    public PurchaseState(String libelle,String code){
-        this.libelle=libelle;
-        this.code=code;
+        this.libelle = libelle;
     }
 
+    public PurchaseState(String libelle) {
+        this.libelle = libelle;
+    }
 
+    public PurchaseState(String libelle, String code) {
+        this.libelle = libelle;
+        this.code = code;
+    }
 
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy =  GenerationType.SEQUENCE,generator="purchase_state_seq")
-    public Long getId(){
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchase_state_seq")
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getLibelle(){
+
+    public String getLibelle() {
         return this.libelle;
     }
-    public void setLibelle(String libelle){
+
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-    public String getCode(){
+
+    public String getCode() {
         return this.code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
 

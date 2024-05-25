@@ -5,11 +5,11 @@ import ma.zs.stocky.zynerator.controller.AbstractController;
 import ma.zs.stocky.zynerator.dto.FileTempDto;
 import ma.zs.stocky.zynerator.security.bean.User;
 import ma.zs.stocky.zynerator.security.dao.criteria.core.UserCriteria;
+import ma.zs.stocky.zynerator.security.payload.request.ChangePasswordRequest;
 import ma.zs.stocky.zynerator.security.service.facade.UserService;
 import ma.zs.stocky.zynerator.security.ws.converter.UserConverter;
 import ma.zs.stocky.zynerator.security.ws.dto.UserDto;
 import ma.zs.stocky.zynerator.util.PaginatedList;
-import ma.zs.stocky.zynerator.security.payload.request.ChangePasswordRequest;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user/")
-public class UserRest  extends AbstractController<User, UserDto, UserCriteria, UserService, UserConverter> {
-
+public class UserRest extends AbstractController<User, UserDto, UserCriteria, UserService, UserConverter> {
 
 
     @Operation(summary = "upload one user")
@@ -29,6 +28,7 @@ public class UserRest  extends AbstractController<User, UserDto, UserCriteria, U
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @Operation(summary = "upload multiple utilisateurs")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -72,10 +72,11 @@ public class UserRest  extends AbstractController<User, UserDto, UserCriteria, U
     public ResponseEntity<List<UserDto>> delete(@RequestBody List<UserDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @Operation(summary = "Delete the specified user")
     @DeleteMapping("")
     public ResponseEntity<UserDto> delete(@RequestBody UserDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @Operation(summary = "Delete the specified user")
@@ -83,11 +84,12 @@ public class UserRest  extends AbstractController<User, UserDto, UserCriteria, U
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @Operation(summary = "Delete multiple utilisateurs by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
     @Operation(summary = "Finds a user by username")
     @GetMapping("user-name/{username}")
@@ -96,6 +98,7 @@ public class UserRest  extends AbstractController<User, UserDto, UserCriteria, U
         UserDto userDto = converter.toDto(user);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
+
     @Operation(summary = "Finds a user and associated list by id")
     @GetMapping("id/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable Long id) {
@@ -125,6 +128,7 @@ public class UserRest  extends AbstractController<User, UserDto, UserCriteria, U
     public ResponseEntity<Integer> getDataSize(@RequestBody UserCriteria criteria) throws Exception {
         return super.getDataSize(criteria);
     }
+
     @GetMapping("/username/{username}")
     public User findByUsernameWithRoles(@PathVariable String username) {
         return service.findByUsernameWithRoles(username);
@@ -136,7 +140,7 @@ public class UserRest  extends AbstractController<User, UserDto, UserCriteria, U
     }
 
     @PostMapping("/changePassword")
-    public  boolean changePassword(@RequestBody ChangePasswordRequest changePasswordRequest){
+    public boolean changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
         return service.changePassword(changePasswordRequest.getUsername(), changePasswordRequest.getPassword());
     }
 
@@ -146,11 +150,9 @@ public class UserRest  extends AbstractController<User, UserDto, UserCriteria, U
     }
 
 
-    public UserRest (UserService service, UserConverter converter) {
+    public UserRest(UserService service, UserConverter converter) {
         super(service, converter);
     }
-
-
 
 
 }

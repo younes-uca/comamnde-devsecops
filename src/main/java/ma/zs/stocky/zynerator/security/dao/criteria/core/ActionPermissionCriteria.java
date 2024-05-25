@@ -2,7 +2,7 @@ package ma.zs.stocky.zynerator.security.dao.criteria.core;
 
 import ma.zs.stocky.zynerator.criteria.BaseCriteria;
 
-public class ActionPermissionCriteria extends  BaseCriteria  {
+public class ActionPermissionCriteria extends BaseCriteria {
 
     private String reference;
     private String referenceLike;
@@ -10,32 +10,38 @@ public class ActionPermissionCriteria extends  BaseCriteria  {
     private String libelleLike;
 
 
+    public ActionPermissionCriteria() {
+    }
 
-    public ActionPermissionCriteria(){}
-
-    public String getReference(){
+    public String getReference() {
         return this.reference;
     }
-    public void setReference(String reference){
+
+    public void setReference(String reference) {
         this.reference = reference;
     }
-    public String getReferenceLike(){
+
+    public String getReferenceLike() {
         return this.referenceLike;
     }
-    public void setReferenceLike(String referenceLike){
+
+    public void setReferenceLike(String referenceLike) {
         this.referenceLike = referenceLike;
     }
 
-    public String getLibelle(){
+    public String getLibelle() {
         return this.libelle;
     }
-    public void setLibelle(String libelle){
+
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-    public String getLibelleLike(){
+
+    public String getLibelleLike() {
         return this.libelleLike;
     }
-    public void setLibelleLike(String libelleLike){
+
+    public void setLibelleLike(String libelleLike) {
         this.libelleLike = libelleLike;
     }
 

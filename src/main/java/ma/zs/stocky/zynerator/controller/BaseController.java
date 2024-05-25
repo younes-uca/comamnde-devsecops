@@ -1,5 +1,6 @@
 package ma.zs.stocky.zynerator.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import ma.zs.stocky.zynerator.exception.GlobalException;
 import ma.zs.stocky.zynerator.export.ExportModel;
 import ma.zs.stocky.zynerator.util.BirtWarpper;
@@ -16,7 +17,6 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public abstract class BaseController {
     private MessageSource messageSource;
 
 
-@Value("${uploads.location.directory}")
+    @Value("${uploads.location.directory}")
     private String UPLOADED_FOLDER;
 
     protected static ClientHttpRequestFactory clientHttpRequestFactory() {

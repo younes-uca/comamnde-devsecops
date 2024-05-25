@@ -1,14 +1,13 @@
 package ma.zs.stocky.zynerator.security.bean;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.*;
+import ma.zs.stocky.zynerator.bean.BaseEntity;
+import org.springframework.security.core.GrantedAuthority;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
-
-import jakarta.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import org.springframework.security.core.GrantedAuthority;
-import ma.zs.stocky.zynerator.bean.BaseEntity;
 
 
 @Entity
@@ -30,16 +29,16 @@ public class Role extends BaseEntity implements GrantedAuthority {
     private String authority;
 
     public Role() {
-    super();
+        super();
     }
 
     public Role(Long id, String authority) {
-    this.id = id;
-    this.authority = authority;
+        this.id = id;
+        this.authority = authority;
     }
 
     public Role(String authority) {
-    this.authority = authority;
+        this.authority = authority;
     }
 
 
@@ -47,59 +46,59 @@ public class Role extends BaseEntity implements GrantedAuthority {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
     public Long getId() {
-    return this.id;
+        return this.id;
     }
 
     public void setId(Long id) {
-    this.id = id;
+        this.id = id;
     }
 
     public String getAuthority() {
-    return this.authority;
+        return this.authority;
     }
 
     public void setAuthority(String authority) {
-    this.authority = authority;
+        this.authority = authority;
     }
 
     public LocalDateTime getUpdatedAt() {
-    return updatedAt;
+        return updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
-    this.updatedAt = updatedAt;
+        this.updatedAt = updatedAt;
     }
 
     public void setLabel(String label) {
-    this.label = label;
+        this.label = label;
     }
 
     public LocalDateTime getCreatedAt() {
-    return createdAt;
+        return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
-    this.createdAt = createdAt;
+        this.createdAt = createdAt;
     }
 
 
     @Transient
     public String getLabel() {
-    label = authority;
-    return label;
+        label = authority;
+        return label;
     }
 
     @Override
     public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Role role = (Role) o;
-    return id != null && id.equals(role.id);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return id != null && id.equals(role.id);
     }
 
     @Override
     public int hashCode() {
-    return Objects.hash(id);
+        return Objects.hash(id);
     }
 
 }

@@ -1,26 +1,18 @@
 package ma.zs.stocky.bean.core.crm;
 
-import java.util.Objects;
-
-
-
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ma.zs.stocky.zynerator.bean.BaseEntity;
 import jakarta.persistence.*;
+import ma.zs.stocky.zynerator.bean.BaseEntity;
+
 import java.util.Objects;
 
 @Entity
 @Table(name = "client")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="client_seq",sequenceName="client_seq",allocationSize=1, initialValue = 1)
-public class Client  extends BaseEntity     {
+@SequenceGenerator(name = "client_seq", sequenceName = "client_seq", allocationSize = 1, initialValue = 1)
+public class Client extends BaseEntity {
 
     private Long id;
-
 
 
     @Column(length = 500)
@@ -30,8 +22,7 @@ public class Client  extends BaseEntity     {
     private String email;
 
 
-
-    public Client(){
+    public Client() {
         super();
     }
 
@@ -39,36 +30,40 @@ public class Client  extends BaseEntity     {
         this.id = id;
     }
 
-    public Client(Long id, String fullName){
+    public Client(Long id, String fullName) {
         this.id = id;
-        this.fullName = fullName ;
-    }
-    public Client(String fullName){
-        this.fullName = fullName ;
+        this.fullName = fullName;
     }
 
-
+    public Client(String fullName) {
+        this.fullName = fullName;
+    }
 
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy =  GenerationType.SEQUENCE,generator="client_seq")
-    public Long getId(){
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_seq")
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getFullName(){
+
+    public String getFullName() {
         return this.fullName;
     }
-    public void setFullName(String fullName){
+
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return this.email;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
 

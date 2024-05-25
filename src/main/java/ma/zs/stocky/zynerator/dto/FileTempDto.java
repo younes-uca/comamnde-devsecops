@@ -63,7 +63,7 @@ public class FileTempDto {
             return false;
         FileTempDto other = (FileTempDto) obj;
         return Objects.equals(checksumValue, other.checksumValue) && Objects.equals(fileName, other.fileName)
-        && Objects.equals(id, other.id) && Objects.equals(name, other.name)
-        && Objects.equals(originalFileName, other.originalFileName);
+                && Objects.equals(id, other.id) && Objects.equals(name, other.name)
+                && Objects.equals(originalFileName, other.originalFileName);
     }
 }

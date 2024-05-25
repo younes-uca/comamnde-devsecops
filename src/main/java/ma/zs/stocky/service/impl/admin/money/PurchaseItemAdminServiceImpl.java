@@ -1,35 +1,28 @@
 package ma.zs.stocky.service.impl.admin.money;
 
 
-import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.bean.core.money.PurchaseItem;
 import ma.zs.stocky.dao.criteria.core.money.PurchaseItemCriteria;
 import ma.zs.stocky.dao.facade.core.money.PurchaseItemDao;
 import ma.zs.stocky.dao.specification.core.money.PurchaseItemSpecification;
+import ma.zs.stocky.service.facade.admin.catalog.ProductAdminService;
+import ma.zs.stocky.service.facade.admin.money.PurchaseAdminService;
 import ma.zs.stocky.service.facade.admin.money.PurchaseItemAdminService;
-import ma.zs.stocky.zynerator.service.AbstractServiceImpl;
+import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.zynerator.util.ListUtil;
-import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.ArrayList;
+import ma.zs.stocky.zynerator.util.RefelexivityUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.multipart.MultipartFile;
-
-import ma.zs.stocky.zynerator.util.RefelexivityUtil;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import ma.zs.stocky.service.facade.admin.money.PurchaseAdminService ;
-import ma.zs.stocky.bean.core.money.Purchase ;
-import ma.zs.stocky.service.facade.admin.catalog.ProductAdminService ;
-import ma.zs.stocky.bean.core.catalog.Product ;
-
+import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
 
@@ -86,7 +79,7 @@ public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
 
 
     private PurchaseItemSpecification constructSpecification(PurchaseItemCriteria criteria) {
-        PurchaseItemSpecification mySpecification =  (PurchaseItemSpecification) RefelexivityUtil.constructObjectUsingOneParam(PurchaseItemSpecification.class, criteria);
+        PurchaseItemSpecification mySpecification = (PurchaseItemSpecification) RefelexivityUtil.constructObjectUsingOneParam(PurchaseItemSpecification.class, criteria);
         return mySpecification;
     }
 
@@ -104,26 +97,31 @@ public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
         return ((Long) dao.count(mySpecification)).intValue();
     }
 
-    public List<PurchaseItem> findByProductId(Long id){
+    public List<PurchaseItem> findByProductId(Long id) {
         return dao.findByProductId(id);
     }
-    public int deleteByProductId(Long id){
+
+    public int deleteByProductId(Long id) {
         return dao.deleteByProductId(id);
     }
-    public long countByProductCode(String code){
+
+    public long countByProductCode(String code) {
         return dao.countByProductCode(code);
     }
-    public List<PurchaseItem> findByPurchaseId(Long id){
+
+    public List<PurchaseItem> findByPurchaseId(Long id) {
         return dao.findByPurchaseId(id);
     }
-    public int deleteByPurchaseId(Long id){
+
+    public int deleteByPurchaseId(Long id) {
         return dao.deleteByPurchaseId(id);
     }
-    public long countByPurchaseReference(String reference){
+
+    public long countByPurchaseReference(String reference) {
         return dao.countByPurchaseReference(reference);
     }
 
-	public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) {
         boolean condition = deleteByIdCheckCondition(id);
         if (condition) {
             dao.deleteById(id);
@@ -138,8 +136,8 @@ public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
     public void deleteByIdIn(List<Long> ids) {
         //dao.deleteByIdIn(ids);
     }
-	
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public int delete(PurchaseItem t) {
         int result = 0;
         if (t != null) {
@@ -150,19 +148,18 @@ public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
     }
 
 
-
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<PurchaseItem> delete(List<PurchaseItem> list) {
-		List<PurchaseItem> result = new ArrayList();
+        List<PurchaseItem> result = new ArrayList();
         if (list != null) {
             for (PurchaseItem t : list) {
                 int count = delete(t);
-				if(count == 0){
-					result.add(t);
-				}
+                if (count == 0) {
+                    result.add(t);
+                }
             }
         }
-		return result;
+        return result;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -171,18 +168,18 @@ public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
         PurchaseItem saved;
         if (loaded == null) {
             saved = dao.save(t);
-        }else {
+        } else {
             saved = null;
         }
         return saved;
     }
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<PurchaseItem> create(List<PurchaseItem> ts) {
         List<PurchaseItem> result = new ArrayList<>();
         if (ts != null) {
             for (PurchaseItem t : ts) {
-				PurchaseItem created = create(t);
+                PurchaseItem created = create(t);
                 if (created == null)
                     result.add(t);
             }
@@ -190,12 +187,12 @@ public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
         return result;
     }
 
-    public PurchaseItem findWithAssociatedLists(Long id){
+    public PurchaseItem findWithAssociatedLists(Long id) {
         PurchaseItem result = dao.findById(id).orElse(null);
         return result;
     }
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<PurchaseItem> update(List<PurchaseItem> ts, boolean createIfNotExist) {
         List<PurchaseItem> result = new ArrayList<>();
         if (ts != null) {
@@ -218,19 +215,16 @@ public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
     }
 
 
-
-
-
     public PurchaseItem findByReferenceEntity(PurchaseItem t) {
         return t == null || t.getId() == null ? null : findById(t.getId());
     }
-    public void findOrSaveAssociatedObject(PurchaseItem t){
-        if( t != null) {
+
+    public void findOrSaveAssociatedObject(PurchaseItem t) {
+        if (t != null) {
             t.setProduct(productService.findOrSave(t.getProduct()));
             t.setPurchase(purchaseService.findOrSave(t.getPurchase()));
         }
     }
-
 
 
     public List<PurchaseItem> findAllOptimized() {
@@ -300,9 +294,9 @@ public class PurchaseItemAdminServiceImpl implements PurchaseItemAdminService {
     }
 
     @Autowired
-    private PurchaseAdminService purchaseService ;
+    private PurchaseAdminService purchaseService;
     @Autowired
-    private ProductAdminService productService ;
+    private ProductAdminService productService;
 
     private PurchaseItemDao dao;
 

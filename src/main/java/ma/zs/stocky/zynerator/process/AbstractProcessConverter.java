@@ -1,7 +1,6 @@
 package ma.zs.stocky.zynerator.process;
 
 
-
 import ma.zs.stocky.zynerator.audit.AuditBusinessObject;
 
 public abstract class AbstractProcessConverter<I extends AbstractProcessInput, O extends AbstractProcessOutput, T extends AuditBusinessObject> {
@@ -20,16 +19,16 @@ public abstract class AbstractProcessConverter<I extends AbstractProcessInput, O
 
     public abstract O toOutput(T item);
 
-    public void init(boolean initialisation){
+    public void init(boolean initialisation) {
         initObject(initialisation);
         initList(initialisation);
     }
 
-    public void initObject(boolean initialisationObject){
+    public void initObject(boolean initialisationObject) {
 
     }
 
-    public void initList(boolean initialisationList){
+    public void initList(boolean initialisationList) {
 
     }
-    }
+}

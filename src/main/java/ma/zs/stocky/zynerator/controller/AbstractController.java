@@ -41,9 +41,9 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
     private MessageSource messageSource;
 
 
-@Value("${uploads.location.directory}")
+    @Value("${uploads.location.directory}")
     private String UPLOADED_FOLDER;
-@Value("${uploads.location.temp}")
+    @Value("${uploads.location.temp}")
     private String UPLOADED_TEMP_FOLDER;
 
 
@@ -51,7 +51,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
         String extention = com.google.common.io.Files.getFileExtension(fileName);
         String prefix = "tmp";
         if (StringUtil.isNotEmpty(extention)) {
-        File tmpQuittanceFile = File.createTempFile(prefix, "."+extention, new File(UPLOADED_TEMP_FOLDER));
+            File tmpQuittanceFile = File.createTempFile(prefix, "." + extention, new File(UPLOADED_TEMP_FOLDER));
             return tmpQuittanceFile.getName();
         }
         return String.valueOf(UniqueID.get());
@@ -62,20 +62,20 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
         return (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
     }
 
-    public List<DTO> findDtos(List<T> list){
+    public List<DTO> findDtos(List<T> list) {
         converter.initList(false);
         List<DTO> dtos = converter.toDto(list);
         converter.initList(false);
         return dtos;
     }
 
-    public ResponseEntity<List<T>> importExcel(MultipartFile file){
+    public ResponseEntity<List<T>> importExcel(MultipartFile file) {
         List<T> items = this.service.importExcel(file);
         return ResponseEntity.ok(items);
     }
 
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
-        List<FileTempDto> result= new ArrayList<>();
+        List<FileTempDto> result = new ArrayList<>();
         if (files != null) {
             for (MultipartFile file : files) {
                 result.add(uploadFileAndGetChecksum(file).getBody());
@@ -90,7 +90,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
         if (file != null) {
             File convFile = new File(UPLOADED_FOLDER + generateRandomFileName(file.getOriginalFilename()));
             if (!convFile.getParentFile().exists())
-            convFile.getParentFile().mkdirs();
+                convFile.getParentFile().mkdirs();
             convFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(convFile);
             fos.write(file.getBytes());
@@ -120,7 +120,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
 
     protected static ClientHttpRequestFactory clientHttpRequestFactory() {
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-       // factory.setReadTimeout(200000);
+        // factory.setReadTimeout(200000);
         factory.setConnectTimeout(200000);
         return factory;
     }
@@ -133,7 +133,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    public ResponseEntity<DTO> findByReferenceEntity(T t)  {
+    public ResponseEntity<DTO> findByReferenceEntity(T t) {
         T loaded = service.findByReferenceEntity(t);
         if (loaded != null) {
             converter.init(true);
@@ -154,39 +154,37 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
     }
 
     public ResponseEntity<DTO> findWithAssociatedLists(Long id) {
-        T loaded =  service.findWithAssociatedLists(id);
+        T loaded = service.findWithAssociatedLists(id);
         converter.init(true);
         DTO dto = converter.toDto(loaded);
         return new ResponseEntity<>(dto, HttpStatus.OK);
-     }
-
-
+    }
 
 
     public ResponseEntity<DTO> save(DTO dto) throws Exception {
-        if(dto!=null){
+        if (dto != null) {
             converter.init(true);
             T myT = converter.toItem(dto);
             T t = service.create(myT);
             if (t == null) {
                 return new ResponseEntity<>(null, HttpStatus.IM_USED);
-            }else{
+            } else {
                 DTO myDto = converter.toDto(t);
                 return new ResponseEntity<>(myDto, HttpStatus.CREATED);
             }
-        }else {
+        } else {
             return new ResponseEntity<>(dto, HttpStatus.NO_CONTENT);
         }
     }
 
 
     public ResponseEntity<DTO> update(DTO dto) throws Exception {
-        ResponseEntity<DTO> res ;
+        ResponseEntity<DTO> res;
         if (dto.getId() == null || service.findById(dto.getId()) == null)
             res = new ResponseEntity<>(HttpStatus.CONFLICT);
         else {
             T t = service.findById(dto.getId());
-            converter.copy(dto,t);
+            converter.copy(dto, t);
             T updated = service.update(t);
             DTO myDto = converter.toDto(updated);
             res = new ResponseEntity<>(myDto, HttpStatus.OK);
@@ -196,7 +194,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
 
 
     public ResponseEntity<List<DTO>> delete(List<DTO> dtos) throws Exception {
-        ResponseEntity<List<DTO>> res ;
+        ResponseEntity<List<DTO>> res;
         HttpStatus status = HttpStatus.CONFLICT;
         if (dtos != null && !dtos.isEmpty()) {
             converter.init(false);
@@ -222,7 +220,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
     }
 
 
-    protected ResponseEntity<Long> deleteById(Long id)  throws Exception {
+    protected ResponseEntity<Long> deleteById(Long id) throws Exception {
         ResponseEntity<Long> res;
         HttpStatus status = HttpStatus.PRECONDITION_FAILED;
         if (id != null) {
@@ -236,7 +234,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
     }
 
 
-    protected ResponseEntity<List<Long>> deleteByIdIn(List<Long> ids)  throws Exception {
+    protected ResponseEntity<List<Long>> deleteByIdIn(List<Long> ids) throws Exception {
         ResponseEntity<List<Long>> res;
         HttpStatus status = HttpStatus.CONFLICT;
         if (ids != null) {
@@ -252,7 +250,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
         List<T> list = service.findByCriteria(criteria);
         HttpStatus status = HttpStatus.NO_CONTENT;
         converter.initList(false);
-        List<DTO> dtos  = converter.toDto(list);
+        List<DTO> dtos = converter.toDto(list);
         converter.initList(true);
 
         if (dtos != null && !dtos.isEmpty())
@@ -275,7 +273,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
         HttpStatus status = HttpStatus.NO_CONTENT;
         dtos = converter.toDto(list);
         if (dtos != null && !dtos.isEmpty())
-        status = HttpStatus.OK;
+            status = HttpStatus.OK;
 
         res = new ResponseEntity<>(dtos, status);
         return res;
@@ -352,8 +350,8 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
     protected ResponseEntity<List<DTO>> importData(List<DTO> dtos) {
         List<T> items = converter.toItem(dtos);
         items = service.importerData(items);
-        List<DTO> result= converter.toDto(items);
-        return new ResponseEntity<>(result,HttpStatus.OK);
+        List<DTO> result = converter.toDto(items);
+        return new ResponseEntity<>(result, HttpStatus.OK);
 
     }
 
@@ -374,10 +372,10 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
             }
             result = FileUtils.saveFile(UPLOADED_TEMP_FOLDER, UPLOADED_FOLDER, file, filePath, "");
             if (FileUtils.isFileExist(UPLOADED_FOLDER, result)) {
-            // Vérifier checksum fichier sur le dossier data
-            checksum = MD5Checksum.getMD5Checksum(UPLOADED_FOLDER + result);
+                // Vérifier checksum fichier sur le dossier data
+                checksum = MD5Checksum.getMD5Checksum(UPLOADED_FOLDER + result);
                 if (!checksum.equals(checksumOld)) {
-                throw new BusinessRuleException("errors.file.checksum", new String[]{""});
+                    throw new BusinessRuleException("errors.file.checksum", new String[]{""});
                 }
             } else {
                 throw new BusinessRuleException("errors.file.data.creation", new String[]{""});
@@ -385,6 +383,7 @@ public class AbstractController<T extends BaseEntity, DTO extends BaseDto, Crite
         }
         return result;
     }
+
     public AbstractController(SERV service, CONV converter) {
         this.service = service;
         this.converter = converter;

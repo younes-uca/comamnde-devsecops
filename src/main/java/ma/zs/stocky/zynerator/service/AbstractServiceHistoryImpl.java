@@ -1,8 +1,8 @@
 package ma.zs.stocky.zynerator.service;
 
+import ma.zs.stocky.zynerator.bean.BaseEntity;
 import ma.zs.stocky.zynerator.dto.AuditEntityDto;
 import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
-import ma.zs.stocky.zynerator.bean.BaseEntity;
 import ma.zs.stocky.zynerator.history.HistCriteria;
 import ma.zs.stocky.zynerator.repository.AbstractHistoryRepository;
 import ma.zs.stocky.zynerator.security.bean.User;
@@ -19,8 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.List;
 
 
-public abstract class AbstractServiceHistoryImpl< H extends BaseEntity, HC extends HistCriteria,  HISTREPO extends AbstractHistoryRepository<H, Long>>  {
-
+public abstract class AbstractServiceHistoryImpl<H extends BaseEntity, HC extends HistCriteria, HISTREPO extends AbstractHistoryRepository<H, Long>> {
 
 
     protected HISTREPO historyRepository;
@@ -33,8 +32,7 @@ public abstract class AbstractServiceHistoryImpl< H extends BaseEntity, HC exten
     protected UserService userService;
 
 
-
-    public AbstractServiceHistoryImpl( HISTREPO historyRepository) {
+    public AbstractServiceHistoryImpl(HISTREPO historyRepository) {
         this.historyRepository = historyRepository;
         this.configure();
     }
@@ -135,15 +133,14 @@ public abstract class AbstractServiceHistoryImpl< H extends BaseEntity, HC exten
     public abstract void configure();
 
 
-
     public User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null && principal instanceof User) {
-        return (User) principal;
+            return (User) principal;
         } else if (principal != null && principal instanceof String) {
-        return userService.findByUsername(principal.toString());
+            return userService.findByUsername(principal.toString());
         } else {
-        return null;
+            return null;
         }
     }
 

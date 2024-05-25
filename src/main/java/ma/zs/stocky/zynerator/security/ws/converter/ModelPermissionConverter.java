@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class ModelPermissionConverter extends AbstractConverter<ModelPermission, ModelPermissionDto> {
 
 
-    public  ModelPermissionConverter(){//){
+    public ModelPermissionConverter() {//){
         super(ModelPermission.class, ModelPermissionDto.class);
     }
 
@@ -19,17 +19,16 @@ public class ModelPermissionConverter extends AbstractConverter<ModelPermission,
         if (dto == null) {
             return null;
         } else {
-        ModelPermission item = new ModelPermission();
-            if(StringUtil.isNotEmpty(dto.getId()))
+            ModelPermission item = new ModelPermission();
+            if (StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if(StringUtil.isNotEmpty(dto.getReference()))
+            if (StringUtil.isNotEmpty(dto.getReference()))
                 item.setReference(dto.getReference());
-            if(StringUtil.isNotEmpty(dto.getLibelle()))
+            if (StringUtil.isNotEmpty(dto.getLibelle()))
                 item.setLibelle(dto.getLibelle());
 
 
-
-        return item;
+            return item;
         }
     }
 
@@ -39,15 +38,15 @@ public class ModelPermissionConverter extends AbstractConverter<ModelPermission,
             return null;
         } else {
             ModelPermissionDto dto = new ModelPermissionDto();
-            if(StringUtil.isNotEmpty(item.getId()))
+            if (StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-            if(StringUtil.isNotEmpty(item.getReference()))
+            if (StringUtil.isNotEmpty(item.getReference()))
                 dto.setReference(item.getReference());
-            if(StringUtil.isNotEmpty(item.getLibelle()))
+            if (StringUtil.isNotEmpty(item.getLibelle()))
                 dto.setLibelle(item.getLibelle());
 
 
-        return dto;
+            return dto;
         }
     }
 

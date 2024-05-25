@@ -1,26 +1,19 @@
 package ma.zs.stocky.service.facade.admin.commun;
 
-import java.util.List;
 import ma.zs.stocky.bean.core.commun.PurchaseState;
 import ma.zs.stocky.dao.criteria.core.commun.PurchaseStateCriteria;
-import ma.zs.stocky.zynerator.service.IService;
-
-
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public interface PurchaseStateAdminService {
 
 
-
-
-
-
-
-	PurchaseState create(PurchaseState t);
+    PurchaseState create(PurchaseState t);
 
     PurchaseState update(PurchaseState t);
 
-    List<PurchaseState> update(List<PurchaseState> ts,boolean createIfNotExist);
+    List<PurchaseState> update(List<PurchaseState> ts, boolean createIfNotExist);
 
     PurchaseState findById(Long id);
 
@@ -48,7 +41,7 @@ public interface PurchaseStateAdminService {
 
     List<List<PurchaseState>> getToBeSavedAndToBeDeleted(List<PurchaseState> oldList, List<PurchaseState> newList);
 
-    public String uploadFile(String checksumOld, String tempUpladedFile,String destinationFilePath) throws Exception ;
+    public String uploadFile(String checksumOld, String tempUpladedFile, String destinationFilePath) throws Exception;
 
     List<PurchaseState> importExcel(MultipartFile file);
 

@@ -1,12 +1,12 @@
-package  ma.zs.stocky.dao.criteria.core.money;
+package ma.zs.stocky.dao.criteria.core.money;
 
 
 import ma.zs.stocky.dao.criteria.core.catalog.ProductCriteria;
-
 import ma.zs.stocky.zynerator.criteria.BaseCriteria;
+
 import java.util.List;
 
-public class PurchaseItemCriteria extends  BaseCriteria  {
+public class PurchaseItemCriteria extends BaseCriteria {
 
     private String price;
     private String priceMin;
@@ -15,79 +15,93 @@ public class PurchaseItemCriteria extends  BaseCriteria  {
     private String quantityMin;
     private String quantityMax;
 
-    private ProductCriteria product ;
-    private List<ProductCriteria> products ;
-    private PurchaseCriteria purchase ;
-    private List<PurchaseCriteria> purchases ;
+    private ProductCriteria product;
+    private List<ProductCriteria> products;
+    private PurchaseCriteria purchase;
+    private List<PurchaseCriteria> purchases;
 
 
-    public PurchaseItemCriteria(){}
+    public PurchaseItemCriteria() {
+    }
 
-    public String getPrice(){
+    public String getPrice() {
         return this.price;
     }
-    public void setPrice(String price){
+
+    public void setPrice(String price) {
         this.price = price;
-    }   
-    public String getPriceMin(){
+    }
+
+    public String getPriceMin() {
         return this.priceMin;
     }
-    public void setPriceMin(String priceMin){
+
+    public void setPriceMin(String priceMin) {
         this.priceMin = priceMin;
     }
-    public String getPriceMax(){
+
+    public String getPriceMax() {
         return this.priceMax;
     }
-    public void setPriceMax(String priceMax){
+
+    public void setPriceMax(String priceMax) {
         this.priceMax = priceMax;
     }
-      
-    public String getQuantity(){
+
+    public String getQuantity() {
         return this.quantity;
     }
-    public void setQuantity(String quantity){
+
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
-    }   
-    public String getQuantityMin(){
+    }
+
+    public String getQuantityMin() {
         return this.quantityMin;
     }
-    public void setQuantityMin(String quantityMin){
+
+    public void setQuantityMin(String quantityMin) {
         this.quantityMin = quantityMin;
     }
-    public String getQuantityMax(){
+
+    public String getQuantityMax() {
         return this.quantityMax;
     }
-    public void setQuantityMax(String quantityMax){
+
+    public void setQuantityMax(String quantityMax) {
         this.quantityMax = quantityMax;
     }
-      
 
-    public ProductCriteria getProduct(){
+
+    public ProductCriteria getProduct() {
         return this.product;
     }
 
-    public void setProduct(ProductCriteria product){
+    public void setProduct(ProductCriteria product) {
         this.product = product;
     }
-    public List<ProductCriteria> getProducts(){
+
+    public List<ProductCriteria> getProducts() {
         return this.products;
     }
 
-    public void setProducts(List<ProductCriteria> products){
+    public void setProducts(List<ProductCriteria> products) {
         this.products = products;
     }
-    public PurchaseCriteria getPurchase(){
+
+    public PurchaseCriteria getPurchase() {
         return this.purchase;
     }
 
-    public void setPurchase(PurchaseCriteria purchase){
+    public void setPurchase(PurchaseCriteria purchase) {
         this.purchase = purchase;
     }
-    public List<PurchaseCriteria> getPurchases(){
+
+    public List<PurchaseCriteria> getPurchases() {
         return this.purchases;
     }
 
-    public void setPurchases(List<PurchaseCriteria> purchases){
+    public void setPurchases(List<PurchaseCriteria> purchases) {
         this.purchases = purchases;
     }
 }

@@ -1,81 +1,79 @@
 package ma.zs.stocky.bean.core.money;
 
-import java.util.Objects;
-
-
-
-
-
-import ma.zs.stocky.bean.core.catalog.Product;
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ma.zs.stocky.zynerator.bean.BaseEntity;
 import jakarta.persistence.*;
-import java.util.Objects;
+import ma.zs.stocky.bean.core.catalog.Product;
+import ma.zs.stocky.zynerator.bean.BaseEntity;
+
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "purchase_item")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="purchase_item_seq",sequenceName="purchase_item_seq",allocationSize=1, initialValue = 1)
-public class PurchaseItem  extends BaseEntity     {
+@SequenceGenerator(name = "purchase_item_seq", sequenceName = "purchase_item_seq", allocationSize = 1, initialValue = 1)
+public class PurchaseItem extends BaseEntity {
 
     private Long id;
-
 
 
     private BigDecimal price = BigDecimal.ZERO;
 
     private BigDecimal quantity = BigDecimal.ZERO;
 
-    private Product product ;
-    private Purchase purchase ;
+    private Product product;
+    private Purchase purchase;
 
 
-    public PurchaseItem(){
+    public PurchaseItem() {
         super();
     }
 
 
-
-
-
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy =  GenerationType.SEQUENCE,generator="purchase_item_seq")
-    public Long getId(){
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchase_item_seq")
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product")
-    public Product getProduct(){
+    public Product getProduct() {
         return this.product;
     }
-    public void setProduct(Product product){
+
+    public void setProduct(Product product) {
         this.product = product;
     }
-    public BigDecimal getPrice(){
+
+    public BigDecimal getPrice() {
         return this.price;
     }
-    public void setPrice(BigDecimal price){
+
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
-    public BigDecimal getQuantity(){
+
+    public BigDecimal getQuantity() {
         return this.quantity;
     }
-    public void setQuantity(BigDecimal quantity){
+
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase")
-    public Purchase getPurchase(){
+    public Purchase getPurchase() {
         return this.purchase;
     }
-    public void setPurchase(Purchase purchase){
+
+    public void setPurchase(Purchase purchase) {
         this.purchase = purchase;
     }
 

@@ -1,11 +1,9 @@
-package  ma.zs.stocky.dao.criteria.core.commun;
-
+package ma.zs.stocky.dao.criteria.core.commun;
 
 
 import ma.zs.stocky.zynerator.criteria.BaseCriteria;
-import java.util.List;
 
-public class PurchaseStateCriteria extends  BaseCriteria  {
+public class PurchaseStateCriteria extends BaseCriteria {
 
     private String libelle;
     private String libelleLike;
@@ -13,32 +11,38 @@ public class PurchaseStateCriteria extends  BaseCriteria  {
     private String codeLike;
 
 
+    public PurchaseStateCriteria() {
+    }
 
-    public PurchaseStateCriteria(){}
-
-    public String getLibelle(){
+    public String getLibelle() {
         return this.libelle;
     }
-    public void setLibelle(String libelle){
+
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-    public String getLibelleLike(){
+
+    public String getLibelleLike() {
         return this.libelleLike;
     }
-    public void setLibelleLike(String libelleLike){
+
+    public void setLibelleLike(String libelleLike) {
         this.libelleLike = libelleLike;
     }
 
-    public String getCode(){
+    public String getCode() {
         return this.code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
-    public String getCodeLike(){
+
+    public String getCodeLike() {
         return this.codeLike;
     }
-    public void setCodeLike(String codeLike){
+
+    public void setCodeLike(String codeLike) {
         this.codeLike = codeLike;
     }
 

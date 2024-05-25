@@ -9,7 +9,6 @@ import ma.zs.stocky.zynerator.export.ColumnModel;
 import ma.zs.stocky.zynerator.export.ExportModel;
 import ma.zs.stocky.zynerator.export.ReportBuilder;
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;

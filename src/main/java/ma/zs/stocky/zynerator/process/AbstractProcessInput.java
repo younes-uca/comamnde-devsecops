@@ -1,11 +1,11 @@
 package ma.zs.stocky.zynerator.process;
 
+import ma.zs.stocky.zynerator.dto.AuditBaseDto;
 import org.apache.commons.collections4.map.HashedMap;
 
 import java.util.Map;
-import ma.zs.stocky.zynerator.dto.AuditBaseDto;
 
-public class AbstractProcessInput  extends AuditBaseDto{
+public class AbstractProcessInput extends AuditBaseDto {
     private Map<String, Object> attributes;
 
     public int putAttribute(String key, Object value) {

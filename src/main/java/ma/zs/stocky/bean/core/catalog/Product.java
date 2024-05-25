@@ -1,26 +1,18 @@
 package ma.zs.stocky.bean.core.catalog;
 
-import java.util.Objects;
-
-
-
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ma.zs.stocky.zynerator.bean.BaseEntity;
 import jakarta.persistence.*;
+import ma.zs.stocky.zynerator.bean.BaseEntity;
+
 import java.util.Objects;
 
 @Entity
 @Table(name = "product")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="product_seq",sequenceName="product_seq",allocationSize=1, initialValue = 1)
-public class Product  extends BaseEntity     {
+@SequenceGenerator(name = "product_seq", sequenceName = "product_seq", allocationSize = 1, initialValue = 1)
+public class Product extends BaseEntity {
 
     private Long id;
-
 
 
     @Column(length = 500)
@@ -30,45 +22,48 @@ public class Product  extends BaseEntity     {
     private String reference;
 
 
-
-    public Product(){
+    public Product() {
         super();
     }
 
-    public Product(Long id){
+    public Product(Long id) {
         this.id = id;
     }
 
-    public Product(Long id,String reference){
+    public Product(Long id, String reference) {
         this.id = id;
-        this.reference = reference ;
-    }
-    public Product(String reference){
-        this.reference = reference ;
+        this.reference = reference;
     }
 
-
+    public Product(String reference) {
+        this.reference = reference;
+    }
 
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy =  GenerationType.SEQUENCE,generator="product_seq")
-    public Long getId(){
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getCode(){
+
+    public String getCode() {
         return this.code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
-    public String getReference(){
+
+    public String getReference() {
         return this.reference;
     }
-    public void setReference(String reference){
+
+    public void setReference(String reference) {
         this.reference = reference;
     }
 

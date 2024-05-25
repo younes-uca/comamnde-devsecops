@@ -1,34 +1,34 @@
 package ma.zs.stocky.zynerator.dto;
 
-import ma.zs.stocky.zynerator.audit.Log;
-import ma.zs.stocky.zynerator.dto.AuditBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
+import ma.zs.stocky.zynerator.audit.Log;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EtablissementDto  extends AuditBaseDto {
+public class EtablissementDto extends AuditBaseDto {
 
-    private String libelle  ;
-    private String code  ;
+    private String libelle;
+    private String code;
 
-    public EtablissementDto(){
+    public EtablissementDto() {
         super();
     }
 
     @Log
-    public String getLibelle(){
+    public String getLibelle() {
         return this.libelle;
     }
-    public void setLibelle(String libelle){
+
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
 
     @Log
-    public String getCode(){
+    public String getCode() {
         return this.code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
 

@@ -1,44 +1,23 @@
-package  ma.zs.stocky.ws.facade.admin.money;
+package ma.zs.stocky.ws.facade.admin.money;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.HttpStatus;
-import java.util.Arrays;
-import java.util.ArrayList;
-
 import ma.zs.stocky.bean.core.money.PurchaseItem;
 import ma.zs.stocky.dao.criteria.core.money.PurchaseItemCriteria;
 import ma.zs.stocky.service.facade.admin.money.PurchaseItemAdminService;
 import ma.zs.stocky.ws.converter.money.PurchaseItemConverter;
 import ma.zs.stocky.ws.dto.money.PurchaseItemDto;
-import ma.zs.stocky.zynerator.controller.AbstractController;
-import ma.zs.stocky.zynerator.dto.AuditEntityDto;
 import ma.zs.stocky.zynerator.util.PaginatedList;
-
-
-import org.springframework.core.io.InputStreamResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.Arrays;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.zs.stocky.zynerator.process.Result;
-
-
-import org.springframework.web.multipart.MultipartFile;
-import ma.zs.stocky.zynerator.dto.FileTempDto;
 
 @RestController
 @RequestMapping("/api/admin/purchaseItem/")
 public class PurchaseItemRestAdmin {
-
-
 
 
     @Operation(summary = "Import Data")
@@ -57,8 +36,8 @@ public class PurchaseItemRestAdmin {
         ResponseEntity<List<PurchaseItemDto>> res = null;
         List<PurchaseItem> list = service.findAll();
         HttpStatus status = HttpStatus.NO_CONTENT;
-            converter.initObject(true);
-        List<PurchaseItemDto> dtos  = converter.toDto(list);
+        converter.initObject(true);
+        List<PurchaseItemDto> dtos = converter.toDto(list);
         if (dtos != null && !dtos.isEmpty())
             status = HttpStatus.OK;
         res = new ResponseEntity<>(dtos, status);
@@ -82,17 +61,17 @@ public class PurchaseItemRestAdmin {
     @Operation(summary = "Saves the specified  purchaseItem")
     @PostMapping("")
     public ResponseEntity<PurchaseItemDto> save(@RequestBody PurchaseItemDto dto) throws Exception {
-        if(dto!=null){
+        if (dto != null) {
             converter.init(true);
             PurchaseItem myT = converter.toItem(dto);
             PurchaseItem t = service.create(myT);
             if (t == null) {
                 return new ResponseEntity<>(null, HttpStatus.IM_USED);
-            }else{
+            } else {
                 PurchaseItemDto myDto = converter.toDto(t);
                 return new ResponseEntity<>(myDto, HttpStatus.CREATED);
             }
-        }else {
+        } else {
             return new ResponseEntity<>(dto, HttpStatus.NO_CONTENT);
         }
     }
@@ -100,12 +79,12 @@ public class PurchaseItemRestAdmin {
     @Operation(summary = "Updates the specified  purchaseItem")
     @PutMapping("")
     public ResponseEntity<PurchaseItemDto> update(@RequestBody PurchaseItemDto dto) throws Exception {
-        ResponseEntity<PurchaseItemDto> res ;
+        ResponseEntity<PurchaseItemDto> res;
         if (dto.getId() == null || service.findById(dto.getId()) == null)
             res = new ResponseEntity<>(HttpStatus.CONFLICT);
         else {
             PurchaseItem t = service.findById(dto.getId());
-            converter.copy(dto,t);
+            converter.copy(dto, t);
             PurchaseItem updated = service.update(t);
             PurchaseItemDto myDto = converter.toDto(updated);
             res = new ResponseEntity<>(myDto, HttpStatus.OK);
@@ -116,7 +95,7 @@ public class PurchaseItemRestAdmin {
     @Operation(summary = "Delete list of purchaseItem")
     @PostMapping("multiple")
     public ResponseEntity<List<PurchaseItemDto>> delete(@RequestBody List<PurchaseItemDto> dtos) throws Exception {
-        ResponseEntity<List<PurchaseItemDto>> res ;
+        ResponseEntity<List<PurchaseItemDto>> res;
         HttpStatus status = HttpStatus.CONFLICT;
         if (dtos != null && !dtos.isEmpty()) {
             converter.init(false);
@@ -127,10 +106,11 @@ public class PurchaseItemRestAdmin {
         res = new ResponseEntity<>(dtos, status);
         return res;
     }
+
     @Operation(summary = "Delete the specified purchaseItem")
     @DeleteMapping("")
     public ResponseEntity<PurchaseItemDto> delete(@RequestBody PurchaseItemDto dto) throws Exception {
-		ResponseEntity<PurchaseItemDto> res;
+        ResponseEntity<PurchaseItemDto> res;
         HttpStatus status = HttpStatus.CONFLICT;
         if (dto != null) {
             converter.init(false);
@@ -156,6 +136,7 @@ public class PurchaseItemRestAdmin {
         res = new ResponseEntity<>(id, status);
         return res;
     }
+
     @Operation(summary = "Delete multiple purchaseItems by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
@@ -167,14 +148,13 @@ public class PurchaseItemRestAdmin {
         }
         res = new ResponseEntity<>(ids, status);
         return res;
-     }
-
+    }
 
 
     @Operation(summary = "Finds a purchaseItem and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<PurchaseItemDto> findWithAssociatedLists(@PathVariable Long id) {
-        PurchaseItem loaded =  service.findWithAssociatedLists(id);
+        PurchaseItem loaded = service.findWithAssociatedLists(id);
         converter.init(true);
         PurchaseItemDto dto = converter.toDto(loaded);
         return new ResponseEntity<>(dto, HttpStatus.OK);
@@ -187,7 +167,7 @@ public class PurchaseItemRestAdmin {
         List<PurchaseItem> list = service.findByCriteria(criteria);
         HttpStatus status = HttpStatus.NO_CONTENT;
         converter.initObject(true);
-        List<PurchaseItemDto> dtos  = converter.toDto(list);
+        List<PurchaseItemDto> dtos = converter.toDto(list);
         if (dtos != null && !dtos.isEmpty())
             status = HttpStatus.OK;
 
@@ -216,8 +196,8 @@ public class PurchaseItemRestAdmin {
         int count = service.getDataSize(criteria);
         return new ResponseEntity<Integer>(count, HttpStatus.OK);
     }
-	
-	public List<PurchaseItemDto> findDtos(List<PurchaseItem> list){
+
+    public List<PurchaseItemDto> findDtos(List<PurchaseItem> list) {
         converter.initObject(true);
         List<PurchaseItemDto> dtos = converter.toDto(list);
         return dtos;
@@ -228,13 +208,10 @@ public class PurchaseItemRestAdmin {
     }
 
 
-
-
-    @Autowired private PurchaseItemAdminService service;
-    @Autowired private PurchaseItemConverter converter;
-
-
-
+    @Autowired
+    private PurchaseItemAdminService service;
+    @Autowired
+    private PurchaseItemConverter converter;
 
 
 }

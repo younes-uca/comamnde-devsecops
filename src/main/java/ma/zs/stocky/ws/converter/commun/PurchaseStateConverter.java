@@ -1,27 +1,20 @@
-package  ma.zs.stocky.ws.converter.commun;
+package ma.zs.stocky.ws.converter.commun;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.beans.BeanUtils;
+import ma.zs.stocky.bean.core.commun.PurchaseState;
+import ma.zs.stocky.ws.dto.commun.PurchaseStateDto;
 import ma.zs.stocky.zynerator.converter.AbstractConverterHelper;
+import ma.zs.stocky.zynerator.util.StringUtil;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-
-
-import ma.zs.stocky.zynerator.util.StringUtil;
-import ma.zs.stocky.zynerator.converter.AbstractConverter;
-import ma.zs.stocky.zynerator.util.DateUtil;
-import ma.zs.stocky.bean.core.commun.PurchaseState;
-import ma.zs.stocky.ws.dto.commun.PurchaseStateDto;
 
 @Component
 public class PurchaseStateConverter {
 
 
-    public  PurchaseStateConverter() {
+    public PurchaseStateConverter() {
     }
 
 
@@ -29,17 +22,16 @@ public class PurchaseStateConverter {
         if (dto == null) {
             return null;
         } else {
-        PurchaseState item = new PurchaseState();
-            if(StringUtil.isNotEmpty(dto.getId()))
+            PurchaseState item = new PurchaseState();
+            if (StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if(StringUtil.isNotEmpty(dto.getLibelle()))
+            if (StringUtil.isNotEmpty(dto.getLibelle()))
                 item.setLibelle(dto.getLibelle());
-            if(StringUtil.isNotEmpty(dto.getCode()))
+            if (StringUtil.isNotEmpty(dto.getCode()))
                 item.setCode(dto.getCode());
 
 
-
-        return item;
+            return item;
         }
     }
 
@@ -49,20 +41,19 @@ public class PurchaseStateConverter {
             return null;
         } else {
             PurchaseStateDto dto = new PurchaseStateDto();
-            if(StringUtil.isNotEmpty(item.getId()))
+            if (StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-            if(StringUtil.isNotEmpty(item.getLibelle()))
+            if (StringUtil.isNotEmpty(item.getLibelle()))
                 dto.setLibelle(item.getLibelle());
-            if(StringUtil.isNotEmpty(item.getCode()))
+            if (StringUtil.isNotEmpty(item.getCode()))
                 dto.setCode(item.getCode());
 
 
-        return dto;
+            return dto;
         }
     }
 
 
-	
     public List<PurchaseState> toItem(List<PurchaseStateDto> dtos) {
         List<PurchaseState> items = new ArrayList<>();
         if (dtos != null && !dtos.isEmpty()) {
@@ -86,7 +77,7 @@ public class PurchaseStateConverter {
 
 
     public void copy(PurchaseStateDto dto, PurchaseState t) {
-		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+        BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
     }
 
     public List<PurchaseState> copy(List<PurchaseStateDto> dtos) {

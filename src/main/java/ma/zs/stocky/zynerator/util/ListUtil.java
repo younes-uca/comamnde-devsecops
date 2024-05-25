@@ -15,11 +15,12 @@ public class ListUtil {
     public static <T> List<T> emptyIfNull(List<T> list) {
         if (isEmpty(list)) {
             List<T> myList = new ArrayList<>();
-                return myList;
+            return myList;
         } else {
             return list;
         }
     }
+
     public static List removed(List coll1, List coll2) {
         List intersection = new ArrayList();
         if (coll1 != null)

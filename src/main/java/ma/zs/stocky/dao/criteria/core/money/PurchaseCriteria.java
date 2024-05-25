@@ -1,15 +1,14 @@
-package  ma.zs.stocky.dao.criteria.core.money;
+package ma.zs.stocky.dao.criteria.core.money;
 
 
 import ma.zs.stocky.dao.criteria.core.commun.PurchaseStateCriteria;
 import ma.zs.stocky.dao.criteria.core.crm.ClientCriteria;
-
 import ma.zs.stocky.zynerator.criteria.BaseCriteria;
-import java.util.List;
-import java.time.LocalDateTime;
-import java.time.LocalDate;
 
-public class PurchaseCriteria extends  BaseCriteria  {
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class PurchaseCriteria extends BaseCriteria {
 
     private String reference;
     private String referenceLike;
@@ -24,117 +23,141 @@ public class PurchaseCriteria extends  BaseCriteria  {
     private String description;
     private String descriptionLike;
 
-    private ClientCriteria client ;
-    private List<ClientCriteria> clients ;
-    private PurchaseStateCriteria purchaseState ;
-    private List<PurchaseStateCriteria> purchaseStates ;
+    private ClientCriteria client;
+    private List<ClientCriteria> clients;
+    private PurchaseStateCriteria purchaseState;
+    private List<PurchaseStateCriteria> purchaseStates;
 
 
-    public PurchaseCriteria(){}
+    public PurchaseCriteria() {
+    }
 
-    public String getReference(){
+    public String getReference() {
         return this.reference;
     }
-    public void setReference(String reference){
+
+    public void setReference(String reference) {
         this.reference = reference;
     }
-    public String getReferenceLike(){
+
+    public String getReferenceLike() {
         return this.referenceLike;
     }
-    public void setReferenceLike(String referenceLike){
+
+    public void setReferenceLike(String referenceLike) {
         this.referenceLike = referenceLike;
     }
 
-    public LocalDateTime getPurchaseDate(){
+    public LocalDateTime getPurchaseDate() {
         return this.purchaseDate;
     }
-    public void setPurchaseDate(LocalDateTime purchaseDate){
+
+    public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
-    public LocalDateTime getPurchaseDateFrom(){
+
+    public LocalDateTime getPurchaseDateFrom() {
         return this.purchaseDateFrom;
     }
-    public void setPurchaseDateFrom(LocalDateTime purchaseDateFrom){
+
+    public void setPurchaseDateFrom(LocalDateTime purchaseDateFrom) {
         this.purchaseDateFrom = purchaseDateFrom;
     }
-    public LocalDateTime getPurchaseDateTo(){
+
+    public LocalDateTime getPurchaseDateTo() {
         return this.purchaseDateTo;
     }
-    public void setPurchaseDateTo(LocalDateTime purchaseDateTo){
+
+    public void setPurchaseDateTo(LocalDateTime purchaseDateTo) {
         this.purchaseDateTo = purchaseDateTo;
     }
-    public String getImage(){
+
+    public String getImage() {
         return this.image;
     }
-    public void setImage(String image){
+
+    public void setImage(String image) {
         this.image = image;
     }
-    public String getImageLike(){
+
+    public String getImageLike() {
         return this.imageLike;
     }
-    public void setImageLike(String imageLike){
+
+    public void setImageLike(String imageLike) {
         this.imageLike = imageLike;
     }
 
-    public String getTotal(){
+    public String getTotal() {
         return this.total;
     }
-    public void setTotal(String total){
+
+    public void setTotal(String total) {
         this.total = total;
-    }   
-    public String getTotalMin(){
+    }
+
+    public String getTotalMin() {
         return this.totalMin;
     }
-    public void setTotalMin(String totalMin){
+
+    public void setTotalMin(String totalMin) {
         this.totalMin = totalMin;
     }
-    public String getTotalMax(){
+
+    public String getTotalMax() {
         return this.totalMax;
     }
-    public void setTotalMax(String totalMax){
+
+    public void setTotalMax(String totalMax) {
         this.totalMax = totalMax;
     }
-      
-    public String getDescription(){
+
+    public String getDescription() {
         return this.description;
     }
-    public void setDescription(String description){
+
+    public void setDescription(String description) {
         this.description = description;
     }
-    public String getDescriptionLike(){
+
+    public String getDescriptionLike() {
         return this.descriptionLike;
     }
-    public void setDescriptionLike(String descriptionLike){
+
+    public void setDescriptionLike(String descriptionLike) {
         this.descriptionLike = descriptionLike;
     }
 
 
-    public ClientCriteria getClient(){
+    public ClientCriteria getClient() {
         return this.client;
     }
 
-    public void setClient(ClientCriteria client){
+    public void setClient(ClientCriteria client) {
         this.client = client;
     }
-    public List<ClientCriteria> getClients(){
+
+    public List<ClientCriteria> getClients() {
         return this.clients;
     }
 
-    public void setClients(List<ClientCriteria> clients){
+    public void setClients(List<ClientCriteria> clients) {
         this.clients = clients;
     }
-    public PurchaseStateCriteria getPurchaseState(){
+
+    public PurchaseStateCriteria getPurchaseState() {
         return this.purchaseState;
     }
 
-    public void setPurchaseState(PurchaseStateCriteria purchaseState){
+    public void setPurchaseState(PurchaseStateCriteria purchaseState) {
         this.purchaseState = purchaseState;
     }
-    public List<PurchaseStateCriteria> getPurchaseStates(){
+
+    public List<PurchaseStateCriteria> getPurchaseStates() {
         return this.purchaseStates;
     }
 
-    public void setPurchaseStates(List<PurchaseStateCriteria> purchaseStates){
+    public void setPurchaseStates(List<PurchaseStateCriteria> purchaseStates) {
         this.purchaseStates = purchaseStates;
     }
 }

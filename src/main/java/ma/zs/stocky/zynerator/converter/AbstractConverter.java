@@ -3,13 +3,9 @@ package ma.zs.stocky.zynerator.converter;
 import ma.zs.stocky.zynerator.bean.BaseEntity;
 import ma.zs.stocky.zynerator.dto.BaseDto;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public abstract class AbstractConverter<T extends BaseEntity, DTO extends BaseDto> {

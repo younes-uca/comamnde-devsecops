@@ -9,8 +9,9 @@ import java.util.List;
 
 
 @Repository
-public interface ModelPermissionDao extends AbstractRepository<ModelPermission,Long>  {
+public interface ModelPermissionDao extends AbstractRepository<ModelPermission, Long> {
     ModelPermission findByReference(String reference);
+
     int deleteByReference(String reference);
 
 

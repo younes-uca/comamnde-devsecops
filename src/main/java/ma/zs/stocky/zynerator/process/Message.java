@@ -40,9 +40,9 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
-            ", code='" + code + '\'' +
-            "label='" + label + '\'' +
-            ", messageType=" + messageType +
-        '}';
+                ", code='" + code + '\'' +
+                "label='" + label + '\'' +
+                ", messageType=" + messageType +
+                '}';
     }
 }

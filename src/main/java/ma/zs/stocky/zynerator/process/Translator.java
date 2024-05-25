@@ -9,7 +9,7 @@ import java.util.Locale;
 
 @Component
 public class Translator {
-    private  static ResourceBundleMessageSource resourceBundleMessageSource;
+    private static ResourceBundleMessageSource resourceBundleMessageSource;
 
     public Translator(@Qualifier("process-messages") ResourceBundleMessageSource resourceBundleMessageSource) {
         this.resourceBundleMessageSource = resourceBundleMessageSource;

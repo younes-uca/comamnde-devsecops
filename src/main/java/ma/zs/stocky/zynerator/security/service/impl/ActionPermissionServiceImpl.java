@@ -15,11 +15,8 @@ import java.util.List;
 public class ActionPermissionServiceImpl extends AbstractServiceImpl<ActionPermission, ActionPermissionCriteria, ActionPermissionDao> implements ActionPermissionService {
 
 
-
-
-
-    public ActionPermission findByReferenceEntity(ActionPermission t){
-        return  dao.findByReference(t.getReference());
+    public ActionPermission findByReferenceEntity(ActionPermission t) {
+        return dao.findByReference(t.getReference());
     }
 
 
@@ -28,13 +25,9 @@ public class ActionPermissionServiceImpl extends AbstractServiceImpl<ActionPermi
     }
 
 
-
-
-
     public void configure() {
         super.configure(ActionPermission.class, ActionPermissionSpecification.class);
     }
-
 
 
     public ActionPermissionServiceImpl(ActionPermissionDao dao) {

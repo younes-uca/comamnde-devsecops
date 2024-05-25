@@ -1,8 +1,8 @@
 package ma.zs.stocky.zynerator.security.payload.request;
 
 public class ChangePasswordRequest {
-    private  String username;
-    private  String password;
+    private String username;
+    private String password;
 
     public String getUsername() {
         return username;

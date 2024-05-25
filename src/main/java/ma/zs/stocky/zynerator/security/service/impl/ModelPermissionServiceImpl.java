@@ -15,9 +15,8 @@ import java.util.List;
 public class ModelPermissionServiceImpl extends AbstractServiceImpl<ModelPermission, ModelPermissionCriteria, ModelPermissionDao> implements ModelPermissionService {
 
 
-
-    public ModelPermission findByReferenceEntity(ModelPermission t){
-        return  dao.findByReference(t.getReference());
+    public ModelPermission findByReferenceEntity(ModelPermission t) {
+        return dao.findByReference(t.getReference());
     }
 
 
@@ -26,13 +25,9 @@ public class ModelPermissionServiceImpl extends AbstractServiceImpl<ModelPermiss
     }
 
 
-
-
-
     public void configure() {
         super.configure(ModelPermission.class, ModelPermissionSpecification.class);
     }
-
 
 
     public ModelPermissionServiceImpl(ModelPermissionDao dao) {

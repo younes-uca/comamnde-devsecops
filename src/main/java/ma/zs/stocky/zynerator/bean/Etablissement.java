@@ -1,21 +1,17 @@
 package ma.zs.stocky.zynerator.bean;
 
-import java.util.Objects;
-
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ma.zs.stocky.zynerator.audit.AuditBusinessObject;
 import jakarta.persistence.*;
+import ma.zs.stocky.zynerator.audit.AuditBusinessObject;
+
+import java.util.Objects;
 
 
 @Entity
 @Table(name = "etablissement")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="etablissement_seq",sequenceName="etablissement_seq",allocationSize=1, initialValue = 1)
-public class Etablissement   extends AuditBusinessObject  {
+@SequenceGenerator(name = "etablissement_seq", sequenceName = "etablissement_seq", allocationSize = 1, initialValue = 1)
+public class Etablissement extends AuditBusinessObject {
 
     private Long id;
 
@@ -25,53 +21,55 @@ public class Etablissement   extends AuditBusinessObject  {
     private String code;
 
 
-
-    public Etablissement(){
-    super();
+    public Etablissement() {
+        super();
     }
-
-
 
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="etablissement_seq")
-    public Long getId(){
-    return this.id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "etablissement_seq")
+    public Long getId() {
+        return this.id;
     }
-    public void setId(Long id){
-    this.id = id;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public String getLibelle(){
-    return this.libelle;
+
+    public String getLibelle() {
+        return this.libelle;
     }
-    public void setLibelle(String libelle){
-    this.libelle = libelle;
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
-    public String getCode(){
-    return this.code;
+
+    public String getCode() {
+        return this.code;
     }
-    public void setCode(String code){
-    this.code = code;
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Transient
     public String getLabel() {
-    label = libelle;
-    return label;
+        label = libelle;
+        return label;
     }
 
     @Override
     public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Etablissement etablissement = (Etablissement) o;
-    return id != null && id.equals(etablissement.id);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Etablissement etablissement = (Etablissement) o;
+        return id != null && id.equals(etablissement.id);
     }
 
     @Override
     public int hashCode() {
-    return Objects.hash(id);
+        return Objects.hash(id);
     }
 
 }

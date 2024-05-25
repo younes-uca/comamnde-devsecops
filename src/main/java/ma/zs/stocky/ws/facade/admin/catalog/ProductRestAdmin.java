@@ -1,44 +1,23 @@
-package  ma.zs.stocky.ws.facade.admin.catalog;
+package ma.zs.stocky.ws.facade.admin.catalog;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.HttpStatus;
-import java.util.Arrays;
-import java.util.ArrayList;
-
 import ma.zs.stocky.bean.core.catalog.Product;
 import ma.zs.stocky.dao.criteria.core.catalog.ProductCriteria;
 import ma.zs.stocky.service.facade.admin.catalog.ProductAdminService;
 import ma.zs.stocky.ws.converter.catalog.ProductConverter;
 import ma.zs.stocky.ws.dto.catalog.ProductDto;
-import ma.zs.stocky.zynerator.controller.AbstractController;
-import ma.zs.stocky.zynerator.dto.AuditEntityDto;
 import ma.zs.stocky.zynerator.util.PaginatedList;
-
-
-import org.springframework.core.io.InputStreamResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.Arrays;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.zs.stocky.zynerator.process.Result;
-
-
-import org.springframework.web.multipart.MultipartFile;
-import ma.zs.stocky.zynerator.dto.FileTempDto;
 
 @RestController
 @RequestMapping("/api/admin/product/")
 public class ProductRestAdmin {
-
-
 
 
     @Operation(summary = "Import Data")
@@ -57,7 +36,7 @@ public class ProductRestAdmin {
         ResponseEntity<List<ProductDto>> res = null;
         List<Product> list = service.findAll();
         HttpStatus status = HttpStatus.NO_CONTENT;
-        List<ProductDto> dtos  = converter.toDto(list);
+        List<ProductDto> dtos = converter.toDto(list);
         if (dtos != null && !dtos.isEmpty())
             status = HttpStatus.OK;
         res = new ResponseEntity<>(dtos, status);
@@ -70,7 +49,7 @@ public class ProductRestAdmin {
         ResponseEntity<List<ProductDto>> res = null;
         List<Product> list = service.findAllOptimized();
         HttpStatus status = HttpStatus.NO_CONTENT;
-        List<ProductDto> dtos  = converter.toDto(list);
+        List<ProductDto> dtos = converter.toDto(list);
         if (dtos != null && !dtos.isEmpty())
             status = HttpStatus.OK;
         res = new ResponseEntity<>(dtos, status);
@@ -91,7 +70,7 @@ public class ProductRestAdmin {
     @Operation(summary = "Finds a product by reference")
     @GetMapping("reference/{reference}")
     public ResponseEntity<ProductDto> findByReference(@PathVariable String reference) {
-	    Product t = service.findByReferenceEntity(new Product(reference));
+        Product t = service.findByReferenceEntity(new Product(reference));
         if (t != null) {
             ProductDto dto = converter.toDto(t);
             return getDtoResponseEntity(dto);
@@ -102,16 +81,16 @@ public class ProductRestAdmin {
     @Operation(summary = "Saves the specified  product")
     @PostMapping("")
     public ResponseEntity<ProductDto> save(@RequestBody ProductDto dto) throws Exception {
-        if(dto!=null){
+        if (dto != null) {
             Product myT = converter.toItem(dto);
             Product t = service.create(myT);
             if (t == null) {
                 return new ResponseEntity<>(null, HttpStatus.IM_USED);
-            }else{
+            } else {
                 ProductDto myDto = converter.toDto(t);
                 return new ResponseEntity<>(myDto, HttpStatus.CREATED);
             }
-        }else {
+        } else {
             return new ResponseEntity<>(dto, HttpStatus.NO_CONTENT);
         }
     }
@@ -119,12 +98,12 @@ public class ProductRestAdmin {
     @Operation(summary = "Updates the specified  product")
     @PutMapping("")
     public ResponseEntity<ProductDto> update(@RequestBody ProductDto dto) throws Exception {
-        ResponseEntity<ProductDto> res ;
+        ResponseEntity<ProductDto> res;
         if (dto.getId() == null || service.findById(dto.getId()) == null)
             res = new ResponseEntity<>(HttpStatus.CONFLICT);
         else {
             Product t = service.findById(dto.getId());
-            converter.copy(dto,t);
+            converter.copy(dto, t);
             Product updated = service.update(t);
             ProductDto myDto = converter.toDto(updated);
             res = new ResponseEntity<>(myDto, HttpStatus.OK);
@@ -135,7 +114,7 @@ public class ProductRestAdmin {
     @Operation(summary = "Delete list of product")
     @PostMapping("multiple")
     public ResponseEntity<List<ProductDto>> delete(@RequestBody List<ProductDto> dtos) throws Exception {
-        ResponseEntity<List<ProductDto>> res ;
+        ResponseEntity<List<ProductDto>> res;
         HttpStatus status = HttpStatus.CONFLICT;
         if (dtos != null && !dtos.isEmpty()) {
             List<Product> ts = converter.toItem(dtos);
@@ -145,10 +124,11 @@ public class ProductRestAdmin {
         res = new ResponseEntity<>(dtos, status);
         return res;
     }
+
     @Operation(summary = "Delete the specified product")
     @DeleteMapping("")
     public ResponseEntity<ProductDto> delete(@RequestBody ProductDto dto) throws Exception {
-		ResponseEntity<ProductDto> res;
+        ResponseEntity<ProductDto> res;
         HttpStatus status = HttpStatus.CONFLICT;
         if (dto != null) {
             Product t = converter.toItem(dto);
@@ -173,6 +153,7 @@ public class ProductRestAdmin {
         res = new ResponseEntity<>(id, status);
         return res;
     }
+
     @Operation(summary = "Delete multiple products by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
@@ -184,14 +165,13 @@ public class ProductRestAdmin {
         }
         res = new ResponseEntity<>(ids, status);
         return res;
-     }
-
+    }
 
 
     @Operation(summary = "Finds a product and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<ProductDto> findWithAssociatedLists(@PathVariable Long id) {
-        Product loaded =  service.findWithAssociatedLists(id);
+        Product loaded = service.findWithAssociatedLists(id);
         ProductDto dto = converter.toDto(loaded);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
@@ -202,7 +182,7 @@ public class ProductRestAdmin {
         ResponseEntity<List<ProductDto>> res = null;
         List<Product> list = service.findByCriteria(criteria);
         HttpStatus status = HttpStatus.NO_CONTENT;
-        List<ProductDto> dtos  = converter.toDto(list);
+        List<ProductDto> dtos = converter.toDto(list);
         if (dtos != null && !dtos.isEmpty())
             status = HttpStatus.OK;
 
@@ -230,8 +210,8 @@ public class ProductRestAdmin {
         int count = service.getDataSize(criteria);
         return new ResponseEntity<Integer>(count, HttpStatus.OK);
     }
-	
-	public List<ProductDto> findDtos(List<Product> list){
+
+    public List<ProductDto> findDtos(List<Product> list) {
         List<ProductDto> dtos = converter.toDto(list);
         return dtos;
     }
@@ -241,13 +221,10 @@ public class ProductRestAdmin {
     }
 
 
-
-
-    @Autowired private ProductAdminService service;
-    @Autowired private ProductConverter converter;
-
-
-
+    @Autowired
+    private ProductAdminService service;
+    @Autowired
+    private ProductConverter converter;
 
 
 }

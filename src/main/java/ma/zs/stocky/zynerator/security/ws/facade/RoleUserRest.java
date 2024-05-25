@@ -18,8 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/roleUser/")
-public class RoleUserRest  extends AbstractController<RoleUser, RoleUserDto, RoleUserCriteria, RoleUserService, RoleUserConverter> {
-
+public class RoleUserRest extends AbstractController<RoleUser, RoleUserDto, RoleUserCriteria, RoleUserService, RoleUserConverter> {
 
 
     @Operation(summary = "upload one roleUser")
@@ -27,6 +26,7 @@ public class RoleUserRest  extends AbstractController<RoleUser, RoleUserDto, Rol
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @Operation(summary = "upload multiple roleUsers")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -64,10 +64,11 @@ public class RoleUserRest  extends AbstractController<RoleUser, RoleUserDto, Rol
     public ResponseEntity<List<RoleUserDto>> delete(@RequestBody List<RoleUserDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @Operation(summary = "Delete the specified roleUser")
     @DeleteMapping("")
     public ResponseEntity<RoleUserDto> delete(@RequestBody RoleUserDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @Operation(summary = "Delete the specified roleUser")
@@ -75,33 +76,38 @@ public class RoleUserRest  extends AbstractController<RoleUser, RoleUserDto, Rol
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @Operation(summary = "Delete multiple roleUsers by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @Operation(summary = "find by role id")
     @GetMapping("role/id/{id}")
-    public List<RoleUserDto> findByRoleId(@PathVariable Long id){
+    public List<RoleUserDto> findByRoleId(@PathVariable Long id) {
         return findDtos(service.findByRoleId(id));
     }
+
     @Operation(summary = "delete by role id")
     @DeleteMapping("role/id/{id}")
-    public int deleteByRoleId(@PathVariable Long id){
+    public int deleteByRoleId(@PathVariable Long id) {
         return service.deleteByRoleId(id);
     }
+
     @Operation(summary = "find by user id")
     @GetMapping("user/id/{id}")
-    public List<RoleUserDto> findByUserId(@PathVariable Long id){
+    public List<RoleUserDto> findByUserId(@PathVariable Long id) {
         return findDtos(service.findByUserId(id));
     }
+
     @Operation(summary = "delete by user id")
     @DeleteMapping("user/id/{id}")
-    public int deleteByUserId(@PathVariable Long id){
+    public int deleteByUserId(@PathVariable Long id) {
         return service.deleteByUserId(id);
     }
+
     @Operation(summary = "Finds roleUsers by criteria")
     @PostMapping("find-by-criteria")
     public ResponseEntity<List<RoleUserDto>> findByCriteria(@RequestBody RoleUserCriteria criteria) throws Exception {
@@ -127,12 +133,9 @@ public class RoleUserRest  extends AbstractController<RoleUser, RoleUserDto, Rol
     }
 
 
-
-    public RoleUserRest (RoleUserService service, RoleUserConverter converter) {
+    public RoleUserRest(RoleUserService service, RoleUserConverter converter) {
         super(service, converter);
     }
-
-
 
 
 }

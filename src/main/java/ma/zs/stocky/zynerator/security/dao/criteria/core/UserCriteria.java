@@ -1,10 +1,9 @@
 package ma.zs.stocky.zynerator.security.dao.criteria.core;
 
 
-
 import ma.zs.stocky.zynerator.criteria.BaseCriteria;
 
-public class UserCriteria extends  BaseCriteria  {
+public class UserCriteria extends BaseCriteria {
 
     private Boolean credentialsNonExpired;
     private Boolean enabled;
@@ -26,115 +25,142 @@ public class UserCriteria extends  BaseCriteria  {
     private String phoneLike;
 
 
+    public UserCriteria() {
+    }
 
-    public UserCriteria(){}
-
-    public Boolean getCredentialsNonExpired(){
+    public Boolean getCredentialsNonExpired() {
         return this.credentialsNonExpired;
     }
-    public void setCredentialsNonExpired(Boolean credentialsNonExpired){
+
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
     }
-    public Boolean getEnabled(){
+
+    public Boolean getEnabled() {
         return this.enabled;
     }
-    public void setEnabled(Boolean enabled){
+
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return this.email;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
-    public String getEmailLike(){
+
+    public String getEmailLike() {
         return this.emailLike;
     }
-    public void setEmailLike(String emailLike){
+
+    public void setEmailLike(String emailLike) {
         this.emailLike = emailLike;
     }
 
-    public Boolean getAccountNonExpired(){
+    public Boolean getAccountNonExpired() {
         return this.accountNonExpired;
     }
-    public void setAccountNonExpired(Boolean accountNonExpired){
+
+    public void setAccountNonExpired(Boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
     }
-    public Boolean getAccountNonLocked(){
+
+    public Boolean getAccountNonLocked() {
         return this.accountNonLocked;
     }
-    public void setAccountNonLocked(Boolean accountNonLocked){
+
+    public void setAccountNonLocked(Boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
     }
-    public String getUsername(){
+
+    public String getUsername() {
         return this.username;
     }
-    public void setUsername(String username){
+
+    public void setUsername(String username) {
         this.username = username;
     }
-    public String getUsernameLike(){
+
+    public String getUsernameLike() {
         return this.usernameLike;
     }
-    public void setUsernameLike(String usernameLike){
+
+    public void setUsernameLike(String usernameLike) {
         this.usernameLike = usernameLike;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return this.password;
     }
-    public void setPassword(String password){
+
+    public void setPassword(String password) {
         this.password = password;
     }
-    public String getPasswordLike(){
+
+    public String getPasswordLike() {
         return this.passwordLike;
     }
-    public void setPasswordLike(String passwordLike){
+
+    public void setPasswordLike(String passwordLike) {
         this.passwordLike = passwordLike;
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return this.firstName;
     }
-    public void setFirstName(String firstName){
+
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    public String getFirstNameLike(){
+
+    public String getFirstNameLike() {
         return this.firstNameLike;
     }
-    public void setFirstNameLike(String firstNameLike){
+
+    public void setFirstNameLike(String firstNameLike) {
         this.firstNameLike = firstNameLike;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return this.lastName;
     }
-    public void setLastName(String lastName){
+
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public String getLastNameLike(){
+
+    public String getLastNameLike() {
         return this.lastNameLike;
     }
-    public void setLastNameLike(String lastNameLike){
+
+    public void setLastNameLike(String lastNameLike) {
         this.lastNameLike = lastNameLike;
     }
 
-    public String getPhone(){
+    public String getPhone() {
         return this.phone;
     }
-    public void setPhone(String phone){
+
+    public void setPhone(String phone) {
         this.phone = phone;
     }
-    public String getPhoneLike(){
+
+    public String getPhoneLike() {
         return this.phoneLike;
     }
-    public void setPhoneLike(String phoneLike){
+
+    public void setPhoneLike(String phoneLike) {
         this.phoneLike = phoneLike;
     }
 
-    public Boolean getPasswordChanged(){
+    public Boolean getPasswordChanged() {
         return this.passwordChanged;
     }
-    public void setPasswordChanged(Boolean passwordChanged){
+
+    public void setPasswordChanged(Boolean passwordChanged) {
         this.passwordChanged = passwordChanged;
     }
 

@@ -18,8 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/role/")
-public class RoleRest  extends AbstractController<Role, RoleDto, RoleCriteria, RoleService, RoleConverter> {
-
+public class RoleRest extends AbstractController<Role, RoleDto, RoleCriteria, RoleService, RoleConverter> {
 
 
     @Operation(summary = "upload one role")
@@ -27,6 +26,7 @@ public class RoleRest  extends AbstractController<Role, RoleDto, RoleCriteria, R
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @Operation(summary = "upload multiple roles")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -74,10 +74,11 @@ public class RoleRest  extends AbstractController<Role, RoleDto, RoleCriteria, R
     public ResponseEntity<List<RoleDto>> delete(@RequestBody List<RoleDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @Operation(summary = "Delete the specified role")
     @DeleteMapping("")
     public ResponseEntity<RoleDto> delete(@RequestBody RoleDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @Operation(summary = "Delete the specified role")
@@ -85,11 +86,12 @@ public class RoleRest  extends AbstractController<Role, RoleDto, RoleCriteria, R
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @Operation(summary = "Delete multiple roles by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @Operation(summary = "Finds roles by criteria")
@@ -117,12 +119,9 @@ public class RoleRest  extends AbstractController<Role, RoleDto, RoleCriteria, R
     }
 
 
-
-    public RoleRest (RoleService service, RoleConverter converter) {
+    public RoleRest(RoleService service, RoleConverter converter) {
         super(service, converter);
     }
-
-
 
 
 }

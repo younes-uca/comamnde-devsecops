@@ -1,44 +1,23 @@
-package  ma.zs.stocky.ws.facade.admin.crm;
+package ma.zs.stocky.ws.facade.admin.crm;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.HttpStatus;
-import java.util.Arrays;
-import java.util.ArrayList;
-
 import ma.zs.stocky.bean.core.crm.Client;
 import ma.zs.stocky.dao.criteria.core.crm.ClientCriteria;
 import ma.zs.stocky.service.facade.admin.crm.ClientAdminService;
 import ma.zs.stocky.ws.converter.crm.ClientConverter;
 import ma.zs.stocky.ws.dto.crm.ClientDto;
-import ma.zs.stocky.zynerator.controller.AbstractController;
-import ma.zs.stocky.zynerator.dto.AuditEntityDto;
 import ma.zs.stocky.zynerator.util.PaginatedList;
-
-
-import org.springframework.core.io.InputStreamResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.Arrays;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.zs.stocky.zynerator.process.Result;
-
-
-import org.springframework.web.multipart.MultipartFile;
-import ma.zs.stocky.zynerator.dto.FileTempDto;
 
 @RestController
 @RequestMapping("/api/admin/client/")
 public class ClientRestAdmin {
-
-
 
 
     @Operation(summary = "Import Data")
@@ -57,7 +36,7 @@ public class ClientRestAdmin {
         ResponseEntity<List<ClientDto>> res = null;
         List<Client> list = service.findAll();
         HttpStatus status = HttpStatus.NO_CONTENT;
-        List<ClientDto> dtos  = converter.toDto(list);
+        List<ClientDto> dtos = converter.toDto(list);
         if (dtos != null && !dtos.isEmpty())
             status = HttpStatus.OK;
         res = new ResponseEntity<>(dtos, status);
@@ -70,7 +49,7 @@ public class ClientRestAdmin {
         ResponseEntity<List<ClientDto>> res = null;
         List<Client> list = service.findAllOptimized();
         HttpStatus status = HttpStatus.NO_CONTENT;
-        List<ClientDto> dtos  = converter.toDto(list);
+        List<ClientDto> dtos = converter.toDto(list);
         if (dtos != null && !dtos.isEmpty())
             status = HttpStatus.OK;
         res = new ResponseEntity<>(dtos, status);
@@ -91,7 +70,7 @@ public class ClientRestAdmin {
     @Operation(summary = "Finds a client by fullName")
     @GetMapping("fullName/{fullName}")
     public ResponseEntity<ClientDto> findByFullName(@PathVariable String fullName) {
-	    Client t = service.findByReferenceEntity(new Client(fullName));
+        Client t = service.findByReferenceEntity(new Client(fullName));
         if (t != null) {
             ClientDto dto = converter.toDto(t);
             return getDtoResponseEntity(dto);
@@ -102,16 +81,16 @@ public class ClientRestAdmin {
     @Operation(summary = "Saves the specified  client")
     @PostMapping("")
     public ResponseEntity<ClientDto> save(@RequestBody ClientDto dto) throws Exception {
-        if(dto!=null){
+        if (dto != null) {
             Client myT = converter.toItem(dto);
             Client t = service.create(myT);
             if (t == null) {
                 return new ResponseEntity<>(null, HttpStatus.IM_USED);
-            }else{
+            } else {
                 ClientDto myDto = converter.toDto(t);
                 return new ResponseEntity<>(myDto, HttpStatus.CREATED);
             }
-        }else {
+        } else {
             return new ResponseEntity<>(dto, HttpStatus.NO_CONTENT);
         }
     }
@@ -119,12 +98,12 @@ public class ClientRestAdmin {
     @Operation(summary = "Updates the specified  client")
     @PutMapping("")
     public ResponseEntity<ClientDto> update(@RequestBody ClientDto dto) throws Exception {
-        ResponseEntity<ClientDto> res ;
+        ResponseEntity<ClientDto> res;
         if (dto.getId() == null || service.findById(dto.getId()) == null)
             res = new ResponseEntity<>(HttpStatus.CONFLICT);
         else {
             Client t = service.findById(dto.getId());
-            converter.copy(dto,t);
+            converter.copy(dto, t);
             Client updated = service.update(t);
             ClientDto myDto = converter.toDto(updated);
             res = new ResponseEntity<>(myDto, HttpStatus.OK);
@@ -135,7 +114,7 @@ public class ClientRestAdmin {
     @Operation(summary = "Delete list of client")
     @PostMapping("multiple")
     public ResponseEntity<List<ClientDto>> delete(@RequestBody List<ClientDto> dtos) throws Exception {
-        ResponseEntity<List<ClientDto>> res ;
+        ResponseEntity<List<ClientDto>> res;
         HttpStatus status = HttpStatus.CONFLICT;
         if (dtos != null && !dtos.isEmpty()) {
             List<Client> ts = converter.toItem(dtos);
@@ -145,10 +124,11 @@ public class ClientRestAdmin {
         res = new ResponseEntity<>(dtos, status);
         return res;
     }
+
     @Operation(summary = "Delete the specified client")
     @DeleteMapping("")
     public ResponseEntity<ClientDto> delete(@RequestBody ClientDto dto) throws Exception {
-		ResponseEntity<ClientDto> res;
+        ResponseEntity<ClientDto> res;
         HttpStatus status = HttpStatus.CONFLICT;
         if (dto != null) {
             Client t = converter.toItem(dto);
@@ -173,6 +153,7 @@ public class ClientRestAdmin {
         res = new ResponseEntity<>(id, status);
         return res;
     }
+
     @Operation(summary = "Delete multiple clients by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
@@ -184,14 +165,13 @@ public class ClientRestAdmin {
         }
         res = new ResponseEntity<>(ids, status);
         return res;
-     }
-
+    }
 
 
     @Operation(summary = "Finds a client and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<ClientDto> findWithAssociatedLists(@PathVariable Long id) {
-        Client loaded =  service.findWithAssociatedLists(id);
+        Client loaded = service.findWithAssociatedLists(id);
         ClientDto dto = converter.toDto(loaded);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
@@ -202,7 +182,7 @@ public class ClientRestAdmin {
         ResponseEntity<List<ClientDto>> res = null;
         List<Client> list = service.findByCriteria(criteria);
         HttpStatus status = HttpStatus.NO_CONTENT;
-        List<ClientDto> dtos  = converter.toDto(list);
+        List<ClientDto> dtos = converter.toDto(list);
         if (dtos != null && !dtos.isEmpty())
             status = HttpStatus.OK;
 
@@ -230,8 +210,8 @@ public class ClientRestAdmin {
         int count = service.getDataSize(criteria);
         return new ResponseEntity<Integer>(count, HttpStatus.OK);
     }
-	
-	public List<ClientDto> findDtos(List<Client> list){
+
+    public List<ClientDto> findDtos(List<Client> list) {
         List<ClientDto> dtos = converter.toDto(list);
         return dtos;
     }
@@ -241,13 +221,10 @@ public class ClientRestAdmin {
     }
 
 
-
-
-    @Autowired private ClientAdminService service;
-    @Autowired private ClientConverter converter;
-
-
-
+    @Autowired
+    private ClientAdminService service;
+    @Autowired
+    private ClientConverter converter;
 
 
 }

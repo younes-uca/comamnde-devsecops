@@ -1,9 +1,9 @@
 package ma.zs.stocky.zynerator.util;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.math.BigDecimal;
 
 public class StringUtil {
 
@@ -40,12 +40,13 @@ public class StringUtil {
     }
 
     public static boolean isEmpty(BigDecimal value) {
-         return value == null;
+        return value == null;
     }
 
     public static boolean isNotEmpty(BigDecimal value) {
         return !isEmpty(value);
     }
+
     public static boolean isEmpty(Boolean value) {
         return value == null;
     }

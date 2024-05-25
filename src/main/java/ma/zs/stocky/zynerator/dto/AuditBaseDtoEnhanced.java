@@ -7,29 +7,29 @@ public class AuditBaseDtoEnhanced extends AuditBaseDto {
 
     protected Boolean actif = false;
     protected String hl7;
-    protected Long ordre ;
+    protected Long ordre;
 
     public Boolean getActif() {
-    return actif;
+        return actif;
     }
 
     public void setActif(Boolean actif) {
-    this.actif = actif;
+        this.actif = actif;
     }
 
     public String getHl7() {
-    return hl7;
+        return hl7;
     }
 
     public void setHl7(String hl7) {
-    this.hl7 = hl7;
+        this.hl7 = hl7;
     }
 
     public Long getOrdre() {
-    return ordre;
+        return ordre;
     }
 
     public void setOrdre(Long ordre) {
-    this.ordre = ordre;
+        this.ordre = ordre;
     }
 }

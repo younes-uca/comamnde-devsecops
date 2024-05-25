@@ -12,16 +12,16 @@ import org.springframework.stereotype.Component;
 public class ModelPermissionUserConverter extends AbstractConverter<ModelPermissionUser, ModelPermissionUserDto> {
 
     @Autowired
-    private ModelPermissionConverter modelPermissionConverter ;
+    private ModelPermissionConverter modelPermissionConverter;
     @Autowired
-    private UserConverter utilisateurConverter ;
+    private UserConverter utilisateurConverter;
     @Autowired
-    private ActionPermissionConverter actionPermissionConverter ;
+    private ActionPermissionConverter actionPermissionConverter;
     private boolean actionPermission;
     private boolean modelPermission;
     private boolean user;
 
-    public  ModelPermissionUserConverter(){//ModelPermission modelPermissionUser utilisateurActionPermission actionPermission,){
+    public ModelPermissionUserConverter() {//ModelPermission modelPermissionUser utilisateurActionPermission actionPermission,){
         super(ModelPermissionUser.class, ModelPermissionUserDto.class);
         //this.modelPermission =  modelPermission ;
         //this.user =  user ;
@@ -33,29 +33,27 @@ public class ModelPermissionUserConverter extends AbstractConverter<ModelPermiss
         if (dto == null) {
             return null;
         } else {
-        ModelPermissionUser item = new ModelPermissionUser();
-            if(StringUtil.isNotEmpty(dto.getId()))
+            ModelPermissionUser item = new ModelPermissionUser();
+            if (StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if(dto.getValue() != null)
+            if (dto.getValue() != null)
                 item.setValue(dto.getValue());
-            if(StringUtil.isNotEmpty(dto.getSubAttribute()))
+            if (StringUtil.isNotEmpty(dto.getSubAttribute()))
                 item.setSubAttribute(dto.getSubAttribute());
-            if(this.actionPermission && dto.getActionPermission()!=null &&  dto.getActionPermission().getId() != null)
-                item.setActionPermission(actionPermissionConverter.toItem(dto.getActionPermission())) ;
+            if (this.actionPermission && dto.getActionPermission() != null && dto.getActionPermission().getId() != null)
+                item.setActionPermission(actionPermissionConverter.toItem(dto.getActionPermission()));
 
-            if(this.modelPermission && dto.getModelPermission()!=null &&  dto.getModelPermission().getId() != null)
-                item.setModelPermission(modelPermissionConverter.toItem(dto.getModelPermission())) ;
+            if (this.modelPermission && dto.getModelPermission() != null && dto.getModelPermission().getId() != null)
+                item.setModelPermission(modelPermissionConverter.toItem(dto.getModelPermission()));
 
-            if(dto.getUser() != null && dto.getUser().getId() != null){
+            if (dto.getUser() != null && dto.getUser().getId() != null) {
                 item.setUser(new User());
                 item.getUser().setId(dto.getUser().getId());
                 item.getUser().setEmail(dto.getUser().getEmail());
             }
 
 
-
-
-        return item;
+            return item;
         }
     }
 
@@ -65,23 +63,23 @@ public class ModelPermissionUserConverter extends AbstractConverter<ModelPermiss
             return null;
         } else {
             ModelPermissionUserDto dto = new ModelPermissionUserDto();
-            if(StringUtil.isNotEmpty(item.getId()))
+            if (StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-                dto.setValue(item.getValue());
-            if(StringUtil.isNotEmpty(item.getSubAttribute()))
+            dto.setValue(item.getValue());
+            if (StringUtil.isNotEmpty(item.getSubAttribute()))
                 dto.setSubAttribute(item.getSubAttribute());
-        if(this.actionPermission && item.getActionPermission()!=null) {
-            dto.setActionPermission(actionPermissionConverter.toDto(item.getActionPermission())) ;
-        }
-        if(this.modelPermission && item.getModelPermission()!=null) {
-            dto.setModelPermission(modelPermissionConverter.toDto(item.getModelPermission())) ;
-        }
-        if(this.user && item.getUser()!=null) {
-            dto.setUser(utilisateurConverter.toDto(item.getUser())) ;
-        }
+            if (this.actionPermission && item.getActionPermission() != null) {
+                dto.setActionPermission(actionPermissionConverter.toDto(item.getActionPermission()));
+            }
+            if (this.modelPermission && item.getModelPermission() != null) {
+                dto.setModelPermission(modelPermissionConverter.toDto(item.getModelPermission()));
+            }
+            if (this.user && item.getUser() != null) {
+                dto.setUser(utilisateurConverter.toDto(item.getUser()));
+            }
 
 
-        return dto;
+            return dto;
         }
     }
 
@@ -93,40 +91,51 @@ public class ModelPermissionUserConverter extends AbstractConverter<ModelPermiss
     }
 
 
-    public ModelPermissionConverter getModelPermissionConverter(){
+    public ModelPermissionConverter getModelPermissionConverter() {
         return this.modelPermissionConverter;
     }
-    public void setModelPermissionConverter(ModelPermissionConverter modelPermissionConverter ){
+
+    public void setModelPermissionConverter(ModelPermissionConverter modelPermissionConverter) {
         this.modelPermissionConverter = modelPermissionConverter;
     }
-    public UserConverter getUserConverter(){
+
+    public UserConverter getUserConverter() {
         return this.utilisateurConverter;
     }
-    public void setUserConverter(UserConverter utilisateurConverter ){
+
+    public void setUserConverter(UserConverter utilisateurConverter) {
         this.utilisateurConverter = utilisateurConverter;
     }
-    public ActionPermissionConverter getActionPermissionConverter(){
+
+    public ActionPermissionConverter getActionPermissionConverter() {
         return this.actionPermissionConverter;
     }
-    public void setActionPermissionConverter(ActionPermissionConverter actionPermissionConverter ){
+
+    public void setActionPermissionConverter(ActionPermissionConverter actionPermissionConverter) {
         this.actionPermissionConverter = actionPermissionConverter;
     }
-    public boolean  isActionPermission(){
+
+    public boolean isActionPermission() {
         return this.actionPermission;
     }
-    public void  setActionPermission(boolean actionPermission){
+
+    public void setActionPermission(boolean actionPermission) {
         this.actionPermission = actionPermission;
     }
-    public boolean  isModelPermission(){
+
+    public boolean isModelPermission() {
         return this.modelPermission;
     }
-    public void  setModelPermission(boolean modelPermission){
+
+    public void setModelPermission(boolean modelPermission) {
         this.modelPermission = modelPermission;
     }
-    public boolean  isUser(){
+
+    public boolean isUser() {
         return this.user;
     }
-    public void  setUser(boolean user){
+
+    public void setUser(boolean user) {
         this.user = user;
     }
 }

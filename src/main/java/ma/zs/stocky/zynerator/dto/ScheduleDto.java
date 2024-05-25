@@ -2,17 +2,19 @@ package ma.zs.stocky.zynerator.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public class ScheduleDto {
-    private Long id ;
-    private String subject  ;
+    private Long id;
+    private String subject;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime startTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime endTime;
+
     public ScheduleDto(String subject, LocalDateTime startTime, LocalDateTime endTime, Long id) {
         this.id = id;
         this.subject = subject;
