@@ -1,5 +1,5 @@
 package ma.zs.stocky.ws.facade.admin.money;
-
+//Operation checked
 import io.swagger.v3.oas.annotations.Operation;
 import ma.zs.stocky.bean.core.money.Purchase;
 import ma.zs.stocky.dao.criteria.core.money.PurchaseCriteria;
