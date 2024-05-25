@@ -53,8 +53,8 @@ public class ProductDaoTest {
         Long id = 1L;
         Product entity = new Product();
         entity.setId(id);
-        underTest.save(entity);
-        Product loaded = underTest.findById(id).get();
+        Product saved = underTest.save(entity);
+        Product loaded = underTest.findById(id).orElse(null);
         assertThat(loaded.getId()).isEqualTo(id);
     }
 
@@ -67,13 +67,14 @@ public class ProductDaoTest {
 
         underTest.deleteById(id);
 
-        Product loaded = underTest.findById(id).get();
+        Product loaded = underTest.findById(id).orElse(null);
         assertThat(loaded).isNull();
     }
 
 
     @Test
     void shouldFindAll() {
+        underTest.deleteAll();
         // Given
         List<Product> items = IntStream.rangeClosed(1, 10).mapToObj(i->constructSample(i)).collect(Collectors.toList());
 
