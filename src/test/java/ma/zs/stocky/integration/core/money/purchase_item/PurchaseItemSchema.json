@@ -1,0 +1,15 @@
+{
+    "product": {"id": "#number"},
+    "price": "#number",
+    "quantity": "#number",
+    "purchase": {"id": "#number"}
+
+}
+
+
+
+
+
+
+
+

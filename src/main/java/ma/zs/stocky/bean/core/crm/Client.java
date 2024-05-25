@@ -35,7 +35,11 @@ public class Client  extends BaseEntity     {
         super();
     }
 
-    public Client(Long id,String fullName){
+    public Client(Long id) {
+        this.id = id;
+    }
+
+    public Client(Long id, String fullName){
         this.id = id;
         this.fullName = fullName ;
     }

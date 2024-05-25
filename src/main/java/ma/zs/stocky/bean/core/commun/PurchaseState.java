@@ -35,6 +35,9 @@ public class PurchaseState  extends BaseEntity     {
         super();
     }
 
+    public PurchaseState(Long id) {
+        this.id = id;
+    }
     public PurchaseState(Long id,String libelle){
         this.id = id;
         this.libelle = libelle ;
